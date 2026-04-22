@@ -7,9 +7,25 @@ html, body {
 	color: white;
 }
 
+body {
+	background-color: #000000;
+	background-image: url("images/bg.gif");
+	background-repeat: repeat;
+	background-position: 0 0;
+	animation: gifBgPan 24s linear infinite;
+}
+
+@keyframes gifBgPan {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 1024px 0;
+	}
+}
+
 html, body, canvas {
 	touch-action: none;
-	touch-action-delay: none;
 }
 
 #notSupportedWrap {
