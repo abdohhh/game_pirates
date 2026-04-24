@@ -26,7 +26,7 @@
                 true; this.AddRuntimeMessageHandlers([["create", e => this._OnCreate(e)], ["destroy", e => this._OnDestroy(e)], ["set-visible", e => this._OnSetVisible(e)], ["update-position", e => this._OnUpdatePosition(e)], ["update-state", e => this._OnUpdateState(e)], ["focus", e => this._OnSetFocus(e)], ["set-css-style", e => this._OnSetCssStyle(e)], ["set-attribute", e => this._OnSetAttribute(e)], ["remove-attribute", e => this._OnRemoveAttribute(e)]]); this.AddDOMElementMessageHandler("get-element", elem => elem)
         } SetAutoAttach(e) {
             this._autoAttach =
-            !!e
+                !!e
         } AddDOMElementMessageHandler(handler, func) { this.AddRuntimeMessageHandler(handler, e => { const elementId = e["elementId"]; const elem = this.GetElementById(elementId); return func(elem, e) }) } _OnCreate(e) {
             const elementId = e["elementId"]; const elem = this.CreateElement(elementId, e); const elementState = new ElementState(elem); this._elementMap.set(elementId, elementState); elem.style.boxSizing = "border-box"; elem.style.display = "none"; elementState.SetVisibleFlag(e["isVisible"]); const focusElem = this._GetFocusElement(elem);
             focusElem.addEventListener("focus", e => this._OnFocus(elementId)); focusElem.addEventListener("blur", e => this._OnBlur(elementId)); if (this._autoAttach) document.body.appendChild(elem)
@@ -57,10 +57,10 @@
         new Map; const pendingResponsePromises = new Map; let nextResponseId = 0; const runOnStartupFunctions = []; self.runOnStartup = function runOnStartup(f) { if (typeof f !== "function") throw new Error("runOnStartup called without a function"); runOnStartupFunctions.push(f) }; const WEBVIEW_EXPORT_TYPES = new Set(["cordova", "playable-ad", "instant-games"]); function IsWebViewExportType(exportType) { return WEBVIEW_EXPORT_TYPES.has(exportType) } let isWrapperFullscreen = false; window.RuntimeInterface = class RuntimeInterface {
             constructor(opts) {
                 this._useWorker =
-                opts.useWorker; this._messageChannelPort = null; this._runtimeBaseUrl = ""; this._scriptFolder = opts.scriptFolder; this._workerScriptURLs = {}; this._worker = null; this._localRuntime = null; this._domHandlers = []; this._runtimeDomHandler = null; this._canvas = null; this._isExportingToVideo = false; this._exportToVideoDuration = 0; this._jobScheduler = null; this._rafId = -1; this._rafFunc = () => this._OnRAFCallback(); this._rafCallbacks = []; this._exportType = opts.exportType; this._isFileProtocol = location.protocol.substr(0, 4) === "file"; if (this._useWorker &&
-                    (typeof OffscreenCanvas === "undefined" || !navigator["userActivation"] || !SupportsWorkerTypeModule())) this._useWorker = false; if (this._useWorker && isSafari) this._useWorker = false; if (this._exportType === "playable-ad" || this._exportType === "instant-games") this._useWorker = false; if (this._exportType === "cordova" && this._useWorker) if (isAndroid) { const chromeVer = /Chrome\/(\d+)/i.exec(navigator.userAgent); if (!chromeVer || !(parseInt(chromeVer[1], 10) >= 90)) this._useWorker = false } else this._useWorker = false; this._localFileBlobs =
-                        null; this._localFileStrings = null; if (this._exportType === "html5" && !window.isSecureContext) console.warn("[Construct] Warning: the browser indicates this is not a secure context. Some features may be unavailable. Use secure (HTTPS) hosting to ensure all features are available."); this.AddRuntimeComponentMessageHandler("runtime", "cordova-fetch-local-file", e => this._OnCordovaFetchLocalFile(e)); this.AddRuntimeComponentMessageHandler("runtime", "create-job-worker", e => this._OnCreateJobWorker(e)); if (this._exportType ===
-                            "cordova") document.addEventListener("deviceready", () => this._Init(opts)); else this._Init(opts)
+                    opts.useWorker; this._messageChannelPort = null; this._runtimeBaseUrl = ""; this._scriptFolder = opts.scriptFolder; this._workerScriptURLs = {}; this._worker = null; this._localRuntime = null; this._domHandlers = []; this._runtimeDomHandler = null; this._canvas = null; this._isExportingToVideo = false; this._exportToVideoDuration = 0; this._jobScheduler = null; this._rafId = -1; this._rafFunc = () => this._OnRAFCallback(); this._rafCallbacks = []; this._exportType = opts.exportType; this._isFileProtocol = location.protocol.substr(0, 4) === "file"; if (this._useWorker &&
+                        (typeof OffscreenCanvas === "undefined" || !navigator["userActivation"] || !SupportsWorkerTypeModule())) this._useWorker = false; if (this._useWorker && isSafari) this._useWorker = false; if (this._exportType === "playable-ad" || this._exportType === "instant-games") this._useWorker = false; if (this._exportType === "cordova" && this._useWorker) if (isAndroid) { const chromeVer = /Chrome\/(\d+)/i.exec(navigator.userAgent); if (!chromeVer || !(parseInt(chromeVer[1], 10) >= 90)) this._useWorker = false } else this._useWorker = false; this._localFileBlobs =
+                            null; this._localFileStrings = null; if (this._exportType === "html5" && !window.isSecureContext) console.warn("[Construct] Warning: the browser indicates this is not a secure context. Some features may be unavailable. Use secure (HTTPS) hosting to ensure all features are available."); this.AddRuntimeComponentMessageHandler("runtime", "cordova-fetch-local-file", e => this._OnCordovaFetchLocalFile(e)); this.AddRuntimeComponentMessageHandler("runtime", "create-job-worker", e => this._OnCreateJobWorker(e)); if (this._exportType ===
+                                "cordova") document.addEventListener("deviceready", () => this._Init(opts)); else this._Init(opts)
             } Release() { this._CancelAnimationFrame(); if (this._messageChannelPort) { this._messageChannelPort.onmessage = null; this._messageChannelPort = null } if (this._worker) { this._worker.terminate(); this._worker = null } if (this._localRuntime) { this._localRuntime.Release(); this._localRuntime = null } if (this._canvas) { this._canvas.parentElement.removeChild(this._canvas); this._canvas = null } } GetCanvas() { return this._canvas } GetRuntimeBaseURL() { return this._runtimeBaseUrl } UsesWorker() { return this._useWorker } GetExportType() { return this._exportType } IsFileProtocol() { return this._isFileProtocol } GetScriptFolder() { return this._scriptFolder } IsiOSCordova() {
                 return isiOSLike &&
                     this._exportType === "cordova"
@@ -142,7 +142,7 @@
                 domHandlerClasses.push(Class)
             } _FindRuntimeDOMHandler() { for (const dh of this._domHandlers) if (dh.GetComponentID() === "runtime") { this._runtimeDomHandler = dh; return } throw new Error("cannot find runtime DOM handler"); } _OnMessageFromDebugger(e) { this.PostToRuntimeComponent("debugger", "message", e) } _OnRuntimeReady() { for (const h of this._domHandlers) h.Attach() } static IsDocumentFullscreen() { return !!(document["fullscreenElement"] || document["webkitFullscreenElement"] || document["mozFullScreenElement"] || isWrapperFullscreen) } static _SetWrapperIsFullscreenFlag(f) {
                 isWrapperFullscreen =
-                !!f
+                    !!f
             } async GetRemotePreviewStatusInfo() { return await this.PostToRuntimeComponentAsync("runtime", "get-remote-preview-status-info") } _AddRAFCallback(f) { this._rafCallbacks.push(f); this._RequestAnimationFrame() } _RemoveRAFCallback(f) { const i = this._rafCallbacks.indexOf(f); if (i === -1) throw new Error("invalid callback"); this._rafCallbacks.splice(i, 1); if (!this._rafCallbacks.length) this._CancelAnimationFrame() } _RequestAnimationFrame() { if (this._rafId === -1 && this._rafCallbacks.length) this._rafId = requestAnimationFrame(this._rafFunc) } _CancelAnimationFrame() {
                 if (this._rafId !==
                     -1) { cancelAnimationFrame(this._rafId); this._rafId = -1 }
@@ -298,18 +298,18 @@
                             { "pointerId": pointerId, "pointerType": "mouse", "button": e.button, "buttons": e.buttons, "lastButtons": lastButtons, "clientX": e.clientX, "clientY": e.clientY + this._vkTranslateYOffset, "pageX": e.pageX, "pageY": e.pageY + this._vkTranslateYOffset, "movementX": e.movementX || 0, "movementY": e.movementY || 0, "width": 0, "height": 0, "pressure": 0, "tangentialPressure": 0, "tiltX": 0, "tiltY": 0, "twist": 0, "timeStamp": e.timeStamp }, DISPATCH_RUNTIME_AND_SCRIPT); this._mousePointerLastButtons = e.buttons; this._OnMouseEvent(e.type, e, DISPATCH_SCRIPT_ONLY)
                     } _OnPointerEvent(name,
                         e) {
-                            if (this._isExportToVideo) return; let lastButtons = 0; if (e.pointerType === "mouse") lastButtons = this._mousePointerLastButtons; this._PostToRuntimeMaybeSync(name, {
-                                "pointerId": e.pointerId, "pointerType": e.pointerType, "button": e.button, "buttons": e.buttons, "lastButtons": lastButtons, "clientX": e.clientX, "clientY": e.clientY + this._vkTranslateYOffset, "pageX": e.pageX, "pageY": e.pageY + this._vkTranslateYOffset, "movementX": e.movementX || 0, "movementY": e.movementY || 0, "width": e.width || 0, "height": e.height || 0, "pressure": e.pressure ||
-                                    0, "tangentialPressure": e["tangentialPressure"] || 0, "tiltX": e.tiltX || 0, "tiltY": e.tiltY || 0, "twist": e["twist"] || 0, "timeStamp": e.timeStamp
-                            }, DISPATCH_RUNTIME_AND_SCRIPT); if (e.pointerType === "mouse") { let mouseEventName = "mousemove"; if (name === "pointerdown") mouseEventName = "mousedown"; else if (name === "pointerup") mouseEventName = "mouseup"; this._OnMouseEvent(mouseEventName, e, DISPATCH_SCRIPT_ONLY); this._mousePointerLastButtons = e.buttons }
+                    if (this._isExportToVideo) return; let lastButtons = 0; if (e.pointerType === "mouse") lastButtons = this._mousePointerLastButtons; this._PostToRuntimeMaybeSync(name, {
+                        "pointerId": e.pointerId, "pointerType": e.pointerType, "button": e.button, "buttons": e.buttons, "lastButtons": lastButtons, "clientX": e.clientX, "clientY": e.clientY + this._vkTranslateYOffset, "pageX": e.pageX, "pageY": e.pageY + this._vkTranslateYOffset, "movementX": e.movementX || 0, "movementY": e.movementY || 0, "width": e.width || 0, "height": e.height || 0, "pressure": e.pressure ||
+                            0, "tangentialPressure": e["tangentialPressure"] || 0, "tiltX": e.tiltX || 0, "tiltY": e.tiltY || 0, "twist": e["twist"] || 0, "timeStamp": e.timeStamp
+                    }, DISPATCH_RUNTIME_AND_SCRIPT); if (e.pointerType === "mouse") { let mouseEventName = "mousemove"; if (name === "pointerdown") mouseEventName = "mousedown"; else if (name === "pointerup") mouseEventName = "mouseup"; this._OnMouseEvent(mouseEventName, e, DISPATCH_SCRIPT_ONLY); this._mousePointerLastButtons = e.buttons }
                 } _OnPointerRawUpdate(e) { this._OnPointerEvent("pointermove", e) } _OnTouchEvent(fireName,
                     e) {
-                        if (this._isExportToVideo) return; for (let i = 0, len = e.changedTouches.length; i < len; ++i) {
-                            const t = e.changedTouches[i]; this._PostToRuntimeMaybeSync(fireName, {
-                                "pointerId": t.identifier, "pointerType": "touch", "button": 0, "buttons": 0, "lastButtons": 0, "clientX": t.clientX, "clientY": t.clientY + this._vkTranslateYOffset, "pageX": t.pageX, "pageY": t.pageY + this._vkTranslateYOffset, "movementX": e.movementX || 0, "movementY": e.movementY || 0, "width": (t["radiusX"] || t["webkitRadiusX"] || 0) * 2, "height": (t["radiusY"] || t["webkitRadiusY"] ||
-                                    0) * 2, "pressure": t["force"] || t["webkitForce"] || 0, "tangentialPressure": 0, "tiltX": 0, "tiltY": 0, "twist": t["rotationAngle"] || 0, "timeStamp": e.timeStamp
-                            }, DISPATCH_RUNTIME_AND_SCRIPT)
-                        }
+                    if (this._isExportToVideo) return; for (let i = 0, len = e.changedTouches.length; i < len; ++i) {
+                        const t = e.changedTouches[i]; this._PostToRuntimeMaybeSync(fireName, {
+                            "pointerId": t.identifier, "pointerType": "touch", "button": 0, "buttons": 0, "lastButtons": 0, "clientX": t.clientX, "clientY": t.clientY + this._vkTranslateYOffset, "pageX": t.pageX, "pageY": t.pageY + this._vkTranslateYOffset, "movementX": e.movementX || 0, "movementY": e.movementY || 0, "width": (t["radiusX"] || t["webkitRadiusX"] || 0) * 2, "height": (t["radiusY"] || t["webkitRadiusY"] ||
+                                0) * 2, "pressure": t["force"] || t["webkitForce"] || 0, "tangentialPressure": 0, "tiltX": 0, "tiltY": 0, "twist": t["rotationAngle"] || 0, "timeStamp": e.timeStamp
+                        }, DISPATCH_RUNTIME_AND_SCRIPT)
+                    }
                 } _HandlePointerDownFocus(e) { if (window !== window.top) window.focus(); if (this._IsElementCanvasOrDocument(e.target) && document.activeElement && !this._IsElementCanvasOrDocument(document.activeElement)) document.activeElement.blur() } _IsElementCanvasOrDocument(elem) {
                     return !elem || elem === document || elem === window || elem === document.body || elem.tagName.toLowerCase() ===
                         "canvas"
@@ -351,7 +351,7 @@
                     } else if (type === "update") { const p = document.getElementById("c3-sr-" + e["id"]); if (p) p.textContent = e["text"]; else console.warn(`[Construct] Missing screen reader text with id ${e["id"]}`) } else if (type === "release") { const p = document.getElementById("c3-sr-" + e["id"]); if (p) p.remove(); else console.warn(`[Construct] Missing screen reader text with id ${e["id"]}`) } else console.warn(`[Construct] Unknown screen reader text update '${type}'`)
                 } _SetExportingToVideo(e) {
                     this._isExportToVideo =
-                    true; const headerElem = document.createElement("h1"); headerElem.id = "exportToVideoMessage"; headerElem.textContent = e["message"]; document.body.prepend(headerElem); document.body.classList.add("exportingToVideo"); this.GetRuntimeInterface().GetCanvas().style.display = ""; this._iRuntime.SetIsExportingToVideo(e["duration"])
+                        true; const headerElem = document.createElement("h1"); headerElem.id = "exportToVideoMessage"; headerElem.textContent = e["message"]; document.body.prepend(headerElem); document.body.classList.add("exportingToVideo"); this.GetRuntimeInterface().GetCanvas().style.display = ""; this._iRuntime.SetIsExportingToVideo(e["duration"])
                 } _OnExportVideoProgress(e) {
                     this._exportVideoProgressMessage = e["message"]; if (this._exportVideoUpdateTimerId === -1) this._exportVideoUpdateTimerId = setTimeout(() => this._DoUpdateExportVideoProgressMessage(),
                         250)
@@ -382,7 +382,7 @@
 };
 
 
-'use strict'; { if (window["C3_IsSupported"]) { const enableWorker = true; window["c3_runtimeInterface"] = new self.RuntimeInterface({ useWorker: enableWorker, workerMainUrl: "workermain.js", engineScripts: ["scripts/c3runtime.js"], projectScripts: [["scripts/flutter-bridge.js", "scripts/flutter-bridge.js"]], mainProjectScript: "scripts/flutter-bridge.js", scriptFolder: "scripts/", workerDependencyScripts: [], exportType: "html5" }) } };
+'use strict'; { if (window["C3_IsSupported"]) { const enableWorker = false; window["c3_runtimeInterface"] = new self.RuntimeInterface({ useWorker: enableWorker, workerMainUrl: "workermain.js", engineScripts: ["scripts/c3runtime.js"], projectScripts: [["scripts/flutter-bridge.js", "scripts/flutter-bridge.js"]], mainProjectScript: "scripts/flutter-bridge.js", scriptFolder: "scripts/", workerDependencyScripts: [], exportType: "html5" }) } };
 'use strict'; {
     const DOM_COMPONENT_ID = "touch"; const HANDLER_CLASS = class TouchDOMHandler extends self.DOMHandler {
         constructor(iRuntime) { super(iRuntime, DOM_COMPONENT_ID); this.AddRuntimeMessageHandler("request-permission", e => this._OnRequestPermission(e)) } async _OnRequestPermission(e) { const type = e["type"]; let result = true; if (type === 0) result = await this._RequestOrientationPermission(); else if (type === 1) result = await this._RequestMotionPermission(); this.PostToRuntime("permission-result", { "type": type, "result": result }) } async _RequestOrientationPermission() {
@@ -412,10 +412,10 @@
                             sampleRate)
                     })
                 } else {
-                    const opts = { "latencyHint": e["latencyHint"] }; if (!this.SupportsWebMOpus()) opts["sampleRate"] = 48E3; if (typeof AudioContext !== "undefined") this._audioContext = new AudioContext(opts); else if (typeof webkitAudioContext !== "undefined") this._audioContext = new webkitAudioContext(opts); else throw new Error("Web Audio API not supported"); this._AttachUnblockEvents(); this._audioContext.onstatechange = () => {
-                        if (this._audioContext.state !== "running") this._AttachUnblockEvents(); this.PostToRuntime("audiocontext-state",
-                            { "audioContextState": this._audioContext.state })
-                    }
+                const opts = { "latencyHint": e["latencyHint"] }; if (!this.SupportsWebMOpus()) opts["sampleRate"] = 48E3; if (typeof AudioContext !== "undefined") this._audioContext = new AudioContext(opts); else if (typeof webkitAudioContext !== "undefined") this._audioContext = new webkitAudioContext(opts); else throw new Error("Web Audio API not supported"); this._AttachUnblockEvents(); this._audioContext.onstatechange = () => {
+                    if (this._audioContext.state !== "running") this._AttachUnblockEvents(); this.PostToRuntime("audiocontext-state",
+                        { "audioContextState": this._audioContext.state })
+                }
             } this._destinationNode = this._audioContext["createGain"](); this._destinationNode["connect"](this._audioContext["destination"]); const listenerPos = e["listenerPos"]; this._lastListenerPos[0] = listenerPos[0]; this._lastListenerPos[1] = listenerPos[1]; this._lastListenerPos[2] = listenerPos[2]; this._audioContext["listener"]["setPosition"](listenerPos[0], listenerPos[1], listenerPos[2]); this._audioContext["listener"]["setOrientation"](...this._lastListenerOrientation);
             self["C3_GetAudioContextCurrentTime"] = () => this.GetAudioCurrentTime(); try { await Promise.all(e["preloadList"].map(o => this._GetAudioBuffer(o["originalUrl"], o["url"], o["type"], false))) } catch (err) { console.error("[Construct] Preloading sounds failed: ", err) } return { "sampleRate": this._audioContext["sampleRate"], "audioContextState": this._audioContext.state, "outputLatency": this._audioContext["outputLatency"] || 0 }
         } _AttachUnblockEvents() {
@@ -435,7 +435,7 @@
                     } for (const ai of this.audioInstancesByEffectTag(tag)) ai.Reconnect(destNode); if (this._microphoneSource && this._microphoneTag === tag) { this._microphoneSource["disconnect"](); this._microphoneSource["connect"](destNode) }
                 } GetMasterVolume() { return this._masterVolume } IsSilent() { return this._isSilent } GetTimeScaleMode() { return this._timeScaleMode } GetTimeScale() { return this._timeScale } GetGameTime() { return this._gameTime } IsPlayMusicAsSound() { return this._playMusicAsSound } SupportsWebMOpus() { return this._supportsWebMOpus } _SetHasAnySoftwareDecodedMusic() {
                     this._hasAnySoftwareDecodedMusic =
-                    true
+                        true
                 } GetPanningModel() { return this._panningModel } GetDistanceModel() { return this._distanceModel } GetReferenceDistance() { return this._refDistance } GetMaxDistance() { return this._maxDistance } GetRolloffFactor() { return this._rolloffFactor } DecodeAudioData(audioData, needsSoftwareDecode) {
                     if (needsSoftwareDecode) return this._iRuntime._WasmDecodeWebMOpus(audioData).then(rawAudio => {
                         const audioBuffer = this._audioContext["createBuffer"](1, rawAudio.length, 48E3); const channelBuffer = audioBuffer["getChannelData"](0); channelBuffer.set(rawAudio);
@@ -651,7 +651,7 @@
         constructor(audioDomHandler, buffer, tags) { super(audioDomHandler, buffer, tags); this._bufferSource = null; this._onended_handler = e => this._OnEnded(e); this._hasPlaybackEnded = true; this._activeSource = null; this._playStartTime = 0; this._playFromSeekPos = 0; this._resumePosition = 0; this._muteVol = 1 } Release() { this.Stop(); this._ReleaseBufferSource(); this._onended_handler = null; super.Release() } _ReleaseBufferSource() {
             if (this._bufferSource) {
                 this._bufferSource["onended"] =
-                null; this._bufferSource["disconnect"](); this._bufferSource["buffer"] = null
+                    null; this._bufferSource["disconnect"](); this._bufferSource["buffer"] = null
             } this._bufferSource = null; this._activeSource = null
         } _OnEnded(e) { if (this._isPaused || this._resumeMe) return; if (e.target !== this._activeSource) return; this._hasPlaybackEnded = true; this._isStopped = true; this._instUid = -1; this._ReleaseBufferSource(); this._audioDomHandler.PostTrigger("ended", this._tags, this._aiId) } HasEnded() { if (!this._isStopped && this._bufferSource && this._bufferSource["loop"]) return false; if (this._isPaused) return false; return this._hasPlaybackEnded } CanBeRecycled() {
             if (!this._bufferSource ||
@@ -667,11 +667,11 @@
             this._activeSource = this._bufferSource; this._bufferSource["onended"] = this._onended_handler; this._bufferSource["loop"] = this._isLooping; this._UpdateVolume(); this._UpdatePlaybackRate(); this._bufferSource["start"](0, this._resumePosition); this._playStartTime = this.GetCurrentTime(); this._playFromSeekPos = this._resumePosition; this._isPaused = false
         } GetOutputVolume() { return super.GetOutputVolume() * this._muteVol } _UpdateMuted() { this._muteVol = this._isMuted || this.IsSilent() ? 0 : 1; this._UpdateVolume() } SetLooping(l) {
             l =
-            !!l; if (this._isLooping === l) return; this._isLooping = l; if (this._bufferSource) this._bufferSource["loop"] = l
+                !!l; if (this._isLooping === l) return; this._isLooping = l; if (this._bufferSource) this._bufferSource["loop"] = l
         } _UpdatePlaybackRate() { let r = this._playbackRate; if (this._isTimescaled) r *= this._audioDomHandler.GetTimeScale(); if (this._bufferSource) this._bufferSource["playbackRate"]["value"] = r } Seek(pos) { if (this._isStopped || this.HasEnded()) return; if (this._isPaused) this._resumePosition = pos; else { this.Pause(); this._resumePosition = pos; this.Resume() } } GetResumePosition() { return this._resumePosition } SetSuspended(s) {
             if (s) if (this.IsPlaying()) {
                 this._resumeMe =
-                true; this._resumePosition = this.GetPlaybackTime(); if (this._isLooping) this._resumePosition %= this.GetDuration(); this._bufferSource["stop"](0)
+                    true; this._resumePosition = this.GetPlaybackTime(); if (this._isLooping) this._resumePosition %= this.GetDuration(); this._bufferSource["stop"](0)
             } else this._resumeMe = false; else if (this._resumeMe) {
                 this._ReleaseBufferSource(); this._bufferSource = this.GetAudioContext()["createBufferSource"](); this._bufferSource["buffer"] = this._buffer.GetAudioBuffer(); this._bufferSource["connect"](this._gainNode); this._activeSource = this._bufferSource; this._bufferSource["onended"] = this._onended_handler; this._bufferSource["loop"] =
                     this._isLooping; this._UpdateVolume(); this._UpdatePlaybackRate(); this._bufferSource["start"](0, this._resumePosition); this._playStartTime = this.GetCurrentTime(); this._playFromSeekPos = this._resumePosition; this._resumeMe = false
@@ -688,8 +688,8 @@
     } self.C3AudioFilterFX = class C3AudioFilterFX extends AudioFXBase {
         constructor(audioDomHandler,
             type, freq, detune, q, gain, mix) {
-                super(audioDomHandler); this._type = "filter"; this._params = [type, freq, detune, q, gain, mix]; this._inputNode = this.CreateGain(); this._wetNode = this.CreateGain(); this._wetNode["gain"]["value"] = mix; this._dryNode = this.CreateGain(); this._dryNode["gain"]["value"] = 1 - mix; this._filterNode = this._audioContext["createBiquadFilter"](); this._filterNode["type"] = type; this._filterNode["frequency"]["value"] = freq; this._filterNode["detune"]["value"] = detune; this._filterNode["Q"]["value"] = q; this._filterNode["gain"]["vlaue"] =
-                    gain; this._inputNode["connect"](this._filterNode); this._inputNode["connect"](this._dryNode); this._filterNode["connect"](this._wetNode)
+            super(audioDomHandler); this._type = "filter"; this._params = [type, freq, detune, q, gain, mix]; this._inputNode = this.CreateGain(); this._wetNode = this.CreateGain(); this._wetNode["gain"]["value"] = mix; this._dryNode = this.CreateGain(); this._dryNode["gain"]["value"] = 1 - mix; this._filterNode = this._audioContext["createBiquadFilter"](); this._filterNode["type"] = type; this._filterNode["frequency"]["value"] = freq; this._filterNode["detune"]["value"] = detune; this._filterNode["Q"]["value"] = q; this._filterNode["gain"]["vlaue"] =
+                gain; this._inputNode["connect"](this._filterNode); this._inputNode["connect"](this._dryNode); this._filterNode["connect"](this._wetNode)
         } Release() { this._inputNode["disconnect"](); this._filterNode["disconnect"](); this._wetNode["disconnect"](); this._dryNode["disconnect"](); super.Release() } ConnectTo(node) { this._wetNode["disconnect"](); this._wetNode["connect"](node); this._dryNode["disconnect"](); this._dryNode["connect"](node) } GetInputNode() { return this._inputNode } SetParam(param, value, ramp, time) {
             switch (param) {
                 case 0: value =
