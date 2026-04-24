@@ -35,7 +35,7 @@
 		} function equals$9(a, b) { return Math.abs(a - b) <= EPSILON * Math.max(1, Math.abs(a), Math.abs(b)) } if (!Math.hypot) Math.hypot = function () { var y = 0, i = arguments.length; while (i--) y += arguments[i] * arguments[i]; return Math.sqrt(y) }; var common = Object.freeze({ __proto__: null, EPSILON: EPSILON, get ARRAY_TYPE() { return ARRAY_TYPE }, RANDOM: RANDOM, ANGLE_ORDER: ANGLE_ORDER, setMatrixArrayType: setMatrixArrayType, toRadian: toRadian, equals: equals$9 }); function create$8() {
 			var out = new ARRAY_TYPE(4); if (ARRAY_TYPE != Float32Array) {
 				out[1] =
-				0; out[2] = 0
+					0; out[2] = 0
 			} out[0] = 1; out[3] = 1; return out
 		} function clone$8(a) { var out = new ARRAY_TYPE(4); out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3]; return out } function copy$8(out, a) { out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3]; return out } function identity$5(out) { out[0] = 1; out[1] = 0; out[2] = 0; out[3] = 1; return out } function fromValues$8(m00, m01, m10, m11) { var out = new ARRAY_TYPE(4); out[0] = m00; out[1] = m01; out[2] = m10; out[3] = m11; return out } function set$8(out, m00, m01, m10, m11) { out[0] = m00; out[1] = m01; out[2] = m10; out[3] = m11; return out }
 		function transpose$2(out, a) { if (out === a) { var a1 = a[1]; out[1] = a[2]; out[2] = a1 } else { out[0] = a[0]; out[1] = a[2]; out[2] = a[1]; out[3] = a[3] } return out } function invert$5(out, a) { var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3]; var det = a0 * a3 - a2 * a1; if (!det) return null; det = 1 / det; out[0] = a3 * det; out[1] = -a1 * det; out[2] = -a2 * det; out[3] = a0 * det; return out } function adjoint$2(out, a) { var a0 = a[0]; out[0] = a[3]; out[1] = -a[1]; out[2] = -a[2]; out[3] = a0; return out } function determinant$3(a) { return a[0] * a[3] - a[2] * a[1] } function multiply$8(out, a, b) {
@@ -58,7 +58,7 @@
 							a0 * b4 + a2 * b5 + a4; out[5] = a1 * b4 + a3 * b5 + a5; return out
 					} function rotate$3(out, a, rad) { var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5]; var s = Math.sin(rad); var c = Math.cos(rad); out[0] = a0 * c + a2 * s; out[1] = a1 * c + a3 * s; out[2] = a0 * -s + a2 * c; out[3] = a1 * -s + a3 * c; out[4] = a4; out[5] = a5; return out } function scale$7(out, a, v) { var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5]; var v0 = v[0], v1 = v[1]; out[0] = a0 * v0; out[1] = a1 * v0; out[2] = a2 * v1; out[3] = a3 * v1; out[4] = a4; out[5] = a5; return out } function translate$3(out, a, v) {
 						var a0 = a[0], a1 = a[1],
-						a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5]; var v0 = v[0], v1 = v[1]; out[0] = a0; out[1] = a1; out[2] = a2; out[3] = a3; out[4] = a0 * v0 + a2 * v1 + a4; out[5] = a1 * v0 + a3 * v1 + a5; return out
+							a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5]; var v0 = v[0], v1 = v[1]; out[0] = a0; out[1] = a1; out[2] = a2; out[3] = a3; out[4] = a0 * v0 + a2 * v1 + a4; out[5] = a1 * v0 + a3 * v1 + a5; return out
 					} function fromRotation$3(out, rad) { var s = Math.sin(rad), c = Math.cos(rad); out[0] = c; out[1] = s; out[2] = -s; out[3] = c; out[4] = 0; out[5] = 0; return out } function fromScaling$2(out, v) { out[0] = v[0]; out[1] = 0; out[2] = 0; out[3] = v[1]; out[4] = 0; out[5] = 0; return out } function fromTranslation$3(out, v) { out[0] = 1; out[1] = 0; out[2] = 0; out[3] = 1; out[4] = v[0]; out[5] = v[1]; return out } function str$7(a) {
 						return "mat2d(" +
 							a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ")"
@@ -152,8 +152,8 @@
 			} return out
 		} function scale$5(out, a, v) { var x = v[0], y = v[1], z = v[2]; out[0] = a[0] * x; out[1] = a[1] * x; out[2] = a[2] * x; out[3] = a[3] * x; out[4] = a[4] * y; out[5] = a[5] * y; out[6] = a[6] * y; out[7] = a[7] * y; out[8] = a[8] * z; out[9] = a[9] * z; out[10] = a[10] * z; out[11] = a[11] * z; out[12] = a[12]; out[13] = a[13]; out[14] = a[14]; out[15] = a[15]; return out } function rotate$1(out,
 			a, rad, axis) {
-				var x = axis[0], y = axis[1], z = axis[2]; var len = Math.hypot(x, y, z); var s, c, t; var a00, a01, a02, a03; var a10, a11, a12, a13; var a20, a21, a22, a23; var b00, b01, b02; var b10, b11, b12; var b20, b21, b22; if (len < EPSILON) return null; len = 1 / len; x *= len; y *= len; z *= len; s = Math.sin(rad); c = Math.cos(rad); t = 1 - c; a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3]; a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7]; a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11]; b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s; b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s; b20 = x * z * t + y * s; b21 = y * z * t - x *
-					s; b22 = z * z * t + c; out[0] = a00 * b00 + a10 * b01 + a20 * b02; out[1] = a01 * b00 + a11 * b01 + a21 * b02; out[2] = a02 * b00 + a12 * b01 + a22 * b02; out[3] = a03 * b00 + a13 * b01 + a23 * b02; out[4] = a00 * b10 + a10 * b11 + a20 * b12; out[5] = a01 * b10 + a11 * b11 + a21 * b12; out[6] = a02 * b10 + a12 * b11 + a22 * b12; out[7] = a03 * b10 + a13 * b11 + a23 * b12; out[8] = a00 * b20 + a10 * b21 + a20 * b22; out[9] = a01 * b20 + a11 * b21 + a21 * b22; out[10] = a02 * b20 + a12 * b21 + a22 * b22; out[11] = a03 * b20 + a13 * b21 + a23 * b22; if (a !== out) { out[12] = a[12]; out[13] = a[13]; out[14] = a[14]; out[15] = a[15] } return out
+			var x = axis[0], y = axis[1], z = axis[2]; var len = Math.hypot(x, y, z); var s, c, t; var a00, a01, a02, a03; var a10, a11, a12, a13; var a20, a21, a22, a23; var b00, b01, b02; var b10, b11, b12; var b20, b21, b22; if (len < EPSILON) return null; len = 1 / len; x *= len; y *= len; z *= len; s = Math.sin(rad); c = Math.cos(rad); t = 1 - c; a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3]; a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7]; a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11]; b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s; b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s; b20 = x * z * t + y * s; b21 = y * z * t - x *
+				s; b22 = z * z * t + c; out[0] = a00 * b00 + a10 * b01 + a20 * b02; out[1] = a01 * b00 + a11 * b01 + a21 * b02; out[2] = a02 * b00 + a12 * b01 + a22 * b02; out[3] = a03 * b00 + a13 * b01 + a23 * b02; out[4] = a00 * b10 + a10 * b11 + a20 * b12; out[5] = a01 * b10 + a11 * b11 + a21 * b12; out[6] = a02 * b10 + a12 * b11 + a22 * b12; out[7] = a03 * b10 + a13 * b11 + a23 * b12; out[8] = a00 * b20 + a10 * b21 + a20 * b22; out[9] = a01 * b20 + a11 * b21 + a21 * b22; out[10] = a02 * b20 + a12 * b21 + a22 * b22; out[11] = a03 * b20 + a13 * b21 + a23 * b22; if (a !== out) { out[12] = a[12]; out[13] = a[13]; out[14] = a[14]; out[15] = a[15] } return out
 		} function rotateX$3(out, a, rad) {
 			var s =
 				Math.sin(rad); var c = Math.cos(rad); var a10 = a[4]; var a11 = a[5]; var a12 = a[6]; var a13 = a[7]; var a20 = a[8]; var a21 = a[9]; var a22 = a[10]; var a23 = a[11]; if (a !== out) { out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3]; out[12] = a[12]; out[13] = a[13]; out[14] = a[14]; out[15] = a[15] } out[4] = a10 * c + a20 * s; out[5] = a11 * c + a21 * s; out[6] = a12 * c + a22 * s; out[7] = a13 * c + a23 * s; out[8] = a20 * c - a10 * s; out[9] = a21 * c - a11 * s; out[10] = a22 * c - a12 * s; out[11] = a23 * c - a13 * s; return out
@@ -253,7 +253,7 @@
 				out[2] = a[2] / b[2]; return out
 			} function ceil$2(out, a) { out[0] = Math.ceil(a[0]); out[1] = Math.ceil(a[1]); out[2] = Math.ceil(a[2]); return out } function floor$2(out, a) { out[0] = Math.floor(a[0]); out[1] = Math.floor(a[1]); out[2] = Math.floor(a[2]); return out } function min$2(out, a, b) { out[0] = Math.min(a[0], b[0]); out[1] = Math.min(a[1], b[1]); out[2] = Math.min(a[2], b[2]); return out } function max$2(out, a, b) { out[0] = Math.max(a[0], b[0]); out[1] = Math.max(a[1], b[1]); out[2] = Math.max(a[2], b[2]); return out } function round$2(out, a) {
 				out[0] =
-				Math.round(a[0]); out[1] = Math.round(a[1]); out[2] = Math.round(a[2]); return out
+					Math.round(a[0]); out[1] = Math.round(a[1]); out[2] = Math.round(a[2]); return out
 			} function scale$4(out, a, b) { out[0] = a[0] * b; out[1] = a[1] * b; out[2] = a[2] * b; return out } function scaleAndAdd$2(out, a, b, scale) { out[0] = a[0] + b[0] * scale; out[1] = a[1] + b[1] * scale; out[2] = a[2] + b[2] * scale; return out } function distance$2(a, b) { var x = b[0] - a[0]; var y = b[1] - a[1]; var z = b[2] - a[2]; return Math.hypot(x, y, z) } function squaredDistance$2(a, b) { var x = b[0] - a[0]; var y = b[1] - a[1]; var z = b[2] - a[2]; return x * x + y * y + z * z } function squaredLength$4(a) {
 				var x =
 					a[0]; var y = a[1]; var z = a[2]; return x * x + y * y + z * z
@@ -328,7 +328,7 @@
 		function ln(out, a) { var x = a[0], y = a[1], z = a[2], w = a[3]; var r = Math.sqrt(x * x + y * y + z * z); var t = r > 0 ? Math.atan2(r, w) / r : 0; out[0] = x * t; out[1] = y * t; out[2] = z * t; out[3] = .5 * Math.log(x * x + y * y + z * z + w * w); return out } function pow(out, a, b) { ln(out, a); scale$2(out, out, b); exp(out, out); return out } function slerp(out, a, b, t) {
 			var ax = a[0], ay = a[1], az = a[2], aw = a[3]; var bx = b[0], by = b[1], bz = b[2], bw = b[3]; var omega, cosom, sinom, scale0, scale1; cosom = ax * bx + ay * by + az * bz + aw * bw; if (cosom < 0) { cosom = -cosom; bx = -bx; by = -by; bz = -bz; bw = -bw } if (1 - cosom > EPSILON) {
 				omega =
-				Math.acos(cosom); sinom = Math.sin(omega); scale0 = Math.sin((1 - t) * omega) / sinom; scale1 = Math.sin(t * omega) / sinom
+					Math.acos(cosom); sinom = Math.sin(omega); scale0 = Math.sin((1 - t) * omega) / sinom; scale1 = Math.sin(t * omega) / sinom
 			} else { scale0 = 1 - t; scale1 = t } out[0] = scale0 * ax + scale1 * bx; out[1] = scale0 * ay + scale1 * by; out[2] = scale0 * az + scale1 * bz; out[3] = scale0 * aw + scale1 * bw; return out
 		} function random$1(out) {
 			var u1 = RANDOM(); var u2 = RANDOM(); var u3 = RANDOM(); var sqrt1MinusU1 = Math.sqrt(1 - u1); var sqrtU1 = Math.sqrt(u1); out[0] = sqrt1MinusU1 * Math.sin(2 * Math.PI * u2); out[1] = sqrt1MinusU1 * Math.cos(2 * Math.PI * u2); out[2] = sqrtU1 * Math.sin(2 * Math.PI * u3);
@@ -369,7 +369,7 @@
 				1; out[4] = t[0] * .5; out[5] = t[1] * .5; out[6] = t[2] * .5; out[7] = 0; return out
 		} function fromRotation(out, q) { out[0] = q[0]; out[1] = q[1]; out[2] = q[2]; out[3] = q[3]; out[4] = 0; out[5] = 0; out[6] = 0; out[7] = 0; return out } function fromMat4(out, a) { var outer = create$2(); getRotation(outer, a); var t = new ARRAY_TYPE(3); getTranslation$1(t, a); fromRotationTranslation(out, outer, t); return out } function copy$1(out, a) { out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3]; out[4] = a[4]; out[5] = a[5]; out[6] = a[6]; out[7] = a[7]; return out } function identity(out) {
 			out[0] =
-			0; out[1] = 0; out[2] = 0; out[3] = 1; out[4] = 0; out[5] = 0; out[6] = 0; out[7] = 0; return out
+				0; out[1] = 0; out[2] = 0; out[3] = 1; out[4] = 0; out[5] = 0; out[6] = 0; out[7] = 0; return out
 		} function set$1(out, x1, y1, z1, w1, x2, y2, z2, w2) { out[0] = x1; out[1] = y1; out[2] = z1; out[3] = w1; out[4] = x2; out[5] = y2; out[6] = z2; out[7] = w2; return out } var getReal = copy$2; function getDual(out, a) { out[0] = a[4]; out[1] = a[5]; out[2] = a[6]; out[3] = a[7]; return out } var setReal = copy$2; function setDual(out, q) { out[4] = q[0]; out[5] = q[1]; out[6] = q[2]; out[7] = q[3]; return out } function getTranslation(out, a) {
 			var ax = a[4], ay = a[5], az = a[6], aw = a[7], bx = -a[0], by = -a[1], bz =
 				-a[2], bw = a[3]; out[0] = (ax * bw + aw * bx + ay * bz - az * by) * 2; out[1] = (ay * bw + aw * by + az * bx - ax * bz) * 2; out[2] = (az * bw + aw * bz + ax * by - ay * bx) * 2; return out
@@ -422,7 +422,7 @@
 			a) { out[0] = Math.round(a[0]); out[1] = Math.round(a[1]); return out } function scale(out, a, b) { out[0] = a[0] * b; out[1] = a[1] * b; return out } function scaleAndAdd(out, a, b, scale) { out[0] = a[0] + b[0] * scale; out[1] = a[1] + b[1] * scale; return out } function distance(a, b) { var x = b[0] - a[0], y = b[1] - a[1]; return Math.hypot(x, y) } function squaredDistance(a, b) { var x = b[0] - a[0], y = b[1] - a[1]; return x * x + y * y } function length(a) { var x = a[0], y = a[1]; return Math.hypot(x, y) } function squaredLength(a) { var x = a[0], y = a[1]; return x * x + y * y } function negate(out,
 				a) { out[0] = -a[0]; out[1] = -a[1]; return out } function inverse(out, a) { out[0] = 1 / a[0]; out[1] = 1 / a[1]; return out } function normalize(out, a) { var x = a[0], y = a[1]; var len = x * x + y * y; if (len > 0) len = 1 / Math.sqrt(len); out[0] = a[0] * len; out[1] = a[1] * len; return out } function dot(a, b) { return a[0] * b[0] + a[1] * b[1] } function cross(out, a, b) { var z = a[0] * b[1] - a[1] * b[0]; out[0] = out[1] = 0; out[2] = z; return out } function lerp(out, a, b, t) { var ax = a[0], ay = a[1]; out[0] = ax + t * (b[0] - ax); out[1] = ay + t * (b[1] - ay); return out } function random(out, scale) {
 					scale = scale ||
-					1; var r = RANDOM() * 2 * Math.PI; out[0] = Math.cos(r) * scale; out[1] = Math.sin(r) * scale; return out
+						1; var r = RANDOM() * 2 * Math.PI; out[0] = Math.cos(r) * scale; out[1] = Math.sin(r) * scale; return out
 				} function transformMat2(out, a, m) { var x = a[0], y = a[1]; out[0] = m[0] * x + m[2] * y; out[1] = m[1] * x + m[3] * y; return out } function transformMat2d(out, a, m) { var x = a[0], y = a[1]; out[0] = m[0] * x + m[2] * y + m[4]; out[1] = m[1] * x + m[3] * y + m[5]; return out } function transformMat3(out, a, m) { var x = a[0], y = a[1]; out[0] = m[0] * x + m[3] * y + m[6]; out[1] = m[1] * x + m[4] * y + m[7]; return out } function transformMat4(out, a, m) {
 					var x = a[0]; var y = a[1]; out[0] = m[0] * x + m[4] * y + m[12]; out[1] =
 						m[1] * x + m[5] * y + m[13]; return out
@@ -715,7 +715,7 @@
 				else return this._inst.ready()
 			} createInstance(options) { if (typeof options !== "object") throw new TypeError("invalid options object"); const name = options["name"]; if (typeof name !== "string") throw new TypeError("invalid store name"); const inst = new KVStorageContainer(name); return new ForageAdaptor(inst) } length(successCallback) { NOT_IMPLEMENTED("localforage.length()") } key(index, successCallback) { NOT_IMPLEMENTED("localforage.key()") } iterate(iteratorCallback, successCallback) { NOT_IMPLEMENTED("localforage.iterate()") } setDriver(driverName) { NOT_IMPLEMENTED("localforage.setDriver()") } config(options) { NOT_IMPLEMENTED("localforage.config()") } defineDriver(customDriver) { NOT_IMPLEMENTED("localforage.defineDriver()") } driver() { NOT_IMPLEMENTED("localforage.driver()") } supports(driverName) { NOT_IMPLEMENTED("localforage.supports()") } dropInstance() { NOT_IMPLEMENTED("localforage.dropInstance()") } disableMemoryMode() {
 				isInMemory =
-				false
+					false
 			}
 		} self["localforage"] = new ForageAdaptor(new KVStorageContainer("localforage"))
 	};
@@ -729,7 +729,7 @@
 	if (C3.Supports.ImageBitmap) {
 		try { self.createImageBitmap(new ImageData(32, 32), { "premultiplyAlpha": "none" }).then(() => { C3.Supports.ImageBitmapOptions = true }).catch(() => { C3.Supports.ImageBitmapOptions = false }) } catch (err) { C3.Supports.ImageBitmapOptions = false } try { self.createImageBitmap(new ImageData(32, 32), { "resizeWidth": 10, "resizeHeight": 10 }).then(imageBitmap => { C3.Supports.ImageBitmapOptionsResize = imageBitmap.width === 10 && imageBitmap.height === 10 }).catch(() => { C3.Supports.ImageBitmapOptionsResize = false }) } catch (err) {
 			C3.Supports.ImageBitmapOptionsResize =
-			false
+				false
 		}
 	} C3.Supports.ClipboardReadText = !!(navigator["clipboard"] && navigator["clipboard"]["readText"] && C3.Platform.Browser !== "Firefox"); C3.Supports.PermissionsQuery = !!(navigator["permissions"] && navigator["permissions"]["query"]); C3.Supports.ClipboardPermissionsQuery = false; if (C3.Supports.PermissionsQuery) { const permission = { "name": "clipboard-read" }; navigator["permissions"]["query"](permission).then(() => { C3.Supports.ClipboardPermissionsQuery = true }).catch(() => { C3.Supports.ClipboardPermissionsQuery = false }) }
 	C3.Supports.AsyncClipboardApi = !!(navigator["permissions"] && navigator["clipboard"] && self["ClipboardItem"]); C3.Supports.Proxies = typeof Proxy !== "undefined"; C3.Supports.DownloadAttribute = (() => { if (typeof document === "undefined") return false; const a = document.createElement("a"); return typeof a.download !== "undefined" })(); C3.Supports.Fetch = typeof fetch === "function"; C3.Supports.PersistentStorage = !!(self.isSecureContext && C3.Platform.Browser !== "Opera" && (navigator["storage"] && navigator["storage"]["persist"]));
@@ -917,13 +917,13 @@
 				c._b; this._a += c._a; this.clamp()
 		} addRgb(r, g, b, a = 0) { this._r += +r; this._g += +g; this._b += +b; this._a += +a; this.clamp() } diff(c) { this.setR(Math.max(this._r, c._r) - Math.min(this._r, c._r)); this.setG(Math.max(this._g, c._g) - Math.min(this._g, c._g)); this.setB(Math.max(this._b, c._b) - Math.min(this._b, c._b)); this.setA(Math.max(this._a, c._a) - Math.min(this._a, c._a)); this.clamp() } copyRgb(c) { this._r = c._r; this._g = c._g; this._b = c._b } setR(r) { this._r = C3.clamp(+r, 0, 1) } getR() { return this._r } setG(g) { this._g = C3.clamp(+g, 0, 1) } getG() { return this._g } setB(b) {
 			this._b =
-			C3.clamp(+b, 0, 1)
+				C3.clamp(+b, 0, 1)
 		} getB() { return this._b } setA(a) { this._a = C3.clamp(+a, 0, 1) } getA() { return this._a } clone() { return C3.New(C3.Color, this._r, this._g, this._b, this._a) } toArray() { return [this._r, this._g, this._b, this._a] } toTypedArray() { return new Float64Array(this.toArray()) } writeToTypedArray(ta, i) { ta[i++] = this._r; ta[i++] = this._g; ta[i++] = this._b; ta[i] = this._a } writeRGBToTypedArray(ta, i) { ta[i++] = this._r; ta[i++] = this._g; ta[i] = this._b } equals(c) { return this._r === c._r && this._g === c._g && this._b === c._b && this._a === c._a } equalsIgnoringAlpha(c) {
 			return this._r ===
 				c._r && this._g === c._g && this._b === c._b
 		} equalsRgb(r, g, b) { return this._r === r && this._g === g && this._b === b } equalsRgba(r, g, b, a) { return this._r === r && this._g === g && this._b === b && this._a === a } equalsF32Array(arr, offset) { return arr[offset] === Math.fround(this._r) && arr[offset + 1] === Math.fround(this._g) && arr[offset + 2] === Math.fround(this._b) && arr[offset + 3] === Math.fround(this._a) } equalsRGBF32Array(arr, offset) { return arr[offset] === Math.fround(this._r) && arr[offset + 1] === Math.fround(this._g) && arr[offset + 2] === Math.fround(this._b) } multiply(c) {
 			this._r *=
-			c._r; this._g *= c._g; this._b *= c._b; this._a *= c._a
+				c._r; this._g *= c._g; this._b *= c._b; this._a *= c._a
 		} multiplyAlpha(a) { this._r *= a; this._g *= a; this._b *= a; this._a *= a } premultiply() { this._r *= this._a; this._g *= this._a; this._b *= this._a; return this } unpremultiply() { this._r /= this._a; this._g /= this._a; this._b /= this._a; return this } clamp() { this._r = C3.clamp(this._r, 0, 1); this._g = C3.clamp(this._g, 0, 1); this._b = C3.clamp(this._b, 0, 1); this._a = C3.clamp(this._a, 0, 1); return this } setFromRgbValue(rgb) {
 			this._r = C3.GetRValue(rgb); this._g = C3.GetGValue(rgb); this._b = C3.GetBValue(rgb);
 			this._a = C3.GetAValue(rgb)
@@ -1003,13 +1003,13 @@
 	C3.Rect = class Rect {
 		constructor(left, top, right, bottom) { this._left = NaN; this._top = NaN; this._right = NaN; this._bottom = NaN; this._left = 0; this._top = 0; this._right = 0; this._bottom = 0; if (left instanceof C3.Rect) this.copy(left); else this.set(left || 0, top || 0, right || 0, bottom || 0) } set(left, top, right, bottom) { this._left = +left; this._top = +top; this._right = +right; this._bottom = +bottom } setWH(left, top, width, height) { left = +left; top = +top; this._left = left; this._top = top; this._right = left + +width; this._bottom = top + +height } copy(rect) {
 			this._left =
-			+rect._left; this._top = +rect._top; this._right = +rect._right; this._bottom = +rect._bottom
+				+rect._left; this._top = +rect._top; this._right = +rect._right; this._bottom = +rect._bottom
 		} clone() { return new C3.Rect(this._left, this._top, this._right, this._bottom) } static Merge(first, second) { const ret = new C3.Rect; ret.setLeft(Math.min(first._left, second._left)); ret.setTop(Math.min(first._top, second._top)); ret.setRight(Math.max(first._right, second._right)); ret.setBottom(Math.max(first._bottom, second._bottom)); return ret } static FromObject(o) { return new C3.Rect(o.left, o.top, o.right, o.bottom) } equals(rect) {
 			return this._left ===
 				rect._left && this._top === rect._top && this._right === rect._right && this._bottom === rect._bottom
 		} equalsWH(x, y, w, h) { return this._left === x && this._top === y && this.width() === w && this.height() === h } equalsF32Array(arr, offset) { return arr[offset] === Math.fround(this._left) && arr[offset + 1] === Math.fround(this._top) && arr[offset + 2] === Math.fround(this._right) && arr[offset + 3] === Math.fround(this._bottom) } setLeft(l) { this._left = +l } getLeft() { return this._left } setTop(t) { this._top = +t } getTop() { return this._top } setRight(r) {
 			this._right =
-			+r
+				+r
 		} getRight() { return this._right } setBottom(b) { this._bottom = +b } getBottom() { return this._bottom } toArray() { return [this._left, this._top, this._right, this._bottom] } toTypedArray() { return new Float64Array(this.toArray()) } toDOMRect() { return new DOMRect(this._left, this._top, this.width(), this.height()) } writeToTypedArray(ta, i) { ta[i++] = this._left; ta[i++] = this._top; ta[i++] = this._right; ta[i] = this._bottom } writeAsQuadToTypedArray(ta, i) {
 			ta[i++] = this._left; ta[i++] = this._top; ta[i++] = this._right; ta[i++] = this._top; ta[i++] =
 				this._right; ta[i++] = this._bottom; ta[i++] = this._left; ta[i] = this._bottom
@@ -1048,7 +1048,7 @@
 				+bry; this._blx = +blx; this._bly = +bly
 		} setRect(left, top, right, bottom) { this.set(left, top, right, top, right, bottom, left, bottom) } copy(q) { this._tlx = q._tlx; this._tly = q._tly; this._trx = q._trx; this._try = q._try; this._brx = q._brx; this._bry = q._bry; this._blx = q._blx; this._bly = q._bly } equals(q) { return this._tlx === q._tlx && this._tly === q._tly && this._trx === q._trx && this._try === q._try && this._brx === q._brx && this._bry === q._bry && this._blx === q._blx && this._bly === q._bly } setTlx(v) { this._tlx = +v } getTlx() { return this._tlx } setTly(v) {
 			this._tly =
-			+v
+				+v
 		} getTly() { return this._tly } setTrx(v) { this._trx = +v } getTrx() { return this._trx } setTry(v) { this._try = +v } getTry() { return this._try } setBrx(v) { this._brx = +v } getBrx() { return this._brx } setBry(v) { this._bry = +v } getBry() { return this._bry } setBlx(v) { this._blx = +v } getBlx() { return this._blx } setBly(v) { this._bly = +v } getBly() { return this._bly } toDOMQuad() { return new DOMQuad(new DOMPoint(this._tlx, this._tly), new DOMPoint(this._trx, this._try), new DOMPoint(this._brx, this._bry), new DOMPoint(this._blx, this._bly)) } toArray() {
 			return [this._tlx,
 			this._tly, this._trx, this._try, this._brx, this._bry, this._blx, this._bly]
@@ -1064,8 +1064,8 @@
 					cos_a; this._tlx = left_cos_a - top_sin_a; this._tly = top_cos_a + left_sin_a; this._trx = right_cos_a - top_sin_a; this._try = top_cos_a + right_sin_a; this._brx = right_cos_a - bottom_sin_a; this._bry = bottom_cos_a + right_sin_a; this._blx = left_cos_a - bottom_sin_a; this._bly = bottom_cos_a + left_sin_a
 			} getBoundingBox(rect) { rect.set(Math.min(this._tlx, this._trx, this._brx, this._blx), Math.min(this._tly, this._try, this._bry, this._bly), Math.max(this._tlx, this._trx, this._brx, this._blx), Math.max(this._tly, this._try, this._bry, this._bly)) } containsPoint(x,
 				y) {
-					let v0x = this._trx - this._tlx; let v0y = this._try - this._tly; const v1x = this._brx - this._tlx; const v1y = this._bry - this._tly; const v2x = x - this._tlx; const v2y = y - this._tly; let dot00 = v0x * v0x + v0y * v0y; let dot01 = v0x * v1x + v0y * v1y; let dot02 = v0x * v2x + v0y * v2y; const dot11 = v1x * v1x + v1y * v1y; const dot12 = v1x * v2x + v1y * v2y; let invDenom = 1 / (dot00 * dot11 - dot01 * dot01); let u = (dot11 * dot02 - dot01 * dot12) * invDenom; let v = (dot00 * dot12 - dot01 * dot02) * invDenom; if (u >= 0 && v > 0 && u + v < 1) return true; v0x = this._blx - this._tlx; v0y = this._bly - this._tly; dot00 =
-						v0x * v0x + v0y * v0y; dot01 = v0x * v1x + v0y * v1y; dot02 = v0x * v2x + v0y * v2y; invDenom = 1 / (dot00 * dot11 - dot01 * dot01); u = (dot11 * dot02 - dot01 * dot12) * invDenom; v = (dot00 * dot12 - dot01 * dot02) * invDenom; return u >= 0 && v > 0 && u + v < 1
+			let v0x = this._trx - this._tlx; let v0y = this._try - this._tly; const v1x = this._brx - this._tlx; const v1y = this._bry - this._tly; const v2x = x - this._tlx; const v2y = y - this._tly; let dot00 = v0x * v0x + v0y * v0y; let dot01 = v0x * v1x + v0y * v1y; let dot02 = v0x * v2x + v0y * v2y; const dot11 = v1x * v1x + v1y * v1y; const dot12 = v1x * v2x + v1y * v2y; let invDenom = 1 / (dot00 * dot11 - dot01 * dot01); let u = (dot11 * dot02 - dot01 * dot12) * invDenom; let v = (dot00 * dot12 - dot01 * dot02) * invDenom; if (u >= 0 && v > 0 && u + v < 1) return true; v0x = this._blx - this._tlx; v0y = this._bly - this._tly; dot00 =
+				v0x * v0x + v0y * v0y; dot01 = v0x * v1x + v0y * v1y; dot02 = v0x * v2x + v0y * v2y; invDenom = 1 / (dot00 * dot11 - dot01 * dot01); u = (dot11 * dot02 - dot01 * dot12) * invDenom; v = (dot00 * dot12 - dot01 * dot02) * invDenom; return u >= 0 && v > 0 && u + v < 1
 		} midX() { return (this._tlx + this._trx + this._brx + this._blx) / 4 } midY() { return (this._tly + this._try + this._bry + this._bly) / 4 } intersectsSegment(x1, y1, x2, y2) { if (this.containsPoint(x1, y1) || this.containsPoint(x2, y2)) return true; return C3.segmentIntersectsQuad(x1, y1, x2, y2, this) } intersectsQuad(rhs) {
 			let midX = rhs.midX(); let midY =
 				rhs.midY(); if (this.containsPoint(midX, midY)) return true; midX = this.midX(); midY = this.midY(); if (rhs.containsPoint(midX, midY)) return true; const tlx = this._tlx, tly = this._tly, trx = this._trx, try_ = this._try, brx = this._brx, bry = this._bry, blx = this._blx, bly = this._bly; return C3.segmentIntersectsQuad(tlx, tly, trx, try_, rhs) || C3.segmentIntersectsQuad(trx, try_, brx, bry, rhs) || C3.segmentIntersectsQuad(brx, bry, blx, bly, rhs) || C3.segmentIntersectsQuad(blx, bly, tlx, tly, rhs)
@@ -1097,14 +1097,14 @@
 				const ptsArr =
 					this._ptsArr; if (a2x === ptsArr[0] && a2y === ptsArr[1]) return true; this._updateBbox(); const bbox = this._bbox; const a1x = bbox.getLeft() - 110; const a1y = bbox.getTop() - 101; const a3x = bbox.getRight() + 131; const a3y = bbox.getBottom() + 120; let minAx12 = 0; let minAy12 = 0; let maxAx12 = 0; let maxAy12 = 0; let minAx32 = 0; let minAy32 = 0; let maxAx32 = 0; let maxAy32 = 0; if (a1x < a2x) { minAx12 = a1x; maxAx12 = a2x } else { minAx12 = a2x; maxAx12 = a1x } if (a1y < a2y) { minAy12 = a1y; maxAy12 = a2y } else { minAy12 = a2y; maxAy12 = a1y } if (a3x < a2x) { minAx32 = a3x; maxAx32 = a2x } else {
 						minAx32 =
-						a2x; maxAx32 = a3x
+							a2x; maxAx32 = a3x
 					} if (a3y < a2y) { minAy32 = a3y; maxAy32 = a2y } else { minAy32 = a2y; maxAy32 = a3y } let count1 = 0; let count2 = 0; for (let i = 0, len = ptsArr.length; i < len; i += 2) { const j = (i + 2) % len; const b1x = ptsArr[i]; const b1y = ptsArr[i + 1]; const b2x = ptsArr[j]; const b2y = ptsArr[j + 1]; if (C3.segmentsIntersectPreCalc(a1x, a1y, a2x, a2y, minAx12, maxAx12, minAy12, maxAy12, b1x, b1y, b2x, b2y)) ++count1; if (C3.segmentsIntersectPreCalc(a3x, a3y, a2x, a2y, minAx32, maxAx32, minAy32, maxAy32, b1x, b1y, b2x, b2y)) ++count2 } return count1 % 2 === 1 || count2 % 2 === 1
 			} intersectsPoly(poly,
 				offX, offY) {
-					const rPts = poly._ptsArr; const lPts = this._ptsArr; if (this.containsPoint(rPts[0] + offX, rPts[1] + offY)) return true; if (poly.containsPoint(lPts[0] - offX, lPts[1] - offY)) return true; for (let i = 0, leni = lPts.length; i < leni; i += 2) {
-						const j = (i + 2) % leni; const a1x = lPts[i]; const a1y = lPts[i + 1]; const a2x = lPts[j]; const a2y = lPts[j + 1]; let minAx = 0; let minAy = 0; let maxAx = 0; let maxAy = 0; if (a1x < a2x) { minAx = a1x; maxAx = a2x } else { minAx = a2x; maxAx = a1x } if (a1y < a2y) { minAy = a1y; maxAy = a2y } else { minAy = a2y; maxAy = a1y } for (let k = 0, lenk = rPts.length; k <
-							lenk; k += 2) { const l = (k + 2) % lenk; const b1x = rPts[k] + offX; const b1y = rPts[k + 1] + offY; const b2x = rPts[l] + offX; const b2y = rPts[l + 1] + offY; if (C3.segmentsIntersectPreCalc(a1x, a1y, a2x, a2y, minAx, maxAx, minAy, maxAy, b1x, b1y, b2x, b2y)) return true }
-					} return false
+			const rPts = poly._ptsArr; const lPts = this._ptsArr; if (this.containsPoint(rPts[0] + offX, rPts[1] + offY)) return true; if (poly.containsPoint(lPts[0] - offX, lPts[1] - offY)) return true; for (let i = 0, leni = lPts.length; i < leni; i += 2) {
+				const j = (i + 2) % leni; const a1x = lPts[i]; const a1y = lPts[i + 1]; const a2x = lPts[j]; const a2y = lPts[j + 1]; let minAx = 0; let minAy = 0; let maxAx = 0; let maxAy = 0; if (a1x < a2x) { minAx = a1x; maxAx = a2x } else { minAx = a2x; maxAx = a1x } if (a1y < a2y) { minAy = a1y; maxAy = a2y } else { minAy = a2y; maxAy = a1y } for (let k = 0, lenk = rPts.length; k <
+					lenk; k += 2) { const l = (k + 2) % lenk; const b1x = rPts[k] + offX; const b1y = rPts[k + 1] + offY; const b2x = rPts[l] + offX; const b2y = rPts[l + 1] + offY; if (C3.segmentsIntersectPreCalc(a1x, a1y, a2x, a2y, minAx, maxAx, minAy, maxAy, b1x, b1y, b2x, b2y)) return true }
+			} return false
 		} intersectsSegment(offX, offY, a1x, a1y, a2x, a2y) {
 			if (this.containsPoint(a1x - offX, a1y - offY)) return true; if (this.containsPoint(a2x - offX, a2y - offY)) return true; let minAx = 0; let minAy = 0; let maxAx = 0; let maxAy = 0; if (a1x < a2x) { minAx = a1x; maxAx = a2x } else { minAx = a2x; maxAx = a1x } if (a1y <
 				a2y) { minAy = a1y; maxAy = a2y } else { minAy = a2y; maxAy = a1y } const ptsArr = this._ptsArr; for (let i = 0, len = ptsArr.length; i < len; i += 2) { const j = (i + 2) % len; const b1x = ptsArr[i] + offX; const b1y = ptsArr[i + 1] + offY; const b2x = ptsArr[j] + offX; const b2y = ptsArr[j + 1] + offY; if (C3.segmentsIntersectPreCalc(a1x, a1y, a2x, a2y, minAx, maxAx, minAy, maxAy, b1x, b1y, b2x, b2y)) return true } return false
@@ -1424,7 +1424,7 @@
 		while (z != this.sentinel && z != this.root && z.parent.color == RED) if (z.parent == z.parent.parent.left) { var y = z.parent.parent.right; if (y.color == RED) { z.parent.color = BLACK; y.color = BLACK; z.parent.parent.color = RED; z = z.parent.parent } else { if (z == z.parent.right) { z = z.parent; this.leftRotate(z) } z.parent.color = BLACK; z.parent.parent.color = RED; if (z.parent.parent != this.sentinel) this.rightRotate(z.parent.parent) } } else {
 			var y = z.parent.parent.left; if (y.color == RED) {
 				z.parent.color =
-				BLACK; y.color = BLACK; z.parent.parent.color = RED; z = z.parent.parent
+					BLACK; y.color = BLACK; z.parent.parent.color = RED; z = z.parent.parent
 			} else { if (z == z.parent.left) { z = z.parent; this.rightRotate(z) } z.parent.color = BLACK; z.parent.parent.color = RED; if (z.parent.parent != this.sentinel) this.leftRotate(z.parent.parent) }
 		} this.root.color = BLACK
 	};
@@ -1506,10 +1506,10 @@
 	C3.SVGRasterManager = class SVGRasterManager {
 		constructor() { this._images = new Map; this._allowNpotSurfaces = false; this._getBaseSizeCallback = null; this._rasterAtSizeCallback = null; this._releaseResultCallback = null; this._redrawCallback = null } SetNpotSurfaceAllowed(a) { this._allowNpotSurfaces = !!a } IsNpotSurfaceAllowed() { return this._allowNpotSurfaces } SetGetBaseSizeCallback(f) { this._getBaseSizeCallback = f } GetBaseSize(dataSource) { if (!this._getBaseSizeCallback) throw new Error("no get base size callback set"); return this._getBaseSizeCallback(dataSource) } SetRasterAtSizeCallback(f) {
 			this._rasterAtSizeCallback =
-			f
+				f
 		} RasterAtSize(dataSource, context, surfaceWidth, surfaceHeight, imageWidth, imageHeight) { if (!this._rasterAtSizeCallback) throw new Error("no raster at size callback set"); return this._rasterAtSizeCallback(dataSource, context, surfaceWidth, surfaceHeight, imageWidth, imageHeight) } SetReleaseResultCallback(f) { this._releaseResultCallback = f } ReleaseResult(rasterizedResult) { if (!this._releaseResultCallback) throw new Error("no release result callback set"); this._releaseResultCallback(rasterizedResult) } SetRedrawCallback(f) {
 			this._redrawCallback =
-			f
+				f
 		} Redraw() { if (!this._redrawCallback) throw new Error("no redraw callback set"); this._redrawCallback() } AddImage(dataSource) { let ret = this._images.get(dataSource); if (!ret) { ret = C3.New(C3.SVGRasterImage, this, dataSource); this._images.set(dataSource, ret) } ret.IncReference(); return ret } _RemoveImage(ri) { this._images.delete(ri.GetDataSource()) } OnTexturesChanged() { for (const ri of this._images.values()) { ri.ReleaseRasterizedResult(); ri.ForceRasterAgain() } }
 	};
 
@@ -1530,7 +1530,7 @@
 				rasterSurfaceHeight); if (maxDim > MAX_SURFACE_SIZE) { const scale = MAX_SURFACE_SIZE / maxDim; width *= scale; height *= scale; rasterSurfaceWidth = Math.min(Math.ceil(rasterSurfaceWidth * scale), MAX_SURFACE_SIZE); rasterSurfaceHeight = Math.min(Math.ceil(rasterSurfaceHeight * scale), MAX_SURFACE_SIZE) } if (width < rasterSurfaceWidth && height < rasterSurfaceHeight) {
 					const imageAspectRatio = width / height; const surfaceAspectRatio = rasterSurfaceWidth / rasterSurfaceHeight; if (surfaceAspectRatio > imageAspectRatio) {
 						width = rasterSurfaceHeight *
-						imageAspectRatio; height = rasterSurfaceHeight
+							imageAspectRatio; height = rasterSurfaceHeight
 					} else { width = rasterSurfaceWidth; height = rasterSurfaceWidth / imageAspectRatio }
 				} if (this._manager.IsNpotSurfaceAllowed()) { rasterSurfaceWidth = Math.ceil(width); rasterSurfaceHeight = Math.ceil(height) } if (rasterSurfaceWidth <= this._rasterSurfaceWidth && rasterSurfaceHeight <= this._rasterSurfaceHeight && !this._forceRaster) return; this._isRasterizing = true; this._rasterSurfaceWidth = rasterSurfaceWidth; this._rasterSurfaceHeight = rasterSurfaceHeight; const newRasterizedResult = await this._manager.RasterAtSize(this._dataSource,
 					context, this._rasterSurfaceWidth, this._rasterSurfaceHeight, width, height); if (!this._manager) return; this.ReleaseRasterizedResult(); this._rasterizedResult = newRasterizedResult; this._rasterImageWidth = width; this._rasterImageHeight = height; this._isRasterizing = false; this._forceRaster = false; this._manager.Redraw()
@@ -1601,7 +1601,7 @@
 			if (this._isPlain) return this._bbstr; if (!this._htmlstr && this._bbstr) {
 				let str = this._bbstr; if (this._hasAnyBBtags) {
 					classIndex =
-					0; linkActions = this._linkActions; tipList = this._tipList; str = str.replace(BBREGEX, bbToHtmlReplacerFunc); linkActions = null; tipList = null
+						0; linkActions = this._linkActions; tipList = this._tipList; str = str.replace(BBREGEX, bbToHtmlReplacerFunc); linkActions = null; tipList = null
 				} if (this._needsLineBreakConversion) str = str.replace(LINEBREAK_REGEX, "<br>"); this._htmlstr = str
 			} return this._htmlstr
 		} attachLinkHandlers(parentElem) {
@@ -1745,7 +1745,7 @@
 				(2 * this._GetTanFovYDiv2())
 		} GetZAxisScaleFactor(viewH) { if (this.IsZAxisScaleNormalized()) { const realZunits = viewH / (2 * this._GetTanFovYDiv2()); return realZunits / this.GetDefaultCameraZ(viewH) } else return 1 } SetNearZ(z) { this._nearZ = z } GetNearZ() { return this._nearZ } SetFarZ(z) { this._farZ = z } GetFarZ() { return this._farZ } SetFovY(f) { this._fovY = f; this._tan_fovY_2 = Math.tan(this._fovY / 2) } GetFovY() { return this._fovY } _GetTanFovYDiv2() { return this._tan_fovY_2 } SetZAxisScaleNormalized() { this._zAxisScale = false } SetZAxisScaleRegular() {
 			this._zAxisScale =
-			true
+				true
 		} IsZAxisScaleNormalized() { return !this._zAxisScale } IsZAxisScaleRegular() { return this._zAxisScale } CalculatePerspectiveMatrix(outMat, aspect, vpX = .5, vpY = .5) {
 			const zNear = this.GetNearZ(); const zFar = this.GetFarZ(); const fovY = this.GetFovY(); if (vpX === .5 && vpY === .5) if (this.IsWebGPU()) mat4.perspectiveZO(outMat, fovY, aspect, zNear, zFar); else mat4.perspective(outMat, fovY, aspect, zNear, zFar); else {
 				vpX = 1 - vpX; const fLeft = vpX * 2 - 2; const fRight = vpX * 2; const fBottom = vpY * 2 - 2; const fTop = vpY * 2; const fH = this._GetTanFovYDiv2() *
@@ -1762,7 +1762,7 @@
 			if (i !== -1) this._allShaderPrograms.splice(i, 1); this._shaderProgramsByName.delete(sp.GetName())
 		} _ClearAllShaderPrograms() { C3.clearArray(this._allShaderPrograms); this._shaderProgramsByName.clear() } GetShaderProgramByName(name) { return this._shaderProgramsByName.get(name) || null } GetTextureFillShaderProgram() { return this._spTextureFill } SetTextureFillMode() { this.SetProgram(this._spTextureFill) } GetPointsRenderingProgram() { return this._spPoints } SetPointsRenderingProgram() { this.SetProgram(this._spPoints) } SetTilemapFillMode() { this.SetProgram(this._spTilemapFill) } SetTileRandomizationMode() { this.SetProgram(this._spTileRandomization) } SetColorFillMode() { this.SetProgram(this._spColorFill) } SetLinearGradientFillMode() { this.SetProgram(this._spLinearGradientFill) } SetPenumbraFillMode() { this.SetProgram(this._spPenumbraFill) } SetHardEllipseFillMode() { this.SetProgram(this._spHardEllipseFill) } SetHardEllipseOutlineMode() { this.SetProgram(this._spHardEllipseOutline) } SetSmoothEllipseFillMode() { this.SetProgram(this._spSmoothEllipseFill) } SetSmoothEllipseOutlineMode() { this.SetProgram(this._spSmoothEllipseOutline) } SetSmoothLineFillMode() { this.SetProgram(this._spSmoothLineFill) } _SetCurrentStateGroup(sg) {
 			this._currentStateGroup =
-			sg
+				sg
 		} GetCurrentStateGroup() { return this._currentStateGroup } AcquireStateGroup(shaderProgram_or_name, blendMode, color, zElevation) { const key = C3.Gfx.StateGroup.MakeKey(shaderProgram_or_name, blendMode, color, zElevation); let stateGroup = this._stateGroups.get(key); if (!stateGroup) { stateGroup = C3.New(C3.Gfx.StateGroup, this, shaderProgram_or_name, blendMode, color, zElevation); this._stateGroups.set(key, stateGroup) } stateGroup.AddRef(); return stateGroup } ReleaseStateGroup(stateGroup) {
 			stateGroup.DecRef(); if (stateGroup._GetRefCount() ===
 				0) { if (this._currentStateGroup === stateGroup) this._currentStateGroup = null; this._stateGroups.delete(stateGroup.GetKey()); stateGroup.Release() }
@@ -1785,7 +1785,7 @@
 						C3.angleTo(x1, y1, x2, y2); const sin_a = Math.sin(a); const cos_a = Math.cos(a); const halfLineWidth = this._lineWidth * .5; const sin_a_hlw = sin_a * halfLineWidth; const cos_a_hlw = cos_a * halfLineWidth; const lineCap = this._lineCap; if (lineCap === 2) this.TexturedLinePreCalc_LineCap2(x1, y1, x2, y2, sin_a_hlw, cos_a_hlw, u, v); else if (lineCap === 1) this.TexturedLinePreCalc_LineCap1(x1, y1, x2, y2, sin_a_hlw, cos_a_hlw, u, v); else this.TexturedLinePreCalc_LineCap0(x1, y1, x2, y2, sin_a_hlw, cos_a_hlw, u, v)
 				} TexturedLinePreCalc_LineCap2(x1, y1, x2,
 					y2, sin_a_hlw, cos_a_hlw, u, v) {
-						const lineOffset = this._lineOffset; const startX = x1 + lineOffset - cos_a_hlw; const startY = y1 + lineOffset - sin_a_hlw; const endX = x2 + lineOffset + cos_a_hlw; const endY = y2 + lineOffset + sin_a_hlw; const cos_a_lw = cos_a_hlw * 2; const sin_a_lw = sin_a_hlw * 2; const tlx = startX + sin_a_hlw; const tly = startY - cos_a_hlw; const blx = startX - sin_a_hlw + cos_a_lw; const bly = startY + cos_a_hlw + sin_a_lw; const trx = endX + sin_a_hlw; const try_ = endY - cos_a_hlw; const brx = endX - sin_a_hlw - cos_a_lw; const bry = endY + cos_a_hlw - sin_a_lw;
+			const lineOffset = this._lineOffset; const startX = x1 + lineOffset - cos_a_hlw; const startY = y1 + lineOffset - sin_a_hlw; const endX = x2 + lineOffset + cos_a_hlw; const endY = y2 + lineOffset + sin_a_hlw; const cos_a_lw = cos_a_hlw * 2; const sin_a_lw = sin_a_hlw * 2; const tlx = startX + sin_a_hlw; const tly = startY - cos_a_hlw; const blx = startX - sin_a_hlw + cos_a_lw; const bly = startY + cos_a_hlw + sin_a_lw; const trx = endX + sin_a_hlw; const try_ = endY - cos_a_hlw; const brx = endX - sin_a_hlw - cos_a_lw; const bry = endY + cos_a_hlw - sin_a_lw;
 			tmpQuad.set(tlx, tly, trx, try_, brx, bry, blx, bly); tmpRect.set(u, 0, v, 0); this.Quad3(tmpQuad, tmpRect)
 		} TexturedLinePreCalc_LineCap1(x1, y1, x2, y2, sin_a_hlw, cos_a_hlw, u, v) {
 			const lineOffset = this._lineOffset; const startX = x1 + lineOffset - cos_a_hlw; const startY = y1 + lineOffset - sin_a_hlw; const endX = x2 + lineOffset + cos_a_hlw; const endY = y2 + lineOffset + sin_a_hlw; const tlx = startX + sin_a_hlw; const tly = startY - cos_a_hlw; const blx = startX - sin_a_hlw; const bly = startY + cos_a_hlw; const trx = endX + sin_a_hlw; const try_ = endY - cos_a_hlw; const brx =
@@ -1826,7 +1826,7 @@
 					}
 				} GetNumVertexComponents() { return 3 } Finish() { this.EndBatch(true); this._frameNumber++ } GetFrameNumber() { return this._frameNumber } IncrementFrameNumber() { this._frameNumber++ } SetMipmapsEnabled(e) { this._enableMipmaps = !!e } AreMipmapsEnabled() { return this._enableMipmaps } SetHasMajorPerformanceCaveat(c) {
 					this._hasMajorPerformanceCaveat =
-					!!c
+						!!c
 				} HasMajorPerformanceCaveat() { return this._hasMajorPerformanceCaveat } IsWebGL() { return false } IsWebGPU() { return false }
 	};
 
@@ -1853,7 +1853,7 @@
 			this._renderer = null; this._shaderProgram = null; this._shaderProgramName = ""
 		} Apply() { const renderer = this._renderer; renderer.SetProgram(this._shaderProgram); renderer.SetBlendMode(this._blendMode); renderer.SetColor(this._color); renderer.SetCurrentZ(this._zElevation); renderer._SetCurrentStateGroup(this) } GetKey() { return C3.Gfx.StateGroup.MakeKey(this._shaderProgramName, this._blendMode, this._color, this._zElevation) } AddRef() { ++this._refCount } DecRef() { --this._refCount } _GetRefCount() { return this._refCount } OnContextLost() {
 			this._shaderProgram =
-			null
+				null
 		} OnContextRestored(renderer) { this._shaderProgram = renderer.GetShaderProgramByName(this._shaderProgramName); if (!this._shaderProgram) throw new Error("failed to restore shader program"); } static MakeKey(shaderProgram_or_name, blendMode, c, zElevation) { const shaderProgramName = typeof shaderProgram_or_name === "string" ? shaderProgram_or_name : shaderProgram_or_name.GetName(); return shaderProgramName + "," + blendMode + "," + c.getR() + "," + c.getG() + "," + c.getB() + "," + c.getA() + "," + zElevation }
 	};
 
@@ -1874,7 +1874,7 @@
 	C3.Gfx.Mesh = class Mesh {
 		constructor(hsize, vsize, owner) { if (hsize < 2 || vsize < 2) throw new Error("invalid mesh size"); this._hsize = hsize; this._vsize = vsize; this._owner = owner || null; this._pts = []; this._minX = 0; this._minY = 0; this._maxX = 1; this._maxY = 1; this._maxZ = 0; this._pointsChanged = false; const lastX = hsize - 1; const lastY = vsize - 1; for (let y = 0; y < vsize; ++y) { const row = []; for (let x = 0; x < hsize; ++x) { const meshPoint = C3.New(C3.Gfx.MeshPoint, this, x, y); const xf = x / lastX; const yf = y / lastY; meshPoint._Init(xf, yf, xf, yf); row.push(meshPoint) } this._pts.push(row) } } Release() { C3.clearArray(this._pts) } GetHSize() { return this._hsize } GetVSize() { return this._vsize } GetOwner() { return this._owner } _GetPoints() { return this._pts } _SetPointsChanged() {
 			this._pointsChanged =
-			true
+				true
 		} _MaybeComputeBounds() { if (!this._pointsChanged) return; let minX = Infinity; let minY = Infinity; let maxX = -Infinity; let maxY = -Infinity; let maxZ = 0; for (const row of this._pts) for (const meshPoint of row) { const x = meshPoint.GetX(); const y = meshPoint.GetY(); minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x); maxY = Math.max(maxY, y); maxZ = Math.max(maxZ, meshPoint.GetZElevation()) } this._minX = minX; this._minY = minY; this._maxX = maxX; this._maxY = maxY; this._maxZ = maxZ; this._pointsChanged = false } GetMinX() {
 			this._MaybeComputeBounds();
 			return this._minX
@@ -1886,12 +1886,12 @@
 				this._pts; let prevRow = pts[0]; for (let y = 1, lenY = pts.length; y < lenY; ++y) { const row = pts[y]; let tl = prevRow[0]; let bl = row[0]; for (let x = 1, lenX = row.length; x < lenX; ++x) { const tr = prevRow[x]; const br = row[x]; tempQuadTex.set(tl.GetU(), tl.GetV(), tr.GetU(), tr.GetV(), br.GetU(), br.GetV(), bl.GetU(), bl.GetV()); renderer.Quad3D2(tl.GetX(), tl.GetY(), tl.GetZElevation(), tr.GetX(), tr.GetY(), tr.GetZElevation(), br.GetX(), br.GetY(), br.GetZElevation(), bl.GetX(), bl.GetY(), bl.GetZElevation(), tempQuadTex); tl = tr; bl = br } prevRow = row }
 		} Outline(renderer,
 			transformFunc) {
-				if (!transformFunc) transformFunc = (x, y, z) => [x, y, z]; const pts = this._pts; let prevRow = pts[0]; for (let y = 1, lenY = pts.length; y < lenY; ++y) {
-					const row = pts[y]; let tl = prevRow[0]; let bl = row[0]; for (let x = 1, lenX = row.length; x < lenX; ++x) {
-						const tr = prevRow[x]; const br = row[x]; const [tlx, tly, tlz] = transformFunc(tl.GetX(), tl.GetY(), tl.GetZElevation()); const [trx, try_, trz] = transformFunc(tr.GetX(), tr.GetY(), tr.GetZElevation()); const [brx, bry, brz] = transformFunc(br.GetX(), br.GetY(), br.GetZElevation()); const [blx,
-							bly, blz] = transformFunc(bl.GetX(), bl.GetY(), bl.GetZElevation()); renderer.Line3D(tlx, tly, tlz, trx, try_, trz); renderer.Line3D(tlx, tly, tlz, brx, bry, brz); renderer.Line3D(tlx, tly, tlz, blx, bly, blz); if (x === lenX - 1) renderer.Line3D(trx, try_, trz, brx, bry, brz); if (y === lenY - 1) renderer.Line3D(blx, bly, blz, brx, bry, brz); tl = tr; bl = br
-					} prevRow = row
-				}
+			if (!transformFunc) transformFunc = (x, y, z) => [x, y, z]; const pts = this._pts; let prevRow = pts[0]; for (let y = 1, lenY = pts.length; y < lenY; ++y) {
+				const row = pts[y]; let tl = prevRow[0]; let bl = row[0]; for (let x = 1, lenX = row.length; x < lenX; ++x) {
+					const tr = prevRow[x]; const br = row[x]; const [tlx, tly, tlz] = transformFunc(tl.GetX(), tl.GetY(), tl.GetZElevation()); const [trx, try_, trz] = transformFunc(tr.GetX(), tr.GetY(), tr.GetZElevation()); const [brx, bry, brz] = transformFunc(br.GetX(), br.GetY(), br.GetZElevation()); const [blx,
+						bly, blz] = transformFunc(bl.GetX(), bl.GetY(), bl.GetZElevation()); renderer.Line3D(tlx, tly, tlz, trx, try_, trz); renderer.Line3D(tlx, tly, tlz, brx, bry, brz); renderer.Line3D(tlx, tly, tlz, blx, bly, blz); if (x === lenX - 1) renderer.Line3D(trx, try_, trz, brx, bry, brz); if (y === lenY - 1) renderer.Line3D(blx, bly, blz, brx, bry, brz); tl = tr; bl = br
+				} prevRow = row
+			}
 		} InsertPolyMeshVertices(srcPoly) {
 			const RAY_EXT_DIST = .001; const MIN_RAY_DIST = 0; const MAX_RAY_DIST = .99999999; const inPts = srcPoly.pointsArr(); const outPts = []; const colCount = this.GetHSize() -
 				1; const rowCount = this.GetVSize() - 1; const colWidthNorm = 1 / colCount; const rowHeightNorm = 1 / rowCount; const lastCol = colCount - 1; const lastRow = rowCount - 1; let curX = inPts[0]; let curY = inPts[1]; let curCol = C3.clamp(Math.floor(curX * colCount), 0, lastCol); let curRow = C3.clamp(Math.floor(curY * rowCount), 0, lastRow); let isUpper = true; let nextX = 0; let nextY = 0; let rayHit = 0; const NOTHING_DISABLED = -1; const DISABLE_DIAGONAL = 0; const DISABLE_LEFT_EDGE = 1; const DISABLE_TOP_EDGE = 2; const DISABLE_RIGHT_EDGE = 3; const DISABLE_BOTTOM_EDGE =
@@ -1914,9 +1914,9 @@
 					} return C3.New(C3.CollisionPoly, outPts)
 		} TransformCollisionPoly(srcPoly, destPoly) { const ptsArr = this._TransformPolyPoints(srcPoly); this._SimplifyPoly(ptsArr); destPoly.setPoints(ptsArr) } _TransformPolyPoints(srcPoly) { const outPts = []; const ptsArr = srcPoly.pointsArr(); for (let i = 0, len = ptsArr.length; i < len; i += 2) { const srcX = ptsArr[i]; const srcY = ptsArr[i + 1]; const [destX, destY] = this.TransformPoint(srcX, srcY); outPts.push(destX, destY) } return outPts } TransformPoint(srcX,
 			srcY) {
-				const lastCol = this.GetHSize() - 1; const lastRow = this.GetVSize() - 1; const colWidthNorm = 1 / lastCol; const rowHeightNorm = 1 / lastRow; const srcCol = C3.clamp(Math.floor(srcX * lastCol), 0, lastCol - 1); const srcRow = C3.clamp(Math.floor(srcY * lastRow), 0, lastRow - 1); const srcTlx = srcCol * colWidthNorm; const srcTly = srcRow * rowHeightNorm; const srcBrx = (srcCol + 1) * colWidthNorm; const srcBry = (srcRow + 1) * rowHeightNorm; const destTl = this.GetMeshPointAt(srcCol, srcRow); const destBr = this.GetMeshPointAt(srcCol + 1, srcRow + 1); const isUpper =
-					C3.isPointInTriangleInclusive(srcX, srcY, srcTlx, srcTly, srcBrx, srcTly, srcBrx, srcBry); const srcAltX = isUpper ? srcTlx + colWidthNorm : srcTlx; const srcAltY = isUpper ? srcTly : srcTly + rowHeightNorm; const destAlt = this.GetMeshPointAt(srcCol + (isUpper ? 1 : 0), srcRow + (isUpper ? 0 : 1)); const [u, v, w] = C3.triangleCartesianToBarycentric(srcX, srcY, srcTlx, srcTly, srcAltX, srcAltY, srcBrx, srcBry); return C3.triangleBarycentricToCartesian3d(u, v, w, destTl.GetX(), destTl.GetY(), destTl.GetZElevation(), destAlt.GetX(), destAlt.GetY(), destAlt.GetZElevation(),
-						destBr.GetX(), destBr.GetY(), destBr.GetZElevation())
+			const lastCol = this.GetHSize() - 1; const lastRow = this.GetVSize() - 1; const colWidthNorm = 1 / lastCol; const rowHeightNorm = 1 / lastRow; const srcCol = C3.clamp(Math.floor(srcX * lastCol), 0, lastCol - 1); const srcRow = C3.clamp(Math.floor(srcY * lastRow), 0, lastRow - 1); const srcTlx = srcCol * colWidthNorm; const srcTly = srcRow * rowHeightNorm; const srcBrx = (srcCol + 1) * colWidthNorm; const srcBry = (srcRow + 1) * rowHeightNorm; const destTl = this.GetMeshPointAt(srcCol, srcRow); const destBr = this.GetMeshPointAt(srcCol + 1, srcRow + 1); const isUpper =
+				C3.isPointInTriangleInclusive(srcX, srcY, srcTlx, srcTly, srcBrx, srcTly, srcBrx, srcBry); const srcAltX = isUpper ? srcTlx + colWidthNorm : srcTlx; const srcAltY = isUpper ? srcTly : srcTly + rowHeightNorm; const destAlt = this.GetMeshPointAt(srcCol + (isUpper ? 1 : 0), srcRow + (isUpper ? 0 : 1)); const [u, v, w] = C3.triangleCartesianToBarycentric(srcX, srcY, srcTlx, srcTly, srcAltX, srcAltY, srcBrx, srcBry); return C3.triangleBarycentricToCartesian3d(u, v, w, destTl.GetX(), destTl.GetY(), destTl.GetZElevation(), destAlt.GetX(), destAlt.GetY(), destAlt.GetZElevation(),
+					destBr.GetX(), destBr.GetY(), destBr.GetZElevation())
 		} _SimplifyPoly(ptsArr) {
 			const outPts = []; const NZ_EPSILON = 1E-7; const R_EPSILON = .001; let curX = ptsArr[0]; let curY = ptsArr[1]; let lastDx = curX - ptsArr.at(-2); let lastDy = curY - ptsArr.at(-1); for (let i = 0, len = ptsArr.length; i < len; i += 2) {
 				const j = (i + 2) % len; const nextX = ptsArr[j]; const nextY = ptsArr[j + 1]; const dx = nextX - curX; const dy = nextY - curY; const bothXNearZero = Math.abs(dx) < NZ_EPSILON && Math.abs(lastDx) < NZ_EPSILON && Math.sign(dy) === Math.sign(lastDy); const bothYNearZero =
@@ -1977,7 +1977,7 @@
 				} const anisotropicExt = this._renderer._GetAnisotropicExtension(); if (anisotropicExt && this._anisotropy > 0 && this._sampling !== "nearest") gl.texParameterf(gl.TEXTURE_2D, anisotropicExt["TEXTURE_MAX_ANISOTROPY_EXT"], Math.min(this._anisotropy, this._renderer._GetMaxAnisotropy()))
 		} _Update(data,
 			opts) {
-				if ((typeof HTMLImageElement === "undefined" || !(data instanceof HTMLImageElement)) && (typeof HTMLVideoElement === "undefined" || !(data instanceof HTMLVideoElement)) && (typeof HTMLCanvasElement === "undefined" || !(data instanceof HTMLCanvasElement)) && (typeof ImageBitmap === "undefined" || !(data instanceof ImageBitmap)) && (typeof OffscreenCanvas === "undefined" || !(data instanceof OffscreenCanvas)) && !(data instanceof ImageData)) throw new Error("invalid texture source"); if (!this._texture || this._refCount <= 0) throw new Error("texture not created");
+			if ((typeof HTMLImageElement === "undefined" || !(data instanceof HTMLImageElement)) && (typeof HTMLVideoElement === "undefined" || !(data instanceof HTMLVideoElement)) && (typeof HTMLCanvasElement === "undefined" || !(data instanceof HTMLCanvasElement)) && (typeof ImageBitmap === "undefined" || !(data instanceof ImageBitmap)) && (typeof OffscreenCanvas === "undefined" || !(data instanceof OffscreenCanvas)) && !(data instanceof ImageData)) throw new Error("invalid texture source"); if (!this._texture || this._refCount <= 0) throw new Error("texture not created");
 			if (this._isStatic) throw new Error("cannot update static texture"); opts = Object.assign({}, UPDATE_DEFAULT_OPTIONS, opts); const dataWidth = data.width || data.videoWidth; const dataHeight = data.height || data.videoHeight; const webglVersion = this._renderer.GetWebGLVersionNumber(); const gl = this._renderer.GetContext(); gl.bindTexture(gl.TEXTURE_2D, this._texture); gl.pixelStorei(gl["UNPACK_PREMULTIPLY_ALPHA_WEBGL"], opts.premultiplyAlpha); gl.pixelStorei(gl["UNPACK_FLIP_Y_WEBGL"], !!opts.flipY); const formatspec = GetFormatSpecifiers(this._pixelFormat,
 				gl); const internalformat = webglVersion >= 2 ? formatspec.sizedinternalformat : formatspec.internalformat; try {
 					if (this._width === dataWidth && this._height === dataHeight) { const isPOT = C3.isPOT(this._width) && C3.isPOT(this._height); gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, formatspec.format, formatspec.type, data); if ((isPOT || this._renderer.SupportsNPOTTextures()) && this._isMipMapped) { gl.hint(gl.GENERATE_MIPMAP_HINT, this._GetMipMapHint(gl)); gl.generateMipmap(gl.TEXTURE_2D) } } else {
@@ -2076,12 +2076,12 @@
 				0 || paramIndex >= this._uCustomParameters.length) return null; return this._uCustomParameters[paramIndex].GetType()
 		} AreCustomParametersAlreadySetInBatch(params) { for (let i = 0, len = params.length; i < len; ++i)if (!this._uCustomParameters[i].IsSetToCustomInBatch(params[i])) return false; return true } SetCustomParametersInBatch(params) { for (let i = 0, len = params.length; i < len; ++i)this._uCustomParameters[i].SetBatchValueCustom(params[i]) } AreOptionalUniformsAlreadySetInBatch(destRect, srcRect, srcOriginRect, layoutRect, pixelWidth,
 			pixelHeight, dpr, layerScale, layerAngle, time) {
-				if (this._uSamplerBack.IsUsed()) return false; if (this._uPixelSize.IsUsed() && !this._uPixelSize.IsSetTo2InBatch(pixelWidth, pixelHeight)) return false; if (this._uDestStart.IsUsed() && !this._uDestStart.IsSetTo2InBatch(destRect.getLeft(), destRect.getTop())) return false; if (this._uDestEnd.IsUsed() && !this._uDestEnd.IsSetTo2InBatch(destRect.getRight(), destRect.getBottom())) return false; if (this._uDevicePixelRatio.IsUsed() && !this._uDevicePixelRatio.IsSetTo1InBatch(dpr)) return false;
+			if (this._uSamplerBack.IsUsed()) return false; if (this._uPixelSize.IsUsed() && !this._uPixelSize.IsSetTo2InBatch(pixelWidth, pixelHeight)) return false; if (this._uDestStart.IsUsed() && !this._uDestStart.IsSetTo2InBatch(destRect.getLeft(), destRect.getTop())) return false; if (this._uDestEnd.IsUsed() && !this._uDestEnd.IsSetTo2InBatch(destRect.getRight(), destRect.getBottom())) return false; if (this._uDevicePixelRatio.IsUsed() && !this._uDevicePixelRatio.IsSetTo1InBatch(dpr)) return false;
 			if (this._uLayerScale.IsUsed() && !this._uLayerScale.IsSetTo1InBatch(layerScale)) return false; if (this._uLayerAngle.IsUsed() && !this._uLayerAngle.IsSetTo1InBatch(layerAngle)) return false; if (this._uSrcStart.IsUsed() && !this._uSrcStart.IsSetTo2InBatch(srcRect.getLeft(), srcRect.getTop())) return false; if (this._uSrcEnd.IsUsed() && !this._uSrcEnd.IsSetTo2InBatch(srcRect.getRight(), srcRect.getBottom())) return false; if (this._uSrcOriginStart.IsUsed() && !this._uSrcOriginStart.IsSetTo2InBatch(srcOriginRect.getLeft(),
 				srcOriginRect.getTop())) return false; if (this._uSrcOriginEnd.IsUsed() && !this._uSrcOriginEnd.IsSetTo2InBatch(srcOriginRect.getRight(), srcOriginRect.getBottom())) return false; if (this._uLayoutStart.IsUsed() && !this._uLayoutStart.IsSetTo2InBatch(layoutRect.getLeft(), layoutRect.getTop())) return false; if (this._uLayoutEnd.IsUsed() && !this._uLayoutEnd.IsSetTo2InBatch(layoutRect.getTop(), layoutRect.getBottom())) return false; if (this._uSeconds.IsUsed() && !this._uSeconds.IsSetTo1InBatch(time)) return false; return true
 		} SetOptionalUniformsInBatch(destRect,
 			srcRect, srcOriginRect, layoutRect, pixelWidth, pixelHeight, dpr, layerScale, layerAngle, time) {
-				if (this._uSamplerBack.IsUsed()) return; if (this._uPixelSize.IsUsed()) this._uPixelSize.SetBatch2(pixelWidth, pixelHeight); if (this._uDestStart.IsUsed()) this._uDestStart.SetBatch2(destRect.getLeft(), destRect.getTop()); if (this._uDestEnd.IsUsed()) this._uDestEnd.SetBatch2(destRect.getRight(), destRect.getBottom()); if (this._uDevicePixelRatio.IsUsed()) this._uDevicePixelRatio.SetBatch1(dpr); if (this._uLayerScale.IsUsed()) this._uLayerScale.SetBatch1(layerScale);
+			if (this._uSamplerBack.IsUsed()) return; if (this._uPixelSize.IsUsed()) this._uPixelSize.SetBatch2(pixelWidth, pixelHeight); if (this._uDestStart.IsUsed()) this._uDestStart.SetBatch2(destRect.getLeft(), destRect.getTop()); if (this._uDestEnd.IsUsed()) this._uDestEnd.SetBatch2(destRect.getRight(), destRect.getBottom()); if (this._uDevicePixelRatio.IsUsed()) this._uDevicePixelRatio.SetBatch1(dpr); if (this._uLayerScale.IsUsed()) this._uLayerScale.SetBatch1(layerScale);
 			if (this._uLayerAngle.IsUsed()) this._uLayerAngle.SetBatch1(layerAngle); if (this._uSrcStart.IsUsed()) this._uSrcStart.SetBatch2(srcRect.getLeft(), srcRect.getTop()); if (this._uSrcEnd.IsUsed()) this._uSrcEnd.SetBatch2(srcRect.getRight(), srcRect.getBottom()); if (this._uSrcOriginStart.IsUsed()) this._uSrcOriginStart.SetBatch2(srcOriginRect.getLeft(), srcOriginRect.getTop()); if (this._uSrcOriginEnd.IsUsed()) this._uSrcOriginEnd.SetBatch2(srcOriginRect.getRight(), srcOriginRect.getBottom()); if (this._uLayoutStart.IsUsed()) this._uLayoutStart.SetBatch2(layoutRect.getLeft(),
 				layoutRect.getTop()); if (this._uLayoutEnd.IsUsed()) this._uLayoutEnd.SetBatch2(layoutRect.getTop(), layoutRect.getBottom()); if (this._uSeconds.IsUsed()) this._uSeconds.SetBatch1(time)
 		} UpdateMatP(matP, force) { if (this._hasCurrentMatP && !force) return; if (this._isDeviceTransform) return; if (this._uMatP.IsUsed()) this._uMatP.UpdateMatrix4fv(matP); this._hasCurrentMatP = true } SetMatPStale() { this._hasCurrentMatP = false } UpdateMatMV(matMV, force) {
@@ -2307,7 +2307,7 @@ void main(void) {
 	C3.Gfx.WebGLShaderUniform = class WebGLShaderUniform {
 		constructor(owner, name, type) { if (!TYPE_SIZES.has(type)) throw new Error("invalid uniform type"); this._owner = owner; this._gl = this._owner.GetWebGLContext(); this._name = name; this._type = type; this._isColorType = this._type === "color"; this._location = this._gl.getUniformLocation(this._owner.GetShaderProgram(), name); this._isUsed = !!this._location; const typeSize = TYPE_SIZES.get(type); this._lastValue = new Float32Array(typeSize); this._lastBatchValue = new Float32Array(typeSize) } Release() {
 			this._owner =
-			null; this._gl = null; this._location = null
+				null; this._gl = null; this._location = null
 		} IsUsed() { return this._isUsed } GetType() { return this._type } IsColorType() { return this._isColorType } Init1f(v0) { if (!this.IsUsed()) return; this._lastValue[0] = v0; this._lastBatchValue.set(this._lastValue); this._gl.uniform1f(this._location, v0) } Init1i(v0) { if (!this.IsUsed()) return; this._lastValue[0] = v0; this._lastBatchValue.set(this._lastValue); this._gl.uniform1i(this._location, v0) } Init2f(v0, v1) {
 			if (!this.IsUsed()) return; this._lastValue[0] = v0; this._lastValue[1] = v1; this._lastBatchValue.set(this._lastValue);
 			this._gl.uniform2f(this._location, v0, v1)
@@ -2323,7 +2323,7 @@ void main(void) {
 		} UpdateMatrix4fv(m) { const lastValue = this._lastValue; if (mat4.exactEquals(lastValue, m)) return; C3.typedArraySet16(lastValue, m, 0); this._gl.uniformMatrix4fv(this._location, false, m) } IsSetToCustomInBatch(p) { const batchValue = this._lastBatchValue; if (this.IsColorType()) return batchValue[0] === Math.fround(p.getR()) && batchValue[1] === Math.fround(p.getG()) && batchValue[2] === Math.fround(p.getB()); else return batchValue[0] === Math.fround(p) } SetBatchValueCustom(p) {
 			const batchValue = this._lastBatchValue; if (this.IsColorType()) {
 				batchValue[0] =
-				p.getR(); batchValue[1] = p.getG(); batchValue[2] = p.getB()
+					p.getR(); batchValue[1] = p.getG(); batchValue[2] = p.getB()
 			} else batchValue[0] = p
 		} IsSetTo1InBatch(x) { return this._lastBatchValue[0] === Math.fround(x) } IsSetTo2InBatch(x, y) { const batchValue = this._lastBatchValue; return batchValue[0] === Math.fround(x) && batchValue[1] === Math.fround(y) } SetBatch1(x) { this._lastBatchValue[0] = x } SetBatch2(x, y) { const batchValue = this._lastBatchValue; batchValue[0] = x; batchValue[1] = y }
 	};
@@ -2344,7 +2344,7 @@ void main(void) {
 			vec4.copy(batchState.currentColor, c); batchState.currentShader.UpdateColor(c)
 		} InitSetGradientColor(c) { this._type = BATCH_SETGRADIENTCOLOR; c.writeToTypedArray(this._colorParam, 0) } DoSetGradientColor() { const c = this._colorParam; const s = this._batchState.currentShader; if (s._uColor2.IsUsed()) s._uColor2.Update4f(c[0], c[1], c[2], c[3]) } InitSetBlend(s, d) { this._type = BATCH_SETBLEND; this._startIndex = s; this._indexCount = d } DoSetBlend() { this._gl.blendFunc(this._startIndex, this._indexCount) } InitSetViewport(x, y, w, h) {
 			this._type =
-			BATCH_SETVIEWPORT; const colorParam = this._colorParam; colorParam[0] = x; colorParam[1] = y; colorParam[2] = w; colorParam[3] = h
+				BATCH_SETVIEWPORT; const colorParam = this._colorParam; colorParam[0] = x; colorParam[1] = y; colorParam[2] = w; colorParam[3] = h
 		} DoSetViewport() { const colorParam = this._colorParam; this._gl.viewport(colorParam[0], colorParam[1], colorParam[2], colorParam[3]) } InitSetProjection(m) { this._type = BATCH_SETPROJECTION; mat4.copy(this._mat4param, m) } DoSetProjection() {
 			const batchState = this._batchState; const allShaderPrograms = batchState.renderer._allShaderPrograms; const currentShader = batchState.currentShader; const mat4param = this._mat4param;
 			for (let i = 0, len = allShaderPrograms.length; i < len; ++i) { const s = allShaderPrograms[i]; if (s === currentShader) s.UpdateMatP(mat4param, true); else s.SetMatPStale() } mat4.copy(batchState.currentMatP, mat4param)
@@ -2390,7 +2390,7 @@ void main(void) {
 				}
 		} InitStartQuery(query) { this._type = BATCH_STARTQUERY; this._texParam = query } DoStartQuery() { this._texParam.BeginTimeElapsed(); this._texParam = null } InitEndQuery(query) { this._type = BATCH_ENDQUERY; this._texParam = query } DoEndQuery() { this._texParam.EndTimeElapsed(); this._texParam = null } InitSetEllipseParams(pixelW, pixelH, outlineThickness) {
 			this._type =
-			BATCH_SETELLIPSEPARAMS; const mat4param = this._mat4param; mat4param[0] = pixelW; mat4param[1] = pixelH; mat4param[2] = outlineThickness
+				BATCH_SETELLIPSEPARAMS; const mat4param = this._mat4param; mat4param[0] = pixelW; mat4param[1] = pixelH; mat4param[2] = outlineThickness
 		} DoSetEllipseParams() { const s = this._batchState.currentShader; const mat4param = this._mat4param; if (s._uPixelSize.IsUsed()) s._uPixelSize.Update2f(mat4param[0], mat4param[1]); if (s._uOutlineThickness.IsUsed()) s._uOutlineThickness.Update1f(mat4param[2]) } InitSetTilemapInfo(srcRect, textureWidth, textureHeight, tileWidth, tileHeight, tileSpacingX, tileSpacingY) {
 			this._type = BATCH_SETTILEMAPINFO;
 			const mat4param = this._mat4param; srcRect.writeToTypedArray(mat4param, 0); mat4param[4] = 1 / textureWidth; mat4param[5] = 1 / textureHeight; mat4param[6] = tileWidth / textureWidth; mat4param[7] = tileHeight / textureHeight; mat4param[8] = tileSpacingX / textureWidth; mat4param[9] = tileSpacingY / textureHeight
@@ -2486,7 +2486,7 @@ void main(void) {
 			} _SetMeasureFontString(fontString) { if (this._lastMeasureCanvasFont === fontString) return; this._lastMeasureCanvasFont = fontString; this._measureContext.font = fontString; this._measureContextTop.font = fontString } _SupportsFontBoundingBoxMeasurements() {
 				if (!didCheckFoundBoundingBoxSupport) {
 					didCheckFoundBoundingBoxSupport =
-					true; this._MaybeCreateMeasureContext(); const textMetrics = this._measureContext.measureText("test"); supportsFontBoundingBoxMeasurements = typeof textMetrics["fontBoundingBoxAscent"] === "number" && typeof textMetrics["fontBoundingBoxDescent"] === "number"
+						true; this._MaybeCreateMeasureContext(); const textMetrics = this._measureContext.measureText("test"); supportsFontBoundingBoxMeasurements = typeof textMetrics["fontBoundingBoxAscent"] === "number" && typeof textMetrics["fontBoundingBoxDescent"] === "number"
 				} return supportsFontBoundingBoxMeasurements
 			} _MaybeWrapText() {
 				if (!this._textChanged) return; this._MaybeCreateMeasureContext(); if (this._isBBcodeEnabled && (!this._bbString || this._bbString.toString() !== this._text)) this._bbString = new C3.BBString(this._text, { noEscape: true });
@@ -2703,7 +2703,7 @@ void main(void) {
 			C3.shallowAssignArray(b._shaderParams, params); this._topOfBatch = 0
 		} ClearRgba(r, g, b_, a) { const b = this.PushBatch(); b.InitClearSurface2(r, g, b_, a); this._topOfBatch = 0 } Clear(c) { const b = this.PushBatch(); b.InitClearSurface(c); this._topOfBatch = 0 } Start() { } Finish() { super.Finish(); this._gl.flush() } ClearDepth() { if (!this._usesDepthBuffer || !this._currentRenderTarget || !this._currentRenderTarget.HasDepthBuffer()) return; const batch = this.PushBatch(); batch.InitClearDepth(this._isDepthEnabled); this._topOfBatch = 0 } SetDepthEnabled(e) {
 			e =
-			!!e; if (this._isDepthEnabled === e) return; if (!this._usesDepthBuffer) return; this._isDepthEnabled = e; const batch = this.PushBatch(); batch.InitSetDepthEnabled(e); this._topOfBatch = 0
+				!!e; if (this._isDepthEnabled === e) return; if (!this._usesDepthBuffer) return; this._isDepthEnabled = e; const batch = this.PushBatch(); batch.InitSetDepthEnabled(e); this._topOfBatch = 0
 		} IsDepthEnabled() { return this._isDepthEnabled } _GetDepthBuffer() { return this._depthBuffer } _CanSampleDepth() { return this._canSampleDepth } SetDepthSamplingEnabled(e) {
 			e = !!e; if (!this._canSampleDepth) return; if (this._isDepthSamplingEnabled === e) return; if (e && this.IsDepthEnabled()) throw new Error("depth still enabled"); this._isDepthSamplingEnabled =
 				e; const batch = this.PushBatch(); batch.InitSetDepthSamplingEnabled(e); this._topOfBatch = 0
@@ -2715,13 +2715,13 @@ void main(void) {
 			for (const qrb of this._allQueryResultBuffers) qrb.Clear(); this._extensions = []; this._timerExt = null; this._parallelShaderCompileExt = null; this._anisotropicExt = null; this._depthTextureExt = null; this._fragDepthExt = null; this._stdDerivativesExt = null; this._textureLodExt = null; this._maxAnisotropy = 0; this._unmaskedVendor = "(unavailable)"; this._unmaskedRenderer = "(unavailable)"; this._lastProgram = null; this._spDeviceTransformTextureFill = null; this._depthBuffer = null; for (const stateGroup of this._stateGroups.values()) stateGroup.OnContextLost()
 		} async OnContextRestored() {
 			this._isInitialisingAfterContextRestored =
-			true; await this.InitState(); this._isInitialisingAfterContextRestored = false; for (const stateGroup of this._stateGroups.values()) stateGroup.OnContextRestored(this); this.SetSize(this._width, this._height, true)
+				true; await this.InitState(); this._isInitialisingAfterContextRestored = false; for (const stateGroup of this._stateGroups.values()) stateGroup.OnContextRestored(this); this.SetSize(this._width, this._height, true)
 		} CreateStaticTexture(data, opts) { if (this.IsContextLost()) throw new Error("context lost"); this.EndBatch(); const rendererTex = C3.New(C3.Gfx.WebGLRendererTexture, this); rendererTex._CreateStatic(data, opts); return rendererTex } async CreateStaticTextureAsync(data, opts) {
 			if (this.IsContextLost()) throw new Error("context lost");
 			opts = Object.assign({}, opts); if (C3.Supports.ImageBitmapOptions && (C3.Platform.Browser !== "Safari" || !(data instanceof ImageData) || typeof Image === "undefined")) {
 				let imageBitmap = await createImageBitmap(data, { "premultiplyAlpha": "premultiply" }); const isTiled = opts.wrapX && opts.wrapX !== "clamp-to-edge" || opts.wrapY && opts.wrapY !== "clamp-to-edge"; const isPOT = C3.isPOT(imageBitmap.width) && C3.isPOT(imageBitmap.height); if (!this.SupportsNPOTTextures() && !isPOT && isTiled) if (C3.Supports.ImageBitmapOptionsResize) {
 					imageBitmap =
-					await createImageBitmap(data, { "premultiplyAlpha": "premultiply", "resizeWidth": C3.nextHighestPowerOfTwo(imageBitmap.width), "resizeHeight": C3.nextHighestPowerOfTwo(imageBitmap.height) }); opts.premultiplyAlpha = false
+						await createImageBitmap(data, { "premultiplyAlpha": "premultiply", "resizeWidth": C3.nextHighestPowerOfTwo(imageBitmap.width), "resizeHeight": C3.nextHighestPowerOfTwo(imageBitmap.height) }); opts.premultiplyAlpha = false
 				} else imageBitmap = await createImageBitmap(data, { "premultiplyAlpha": "none" }); else opts.premultiplyAlpha = false; return await C3.Asyncify(() => this.CreateStaticTexture(imageBitmap, opts))
 			} else {
 				if (data instanceof Blob) {
@@ -2763,7 +2763,7 @@ void main(void) {
 						null); gl.bindBuffer(PIXEL_PACK_BUFFER, null); restorePreviousRenderTarget(); const sync = gl["fenceSync"](gl["SYNC_GPU_COMMANDS_COMPLETE"], 0); await this._WaitForObjectReady(() => gl["getSyncParameter"](sync, gl["SYNC_STATUS"]) === gl["SIGNALED"]); gl["deleteSync"](sync); imageData = new ImageData(areaWidth, areaHeight); gl.bindBuffer(PIXEL_PACK_BUFFER, pixelBuffer); gl["getBufferSubData"](PIXEL_PACK_BUFFER, 0, new Uint8Array(imageData.data.buffer), 0, bufferSize); gl.bindBuffer(PIXEL_PACK_BUFFER, null); gl.deleteBuffer(pixelBuffer)
 				} else {
 					imageData =
-					new ImageData(areaWidth, areaHeight); gl.readPixels(x, y, areaWidth, areaHeight, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(imageData.data.buffer)); restorePreviousRenderTarget()
+						new ImageData(areaWidth, areaHeight); gl.readPixels(x, y, areaWidth, areaHeight, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(imageData.data.buffer)); restorePreviousRenderTarget()
 				} return imageData
 			} CoplanarStartStencilPass() { this.SetDepthEnabled(true); const batch = this.PushBatch(); batch.InitCoplanarStartStencilPass(); this._topOfBatch = 0 } CoplanarStartColorPass() { this.SetDepthEnabled(false); const batch = this.PushBatch(); batch.InitCoplanarStartColorPass(); this._topOfBatch = 0 } CoplanarRestoreStandardRendering() {
 				this.SetDepthEnabled(true);
@@ -2794,7 +2794,7 @@ void main(void) {
 	C3.Gfx.EffectChainManager = class EffectChainManager {
 		constructor(opts) { opts = Object.assign({}, DEFAULT_CTOR_OPTS, opts); this._cbGetDrawSize = opts.getDrawSize; this._cbGetRenderTarget = opts.getRenderTarget; this._cbReleaseRenderTarget = opts.releaseRenderTarget; this._cbGetTime = opts.getTime; this._cbRedraw = opts.redraw; this._webgpuBackTexture = null; this._allEffectChains = new Set } _AddEffectChain(ec) { this._allEffectChains.add(ec) } _RemoveEffectChain(ec) { this._allEffectChains.delete(ec) } OnContextLost() {
 			this._webgpuBackTexture =
-			null; for (const ec of this._allEffectChains) ec.OnContextLost()
+				null; for (const ec of this._allEffectChains) ec.OnContextLost()
 		} GetDrawSize(renderer) { if (this._cbGetDrawSize) return this._cbGetDrawSize(renderer); else return [renderer.GetWidth(), renderer.GetHeight()] } GetRenderTarget(effectChain) { return this._cbGetRenderTarget(effectChain) } ReleaseRenderTarget(rt, effectChain) { this._cbReleaseRenderTarget(rt, effectChain) } GetTime() { return this._cbGetTime() } Redraw(effectChain) { this._cbRedraw(effectChain) } _GetWebGPUBackTexture(renderer, width, height) {
 			if (this._webgpuBackTexture &&
 				(this._webgpuBackTexture.GetWidth() !== width || this._webgpuBackTexture.GetHeight() !== height)) { renderer.DeleteTexture(this._webgpuBackTexture); this._webgpuBackTexture = null } if (this._webgpuBackTexture === null) this._webgpuBackTexture = renderer.CreateStaticTexture(null, { width, height, sampling: "nearest", mipMap: false }); return this._webgpuBackTexture
@@ -2979,7 +2979,7 @@ void main(void) {
 			}); runtime.UserScriptDispatcher().addEventListener("keydown", e => { if (keysDownByKey.has(e["key"])) { e.stopPropagation(); return } keysDownByKey.add(e["key"]) }); runtime.UserScriptDispatcher().addEventListener("keyup", e => keysDownByKey.delete(e["key"])); runtime.Dispatcher().addEventListener("window-blur", () => keysDownByKey.clear()); if (runtime.IsInWorker()) self["alert"] = message => {
 				if (!didWarnInAlertPolyfill) {
 					didWarnInAlertPolyfill =
-					true; console.warn("[Construct] alert() was called from a Web Worker, because the project 'Use worker' setting is enabled. This method is not normally available in a Web Worker. Construct has implemented the alert for you, but note that other features may be missing in worker mode. You may wish to disable 'Use worker', or use a more convenient function like console.log(). For more information please refer to the scripting section of the manual.")
+						true; console.warn("[Construct] alert() was called from a Web Worker, because the project 'Use worker' setting is enabled. This method is not normally available in a Web Worker. Construct has implemented the alert for you, but note that other features may be missing in worker mode. You may wish to disable 'Use worker', or use a more convenient function like console.log(). For more information please refer to the scripting section of the manual.")
 				} return this.alert(message)
 			}
 		} _InitGlobalVars(globalVarDescriptors) {
@@ -3101,7 +3101,7 @@ void main(void) {
 				map.get(this).GetParentLayer(); return parent ? parent.GetILayer() : null
 		} *parentLayers() { for (const parent of map.get(this).parentLayers()) yield parent.GetILayer() } *subLayers() { for (const layer of map.get(this).GetSubLayers()) yield layer.GetILayer() } *allSubLayers() { for (const subLayer of map.get(this).GetSubLayers()) for (const layer of subLayer.selfAndAllSubLayers()) yield layer.GetILayer() } get isVisible() { return map.get(this)._IsVisibleFlagSet() } set isVisible(v) { map.get(this).SetVisible(v) } get isSelfAndParentsVisible() { return map.get(this).IsVisible() } get isInteractive() { return map.get(this).IsInteractive() } set isInteractive(i) { map.get(this).SetInteractive(i) } get isSelfAndParentsInteractive() { return map.get(this).IsSelfAndParentsInteractive() } get opacity() { return map.get(this).GetOpacity() } set opacity(o) {
 			o =
-			C3.clamp(+o, 0, 1); if (isNaN(o)) return; map.get(this).SetOpacity(o)
+				C3.clamp(+o, 0, 1); if (isNaN(o)) return; map.get(this).SetOpacity(o)
 		} set scale(s) { C3X.RequireFiniteNumber(s); map.get(this).SetOwnScale(s) } get scale() { return map.get(this).GetOwnScale() } set scaleRate(r) { C3X.RequireFiniteNumber(r); map.get(this).SetScaleRate(r) } get scaleRate() { return map.get(this).GetScaleRate() } set angle(a) { C3X.RequireFiniteNumber(a); map.get(this).SetAngle(a) } get angle() { return map.get(this).GetOwnAngle() } set parallaxX(p) { C3X.RequireFiniteNumber(p); map.get(this).SetParallaxX(p) } get parallaxX() { return map.get(this).GetParallaxX() } set parallaxY(p) {
 			C3X.RequireFiniteNumber(p);
 			map.get(this).SetParallaxY(p)
@@ -3128,7 +3128,7 @@ void main(void) {
 	self.IInstance = class IInstance {
 		constructor() { map.set(this, initInst); const descriptors = { runtime: { value: initInst.GetRuntime().GetIRuntime(), writable: false }, objectType: { value: initInst.GetObjectClass().GetIObjectClass(), writable: false }, uid: { value: initInst.GetUID(), writable: false } }; initInst._GetInstVarsScriptDescriptor(descriptors); initInst._GetBehaviorsScriptDescriptor(descriptors); Object.defineProperties(this, descriptors); initInst.GetRuntime()._MapScriptInterface(this, initInst) } static _Init(inst) {
 			initInst =
-			inst
+				inst
 		} static _GetInitInst() { return initInst } _Release() { const dispatcher = dispatchers.get(this); if (dispatcher) { dispatcher.Release(); dispatchers.delete(this) } map.delete(this) } addEventListener(type, func, capture) { C3X.RequireString(type); C3X.RequireFunction(func); GetDispatcher(this).addEventListener(type, func, capture) } removeEventListener(type, func, capture) { C3X.RequireString(type); C3X.RequireFunction(func); GetDispatcher(this).removeEventListener(type, func, capture) } dispatchEvent(e) { GetDispatcher(this).dispatchEvent(e) } destroy() {
 			const inst =
 				map.get(this); const runtime = inst.GetRuntime(); runtime.DestroyInstance(inst); if (!runtime.GetEventSheetManager().IsInEventEngine() && !runtime.GetLayoutManager().IsEndingLayout()) runtime.FlushPendingInstances()
@@ -3156,7 +3156,7 @@ void main(void) {
 			wi.SetY(v); wi.SetBboxChanged()
 		} setPosition(x, y) { x = +x; y = +y; const wi = map.get(this).GetWorldInfo(); if (isNaN(x) || isNaN(y) || wi.GetX() === x && wi.GetY() === y) return; wi.SetXY(x, y); wi.SetBboxChanged() } getPosition() { const wi = map.get(this).GetWorldInfo(); return [wi.GetX(), wi.GetY()] } offsetPosition(dx, dy) { dx = +dx; dy = +dy; if (isNaN(dx) || isNaN(dy) || dx === 0 && dy === 0) return; const wi = map.get(this).GetWorldInfo(); wi.OffsetXY(dx, dy); wi.SetBboxChanged() } get zElevation() { return map.get(this).GetWorldInfo().GetZElevation() } set zElevation(z) {
 			z =
-			+z; const inst = map.get(this); const wi = inst.GetWorldInfo(); if (isNaN(z) || wi.GetZElevation() === z) return; wi.SetZElevation(z); inst.GetRuntime().UpdateRender()
+				+z; const inst = map.get(this); const wi = inst.GetWorldInfo(); if (isNaN(z) || wi.GetZElevation() === z) return; wi.SetZElevation(z); inst.GetRuntime().UpdateRender()
 		} get totalZElevation() { return map.get(this).GetWorldInfo().GetTotalZElevation() } get width() { return map.get(this).GetWorldInfo().GetWidth() } set width(w) { w = +w; const wi = map.get(this).GetWorldInfo(); if (isNaN(w) || wi.GetWidth() === w) return; wi.SetWidth(w); wi.SetBboxChanged() } get height() { return map.get(this).GetWorldInfo().GetHeight() } set height(h) {
 			h = +h; const wi =
 				map.get(this).GetWorldInfo(); if (isNaN(h) || wi.GetHeight() === h) return; wi.SetHeight(h); wi.SetBboxChanged()
@@ -3165,7 +3165,7 @@ void main(void) {
 				a) return; wi.SetAngle(a); wi.SetBboxChanged()
 		} get angleDegrees() { return C3.toDegrees(this.angle) } set angleDegrees(a) { this.angle = C3.toRadians(a) } getBoundingBox() { return map.get(this).GetWorldInfo().GetBoundingBox().toDOMRect() } getBoundingQuad() { return map.get(this).GetWorldInfo().GetBoundingQuad().toDOMQuad() } get isVisible() { return map.get(this).GetWorldInfo().IsVisible() } set isVisible(v) { v = !!v; const inst = map.get(this); const wi = inst.GetWorldInfo(); if (wi.IsVisible() === v) return; wi.SetVisible(v); inst.GetRuntime().UpdateRender() } get opacity() { return map.get(this).GetWorldInfo().GetOpacity() } set opacity(o) {
 			o =
-			C3.clamp(+o, 0, 1); const inst = map.get(this); const wi = inst.GetWorldInfo(); if (isNaN(o) || wi.GetOpacity() === o) return; wi.SetOpacity(o); inst.GetRuntime().UpdateRender()
+				C3.clamp(+o, 0, 1); const inst = map.get(this); const wi = inst.GetWorldInfo(); if (isNaN(o) || wi.GetOpacity() === o) return; wi.SetOpacity(o); inst.GetRuntime().UpdateRender()
 		} set colorRgb(arr) { C3X.RequireArray(arr); if (arr.length < 3) throw new Error("expected 3 elements"); tempColor.setRgb(arr[0], arr[1], arr[2]); const inst = map.get(this); const wi = inst.GetWorldInfo(); if (wi.GetUnpremultipliedColor().equalsIgnoringAlpha(tempColor)) return; wi.SetUnpremultipliedColor(tempColor); inst.GetRuntime().UpdateRender() } get colorRgb() {
 			const c =
 				map.get(this).GetWorldInfo().GetUnpremultipliedColor(); return [c.getR(), c.getG(), c.getB()]
@@ -3305,7 +3305,7 @@ void main(void) {
 			C3.clearArray(this._loadPromises); this._runtime = null
 		} GetRuntime() { return this._runtime } _SetFileStructure(f) { this._fileStructure = f; if (f === "flat") { const newMap = new Map; for (const [url, blob] of this._localUrlBlobs.entries()) newMap.set(url.toLowerCase(), blob); this._localUrlBlobs = newMap } } GetFileStructure() { return this._fileStructure } _SetMediaSubfolder(folder) { this._mediaSubfolder = folder } GetMediaSubfolder() { return this._mediaSubfolder } _SetFontsSubfolder(folder) { this._fontsSubfolder = folder } GetFontsSubfolder() { return this._fontsSubfolder } _SetIconsSubfolder(folder) {
 			this._iconsSubfolder =
-			folder
+				folder
 		} GetIconsSubfolder() { return this._iconsSubfolder } IsFileProtocol() { return this._isFileProtocol } _HasLocalUrlBlob(url) { if (this._fileStructure === "flat") url = url.toLowerCase(); return this._localUrlBlobs.has(url) } _GetLocalUrlBlob(url) { if (this._fileStructure === "flat") url = url.toLowerCase(); return this._localUrlBlobs.get(url) || null } GetLocalUrlAsBlobUrl(url) {
 			if (this._fileStructure === "flat") url = url.toLowerCase(); if (!this._HasLocalUrlBlob(url)) return url; let ret = this._localBlobUrlCache.get(url); if (!ret) {
 				const blob =
@@ -3337,7 +3337,7 @@ void main(void) {
 				this._allAssets.push(asset); this._assetsByUrl.set(asset.GetURL(), asset); if (!this._hasFinishedInitialLoad) { this._totalAssetSizeToLoad += asset.GetSize(); this._loadPromises.push(asset.Load().then(() => this._AddLoadedSize(asset.GetSize()))) } return asset
 			} async WaitForAllToLoad() { try { await Promise.all(this._loadPromises); this._lastLoadProgress = 1 } catch (err) { console.error("Error loading: ", err); this._hasHadErrorLoading = true; this._FireLoadingProgressEvent() } } SetInitialLoadFinished() {
 				this._hasFinishedInitialLoad =
-				true
+					true
 			} HasHadErrorLoading() { return this._hasHadErrorLoading } _AddLoadedSize(s) { this._assetSizeLoaded += s; this._loadingRateLimiter.Call() } _FireLoadingProgressEvent() { const event = C3.New(C3.Event, "loadingprogress"); this._lastLoadProgress = C3.clamp(this._assetSizeLoaded / this._totalAssetSizeToLoad, 0, 1); event.progress = this._lastLoadProgress; this._runtime.Dispatcher().dispatchEvent(event) } GetLoadProgress() { return this._lastLoadProgress } _SetWebFonts(arr) { C3.shallowAssignArray(this._webFonts, arr); if (this._webFonts.length) this._loadPromises.push(this._LoadWebFonts()) } async _LoadWebFonts() {
 				const promises =
 					[]; const loadFontsForDOM = []; for (const [name, filename, size] of this._webFonts) { this._totalAssetSizeToLoad += size; promises.push(this._LoadWebFont(name, filename, loadFontsForDOM).then(() => this._AddLoadedSize(size))) } await Promise.all(promises); if (this._runtime.IsInWorker() && loadFontsForDOM.length > 0) await this._runtime.PostComponentMessageToDOMAsync("runtime", "load-webfonts", { "webfonts": loadFontsForDOM })
@@ -3372,7 +3372,7 @@ void main(void) {
 		constructor(assetManager, opts) { super(); this._assetManager = assetManager; this._runtime = assetManager.GetRuntime(); this._url = opts.url || ""; this._size = opts.size; this._loadPolicy = opts.loadPolicy; this._blob = opts.blob || null; this._isLoaded = !!this._blob; this._loadPromise = null } Release() { this._loadPromise = null; this._assetManager = null; this._runtime = null; this._blob = null } GetURL() { return this._url } GetSize() { return this._size } Load() {
 			if (this._loadPolicy === "local" || this._blob) {
 				this._isLoaded =
-				true; return Promise.resolve()
+					true; return Promise.resolve()
 			} if (this._loadPromise) return this._loadPromise; this._loadPromise = this._assetManager.FetchBlob(this._url, this._loadPolicy).then(blob => { this._isLoaded = true; this._loadPromise = null; this._blob = blob; return blob }).catch(err => console.error("Error loading resource: ", err)); return this._loadPromise
 		} IsLoaded() { return this._isLoaded } GetBlob() {
 			if (this._blob) return Promise.resolve(this._blob); if (this._loadPromise) return this._loadPromise; return this._assetManager.FetchBlob(this._url,
@@ -3389,7 +3389,7 @@ void main(void) {
 		constructor(assetManager, opts) { super(assetManager, opts); this._texturePromise = null; this._webglTexture = null; this._refCount = 0; this._imageWidth = -1; this._imageHeight = -1; allImageAssets.add(this) } Release() { this.ReleaseTexture(); if (this._refCount !== 0) throw new Error("released image asset which still has texture references"); this._texturePromise = null; allImageAssets.delete(this); super.Release() } static OnRendererContextLost() {
 			for (const imageAsset of allImageAssets) {
 				imageAsset._texturePromise =
-				null; imageAsset._webglTexture = null; imageAsset._refCount = 0
+					null; imageAsset._webglTexture = null; imageAsset._refCount = 0
 			}
 		} LoadStaticTexture(renderer, opts) {
 			opts = opts || {}; this._refCount++; if (this._webglTexture) return Promise.resolve(this._webglTexture); if (this._texturePromise) return this._texturePromise; opts.anisotropy = this._runtime.GetCanvasManager().GetTextureAnisotropy(); this._texturePromise = this.GetBlob().then(blob => promiseThrottle.Add(() => renderer.CreateStaticTextureAsync(blob, opts).then(texture => {
@@ -3429,10 +3429,10 @@ void main(void) {
 	C3.RenderGrid = class RenderGrid extends C3.DefendedBase {
 		constructor(cellWidth, cellHeight) { super(); this._cellWidth = cellWidth; this._cellHeight = cellHeight; this._cells = C3.New(C3.PairMap) } Release() { this._cells.Release(); this._cells = null } GetCell(x, y, createIfMissing) { let ret = this._cells.Get(x, y); if (ret) return ret; else if (createIfMissing) { ret = C3.New(C3.RenderCell, this, x, y); this._cells.Set(x, y, ret); return ret } else return null } XToCell(x) { return Math.floor(x / this._cellWidth) } YToCell(y) { return Math.floor(y / this._cellHeight) } Update(inst,
 			oldRange, newRange) {
-				if (oldRange) for (let x = oldRange.getLeft(), lenx = oldRange.getRight(); x <= lenx; ++x)for (let y = oldRange.getTop(), leny = oldRange.getBottom(); y <= leny; ++y) { if (newRange && newRange.containsPoint(x, y)) continue; const cell = this.GetCell(x, y, false); if (!cell) continue; cell.Remove(inst); if (cell.IsEmpty()) this._cells.Delete(x, y) } if (newRange) for (let x = newRange.getLeft(), lenx = newRange.getRight(); x <= lenx; ++x)for (let y = newRange.getTop(), leny = newRange.getBottom(); y <= leny; ++y) {
-					if (oldRange && oldRange.containsPoint(x,
-						y)) continue; this.GetCell(x, y, true).Insert(inst)
-				}
+			if (oldRange) for (let x = oldRange.getLeft(), lenx = oldRange.getRight(); x <= lenx; ++x)for (let y = oldRange.getTop(), leny = oldRange.getBottom(); y <= leny; ++y) { if (newRange && newRange.containsPoint(x, y)) continue; const cell = this.GetCell(x, y, false); if (!cell) continue; cell.Remove(inst); if (cell.IsEmpty()) this._cells.Delete(x, y) } if (newRange) for (let x = newRange.getLeft(), lenx = newRange.getRight(); x <= lenx; ++x)for (let y = newRange.getTop(), leny = newRange.getBottom(); y <= leny; ++y) {
+				if (oldRange && oldRange.containsPoint(x,
+					y)) continue; this.GetCell(x, y, true).Insert(inst)
+			}
 		} QueryRange(rc, result) { let x = this.XToCell(rc.getLeft()); const ystart = this.YToCell(rc.getTop()); const lenx = this.XToCell(rc.getRight()); const leny = this.YToCell(rc.getBottom()); for (; x <= lenx; ++x)for (let y = ystart; y <= leny; ++y) { const cell = this.GetCell(x, y, false); if (!cell) continue; cell.Dump(result) } } MarkRangeChanged(rc) {
 			let x = rc.getLeft(); const ystart = rc.getTop(); const lenx = rc.getRight(); const leny = rc.getBottom(); for (; x <= lenx; ++x)for (let y = ystart; y <= leny; ++y) {
 				const cell =
@@ -3471,7 +3471,7 @@ void main(void) {
 				this) throw new Error("instance added to wrong layer"); this._instances.unshift(inst); if (wi.GetZElevation() !== 0) this._anyInstanceZElevated = true; this.SetZIndicesChanged(); if (addToGrid && this.UsesRenderCells()) inst.GetWorldInfo().SetBboxChanged()
 		} _RemoveInstance(inst, removeFromGrid) { const index = this._instances.indexOf(inst); if (index < 0) return; if (removeFromGrid && this.UsesRenderCells()) inst.GetWorldInfo()._RemoveFromRenderCells(); this._instances.splice(index, 1); this.SetZIndicesChanged(); this._MaybeResetAnyInstanceZElevatedFlag() } _SetAnyInstanceZElevated() {
 			this._anyInstanceZElevated =
-			true
+				true
 		} _MaybeResetAnyInstanceZElevatedFlag() { if (this._instances.length === 0) this._anyInstanceZElevated = false } _SortInstancesByLastCachedZIndex(isPersistMode) {
 			if (isPersistMode) {
 				const assignedZIndices = new Set; for (const inst of this._instances) { const cachedZIndex = inst.GetWorldInfo()._GetLastCachedZIndex(); if (cachedZIndex >= 0) assignedZIndices.add(cachedZIndex) } let index = -1; for (const inst of this._instances) {
@@ -3489,20 +3489,20 @@ void main(void) {
 			} return ret
 		} GetInstanceCount() { return this._instances.length } GetLayout() { return this._layout } GetName() { return this._name } _SetIndex(i) {
 			this._index =
-			i
+				i
 		} GetIndex() { return this._index } GetSID() { return this._sid } GetRuntime() { return this._runtime } GetDevicePixelRatio() { return this._runtime.GetDevicePixelRatio() } GetEffectList() { return this._effectList } GetEffectChain() { this._MaybeRebuildEffectChainSteps(); return this._effectChain } _MaybeRebuildEffectChainSteps() {
 			const isDefaultColor = this.HasDefaultColor(); if (!this._needsRebuildEffectChainSteps && isDefaultColor === this._wasDefaultColor && !this._effectChain.NeedsRebuild()) return; const activeEffectTypes = this.GetEffectList().GetActiveEffectTypes();
 			this._effectChain.BuildSteps(activeEffectTypes.map(e => e.GetShaderProgram()), { indexMap: activeEffectTypes.map(e => e.GetIndex()), forcePreDraw: !isDefaultColor, useFullSurface: true }); this._needsRebuildEffectChainSteps = false; this._wasDefaultColor = isDefaultColor
 		} UpdateActiveEffects() { this.GetEffectList().UpdateActiveEffects(); this._needsRebuildEffectChainSteps = true } UsesRenderCells() { return this._useRenderCells && !this._useCameraDistanceDrawOrder } GetRenderGrid() { return this._renderGrid } SetRenderListStale() {
 			this._isRenderListUpToDate =
-			false
+				false
 		} IsVisible() { for (const layer of this.selfAndParentLayers()) if (!layer._IsVisibleFlagSet()) return false; return true } _IsVisibleFlagSet() { return this._isVisible } SetVisible(v) { v = !!v; if (this._isVisible === v) return; this._isVisible = v; this._runtime.UpdateRender() } SetInteractive(i) { this._isInteractive = !!i } IsInteractive() { return this._isInteractive } IsSelfAndParentsInteractive() { for (const layer of this.selfAndParentLayers()) if (!layer.IsInteractive()) return false; return true } SetOwnScrollPositionEnabled(e) {
 			e =
-			!!e; if (this._hasOwnScrollPosition === e) return; this._hasOwnScrollPosition = e; if (e) { const layout = this.GetLayout(); this._scrollX = layout.GetScrollX(); this._scrollY = layout.GetScrollY() } this._SetMVMatrixChanged(); this._runtime.UpdateRender()
+				!!e; if (this._hasOwnScrollPosition === e) return; this._hasOwnScrollPosition = e; if (e) { const layout = this.GetLayout(); this._scrollX = layout.GetScrollX(); this._scrollY = layout.GetScrollY() } this._SetMVMatrixChanged(); this._runtime.UpdateRender()
 		} IsOwnScrollPositionEnabled() { return this._hasOwnScrollPosition } SetScrollX(x) {
 			const layout = this.GetLayout(); const lbound = layout.GetScrollLeftBound(); const rbound = layout.GetScrollRightBound(); if (x > rbound) x = rbound; if (x < lbound) x = lbound; if (this._scrollX !== x) {
 				this._scrollX =
-				x; if (this.IsOwnScrollPositionEnabled()) { this._SetMVMatrixChanged(); this._runtime.UpdateRender() }
+					x; if (this.IsOwnScrollPositionEnabled()) { this._SetMVMatrixChanged(); this._runtime.UpdateRender() }
 			}
 		} SetScrollY(y) { const layout = this.GetLayout(); const ubound = layout.GetScrollTopBound(); const bbound = layout.GetScrollBottomBound(); if (y > bbound) y = bbound; if (y < ubound) y = ubound; if (this._scrollY !== y) { this._scrollY = y; if (this.IsOwnScrollPositionEnabled()) { this._SetMVMatrixChanged(); this._runtime.UpdateRender() } } } GetScrollX() { if (this.IsOwnScrollPositionEnabled()) return this._scrollX; else return this.GetLayout().GetScrollX() } GetScrollY() {
 			if (this.IsOwnScrollPositionEnabled()) return this._scrollY;
@@ -3510,10 +3510,10 @@ void main(void) {
 		} GetViewport() { this._MaybeUpdateViewport(); return this._viewport } _GetViewportZ0() { this._MaybeUpdateViewport(); return this._viewportZ0 } GetViewport3D() { this._MaybeUpdateViewport(); return this._viewport3D } _GetVanishingPoint() { const layout = this.GetLayout(); return [layout.GetVanishingPointX(), layout.GetVanishingPointY()] } GetDefaultCameraZ(viewH) { return this._runtime.GetDefaultCameraZ(viewH) } GetViewportForZ(z, outRect) {
 			const viewportZ0 = this._GetViewportZ0(); if (z ===
 				0) outRect.copy(viewportZ0); else {
-					let midX = viewportZ0.midX(); let midY = viewportZ0.midY(); const scaleFactor = this.Get2DScaleFactorToZ(z); const viewW = viewportZ0.width() / scaleFactor; const viewH = viewportZ0.height() / scaleFactor; const [vpX, vpY] = this._GetVanishingPoint(); if (vpX !== .5 || vpY !== .5) {
-						const cameraZ = this.GetCameraZ(); const runtime = this._runtime; const zf = this.GetDefaultCameraZ() / cameraZ; let camOffX = (vpX - .5) * runtime.GetViewportWidth() / zf; let camOffY = (vpY - .5) * runtime.GetViewportHeight() / zf; const a = this.GetAngle();
-						if (a !== 0) { tempVec2.set(camOffX, camOffY); tempVec2.rotate(a); camOffX = tempVec2.getX(); camOffY = tempVec2.getY() } const zProg = C3.unlerp(cameraZ, 0, z); midX += C3.lerp(camOffX, 0, zProg); midY += C3.lerp(camOffY, 0, zProg)
-					} outRect.set(midX - viewW / 2, midY - viewH / 2, midX + viewW / 2, midY + viewH / 2)
+				let midX = viewportZ0.midX(); let midY = viewportZ0.midY(); const scaleFactor = this.Get2DScaleFactorToZ(z); const viewW = viewportZ0.width() / scaleFactor; const viewH = viewportZ0.height() / scaleFactor; const [vpX, vpY] = this._GetVanishingPoint(); if (vpX !== .5 || vpY !== .5) {
+					const cameraZ = this.GetCameraZ(); const runtime = this._runtime; const zf = this.GetDefaultCameraZ() / cameraZ; let camOffX = (vpX - .5) * runtime.GetViewportWidth() / zf; let camOffY = (vpY - .5) * runtime.GetViewportHeight() / zf; const a = this.GetAngle();
+					if (a !== 0) { tempVec2.set(camOffX, camOffY); tempVec2.rotate(a); camOffX = tempVec2.getX(); camOffY = tempVec2.getY() } const zProg = C3.unlerp(cameraZ, 0, z); midX += C3.lerp(camOffX, 0, zProg); midY += C3.lerp(camOffY, 0, zProg)
+				} outRect.set(midX - viewW / 2, midY - viewH / 2, midX + viewW / 2, midY + viewH / 2)
 			}
 		} GetOpacity() { return this._color.getA() } SetOpacity(o) { o = C3.clamp(o, 0, 1); if (this._color.getA() === o) return; this._color.setA(o); this._UpdatePremultipliedColor(); this._runtime.UpdateRender() } _UpdatePremultipliedColor() {
 			this._premultipliedColor.copy(this._color);
@@ -3566,7 +3566,7 @@ void main(void) {
 			} _Get2DCameraPosition(offX = 0, offY = 0, viewH = 0) {
 				const runtime = this._runtime; const layout = this.GetLayout(); const parallaxOriginX = runtime.GetParallaxXOrigin(); const parallaxOriginY = runtime.GetParallaxYOrigin(); let scrollOriginX = (this.GetScrollX() - parallaxOriginX) * this._parallaxX + parallaxOriginX; let scrollOriginY = (this.GetScrollY() - parallaxOriginY) * this._parallaxY + parallaxOriginY; if (runtime.IsPixelRoundingEnabled()) {
 					scrollOriginX =
-					Math.round(scrollOriginX); scrollOriginY = Math.round(scrollOriginY)
+						Math.round(scrollOriginX); scrollOriginY = Math.round(scrollOriginY)
 				} let camX = scrollOriginX + offX; let camY = scrollOriginY + offY; const camZ = layout.IsOrthographicProjection() ? this.GetDefaultCameraZ(viewH) : this.GetCameraZ(viewH); const [vpX, vpY] = this._GetVanishingPoint(); if (vpX !== .5 || vpY !== .5) {
 					const zf = this.GetDefaultCameraZ(viewH) / camZ; let camOffX = (vpX - .5) * runtime.GetViewportWidth() / zf; let camOffY = (vpY - .5) * runtime.GetViewportHeight() / zf; const a = this.GetAngle(); if (a !== 0) {
 						tempVec2.set(camOffX, camOffY); tempVec2.rotate(a);
@@ -3641,10 +3641,10 @@ void main(void) {
 				}); renderer.SetBaseZ(this.GetZElevation()); return effectChain.DidChangeTransform()
 			} _DrawLayerOwnTextureToRenderTarget(renderer, ownRenderTarget, destinationRenderTarget,
 				isFirstToTarget) {
-					const activeEffectTypes = this._effectList.GetActiveEffectTypes(); const runtime = this._runtime; if (activeEffectTypes.length === 0) {
-						renderer.SetRenderTarget(destinationRenderTarget); renderer.SetTextureFillMode(); if (isFirstToTarget && this._blendMode === 0 && this.HasDefaultColor()) renderer.CopyRenderTarget(ownRenderTarget); else { renderer.SetBlendMode(this._blendMode); renderer.SetColor(this._premultipliedColor); renderer.DrawRenderTarget(ownRenderTarget) } renderer.InvalidateRenderTarget(ownRenderTarget);
-						runtime.ReleaseAdditionalRenderTarget(ownRenderTarget)
-					} else this.GetEffectChain().Render(renderer, destinationRenderTarget, { contentObject: this, blendMode: this.GetBlendMode(), devicePixelRatio: runtime.GetEffectDevicePixelRatioParam(), layerScale: runtime.GetEffectLayerScaleParam() * this.GetNormalScale(), layerAngle: this.GetAngle(), layoutRect: this.GetViewport(), drawSurfaceRect: null, invalidateRenderTargets: true })
+			const activeEffectTypes = this._effectList.GetActiveEffectTypes(); const runtime = this._runtime; if (activeEffectTypes.length === 0) {
+				renderer.SetRenderTarget(destinationRenderTarget); renderer.SetTextureFillMode(); if (isFirstToTarget && this._blendMode === 0 && this.HasDefaultColor()) renderer.CopyRenderTarget(ownRenderTarget); else { renderer.SetBlendMode(this._blendMode); renderer.SetColor(this._premultipliedColor); renderer.DrawRenderTarget(ownRenderTarget) } renderer.InvalidateRenderTarget(ownRenderTarget);
+				runtime.ReleaseAdditionalRenderTarget(ownRenderTarget)
+			} else this.GetEffectChain().Render(renderer, destinationRenderTarget, { contentObject: this, blendMode: this.GetBlendMode(), devicePixelRatio: runtime.GetEffectDevicePixelRatioParam(), layerScale: runtime.GetEffectLayerScaleParam() * this.GetNormalScale(), layerAngle: this.GetAngle(), layoutRect: this.GetViewport(), drawSurfaceRect: null, invalidateRenderTargets: true })
 		} GetOwnScale() { return this._scale } SetOwnScale(s) {
 			if (this._scale === s) return; this._scale = s; this._layout.BoundScrolling();
 			this._SetMVMatrixChanged(); this._runtime.UpdateRender()
@@ -3658,7 +3658,7 @@ void main(void) {
 				bry, bly); let right = Math.max(tlx, trx, brx, blx); let bottom = Math.max(tly, try_, bry, bly); if (!isFinite(left)) left = -Infinity; if (!isFinite(top)) top = -Infinity; if (!isFinite(right)) right = Infinity; if (!isFinite(bottom)) bottom = Infinity; outRect.set(left, top, right, bottom)
 		} CanvasCssToLayer(ptx, pty, z = 0) { return this._CanvasToLayer(ptx, pty, z, this.GetDisplayScale()) } DrawSurfaceToLayer(ptx, pty, z = 0) { return this._CanvasToLayer(ptx, pty, z, this.GetRenderScale() * this.GetDevicePixelRatio()) } _CanvasToLayer(canvasX, canvasY, zElevation,
 			displayScale) {
-				const runtime = this._runtime; const renderer = runtime.GetRenderer(); const normalScale = this.GetNormalScale(); const scaledViewportWidth = runtime.GetViewportWidth() / normalScale; const scaledViewportHeight = runtime.GetViewportHeight() / normalScale; const viewport = tempVec4; vec4.set(viewport, 0, 0, scaledViewportWidth, scaledViewportHeight); canvasX = canvasX / displayScale; canvasY = viewport[3] - canvasY / displayScale; const matP = this._GetProjectionMatrix(renderer); const matMV = this._GetModelViewMatrix(renderer);
+			const runtime = this._runtime; const renderer = runtime.GetRenderer(); const normalScale = this.GetNormalScale(); const scaledViewportWidth = runtime.GetViewportWidth() / normalScale; const scaledViewportHeight = runtime.GetViewportHeight() / normalScale; const viewport = tempVec4; vec4.set(viewport, 0, 0, scaledViewportWidth, scaledViewportHeight); canvasX = canvasX / displayScale; canvasY = viewport[3] - canvasY / displayScale; const matP = this._GetProjectionMatrix(renderer); const matMV = this._GetModelViewMatrix(renderer);
 			const objectCoord = tempVec3; const result = C3.Gfx.UnprojectScreenToWorldZ(canvasX, canvasY, zElevation, matMV, matP, viewport, objectCoord); if (result) return [objectCoord[0], objectCoord[1]]; else return [NaN, NaN]
 		} CanvasCssToLayer_DefaultTransform(ptx, pty) {
 			const scale = this._scale; const scaleRate = this._scaleRate; const parallaxX = this._parallaxX; const parallaxY = this._parallaxY; const angle = this._angle; this._scale = 1; this._scaleRate = 1; this._parallaxX = 1; this._parallaxY = 1; this._angle = 0; this._SetMVMatrixChanged(); const ret =
@@ -3742,7 +3742,7 @@ void main(void) {
 		} SetScrollX(x) { const lbound = this.GetScrollLeftBound(); const rbound = this.GetScrollRightBound(); if (x > rbound) x = rbound; if (x < lbound) x = lbound; if (this._scrollX !== x) { this._scrollX = x; this._SetAllLayersMVChanged(); this._runtime.UpdateRender() } } GetScrollX() { return this._scrollX } SetScrollY(y) {
 			const ubound = this.GetScrollTopBound(); const bbound = this.GetScrollBottomBound(); if (y > bbound) y = bbound; if (y < ubound) y = ubound; if (this._scrollY !== y) {
 				this._scrollY =
-				y; this._SetAllLayersMVChanged(); this._runtime.UpdateRender()
+					y; this._SetAllLayersMVChanged(); this._runtime.UpdateRender()
 			}
 		} GetScrollY() { return this._scrollY } IsUnboundedScrolling() { return this._isUnboundedScrolling } BoundScrolling() { this.SetScrollX(this.GetScrollX()); this.SetScrollY(this.GetScrollY()); for (const layer of this._allLayersFlat) if (layer.IsOwnScrollPositionEnabled()) { layer.SetScrollX(layer.GetScrollX()); layer.SetScrollY(layer.GetScrollY()) } } SetVanishingPointXY(vpX, vpY) {
 			if (this._vanishingPointX === vpX && this._vanishingPointY === vpY) return; this._vanishingPointX =
@@ -3844,7 +3844,7 @@ void main(void) {
 				let persisDataIndex = 0; for (const layer of this._allLayersFlat) { layer._UpdateZIndices(); for (const inst of layer._GetInstances()) { const objectClass = inst.GetObjectClass(); if (!objectClass.IsGlobal() && objectClass.HasPersistBehavior()) { this._SaveInstanceToPersist(inst, persisDataIndex); persisDataIndex++ } } } for (const layer of this._allLayersFlat) for (const inst of layer._GetInstances()) { const objectClass = inst.GetObjectClass(); if (!objectClass.IsGlobal() && objectClass.HasPersistBehavior()) this._SaveSceneGraphInfoToPersist(inst) } this._persistedIntances.clear()
 			} ResetPersistData() {
 				this._persistData =
-				{}; this._isFirstVisit = true
+					{}; this._isFirstVisit = true
 			} GetRenderTarget() { return this._curRenderTarget } UsesOwnTexture() { const runtime = this._runtime; const isWebGL = runtime.GetRenderer().IsWebGL(); return runtime.GetCanvasManager().GetCurrentFullscreenScalingQuality() === "low" || isWebGL && runtime.UsesAnyBackgroundBlending() || runtime.GetCompositingMode() === "low-latency" || this._effectList.HasAnyActiveEffect() || isWebGL && runtime.Uses3DFeatures() } Draw(renderer) {
 				const canvasManager = this._runtime.GetCanvasManager(); const useOwnTexture = this.UsesOwnTexture();
 				if (useOwnTexture) {
@@ -3853,12 +3853,12 @@ void main(void) {
 				} else this._curRenderTarget = null; renderer.SetRenderTarget(this._curRenderTarget); renderer.Clear(this.GetLayoutBackgroundColor()); if (this._runtime.Uses3DFeatures()) renderer.ClearDepth(); this._DrawLayerList(renderer, this._curRenderTarget, this._rootLayers, true); if (useOwnTexture) { renderer.SetDepthEnabled(false); this._DrawLayoutOwnTextureToRenderTarget(renderer, this._curRenderTarget) } this._curRenderTarget = null
 			} _DrawLayerList(renderer, destRenderTarget, layersArr,
 				canCopyFirstLayer) {
-					const layersToDraw = layersArr.filter(l => l.ShouldDraw()); for (let i = 0, len = layersToDraw.length; i < len;) {
-						const layer = layersToDraw[i]; if (layer.SelfAndAllSubLayersHave3DCamera() && !layer.SelfOrAnySubLayerUsesOwnTexture()) {
-							tempRender3dList.push(layer); for (let j = i + 1; j < len; ++j) { const nextLayer = layersToDraw[j]; if (nextLayer.SelfAndAllSubLayersHave3DCamera() && !nextLayer.SelfOrAnySubLayerUsesOwnTexture()) tempRender3dList.push(layersToDraw[j]); else break } if (tempRender3dList.length >= 2 || tempRender3dList.length ===
-								1 && tempRender3dList[0].HasAnyVisibleSubLayer()) { this._Draw3DLayers(renderer, destRenderTarget, tempRender3dList); i += tempRender3dList.length; C3.clearArray(tempRender3dList); continue } C3.clearArray(tempRender3dList)
-						} layer.Draw(renderer, destRenderTarget, canCopyFirstLayer && i === 0); ++i
-					}
+			const layersToDraw = layersArr.filter(l => l.ShouldDraw()); for (let i = 0, len = layersToDraw.length; i < len;) {
+				const layer = layersToDraw[i]; if (layer.SelfAndAllSubLayersHave3DCamera() && !layer.SelfOrAnySubLayerUsesOwnTexture()) {
+					tempRender3dList.push(layer); for (let j = i + 1; j < len; ++j) { const nextLayer = layersToDraw[j]; if (nextLayer.SelfAndAllSubLayersHave3DCamera() && !nextLayer.SelfOrAnySubLayerUsesOwnTexture()) tempRender3dList.push(layersToDraw[j]); else break } if (tempRender3dList.length >= 2 || tempRender3dList.length ===
+						1 && tempRender3dList[0].HasAnyVisibleSubLayer()) { this._Draw3DLayers(renderer, destRenderTarget, tempRender3dList); i += tempRender3dList.length; C3.clearArray(tempRender3dList); continue } C3.clearArray(tempRender3dList)
+				} layer.Draw(renderer, destRenderTarget, canCopyFirstLayer && i === 0); ++i
+			}
 		} _DrawLayoutOwnTextureToRenderTarget(renderer, ownRenderTarget) {
 			const activeEffectTypes = this._effectList.GetActiveEffectTypes(); const runtime = this._runtime; if (activeEffectTypes.length === 0) {
 				renderer.SetRenderTarget(null); renderer.SetTextureFillMode();
@@ -3908,7 +3908,7 @@ void main(void) {
 				} this._SetAllLayersProjectionChanged(); this._SetAllLayersMVChanged()
 		} GetILayout() { return this._iLayout } UserScriptDispatcher() { return this._userScriptDispatcher } DispatchUserScriptEvent(e) { e.layout = this.GetILayout(); const runtime = this._runtime; const shouldTime = runtime.IsDebug() && !runtime.GetEventSheetManager().IsInEventEngine(); if (shouldTime) C3Debugger.StartMeasuringScriptTime(); this._userScriptDispatcher.dispatchEvent(e); if (shouldTime) C3Debugger.AddScriptTime() } DispatchUserScriptEventAsyncWait(e) {
 			e.layout =
-			this.GetILayout(); return this._userScriptDispatcher.dispatchEventAndWaitAsync(e)
+				this.GetILayout(); return this._userScriptDispatcher.dispatchEventAndWaitAsync(e)
 		}
 	};
 
@@ -4124,7 +4124,7 @@ void main(void) {
 				this)
 		} OnStarted() { if (!C3.Plugins.Timeline || this.constructor !== C3.TimelineState) return; C3.Plugins.Timeline.Cnds.PushTriggerTimeline(this); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnTimelineStarted); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnTimelineStartedByName); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnTimelineStartedByTags); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnAnyTimelineStarted); C3.Plugins.Timeline.Cnds.PopTriggerTimeline() } OnCompleted() {
 			this._completedTick =
-			this._runtime.GetTickCount()
+				this._runtime.GetTickCount()
 		} FinishTriggers() {
 			if (this._finishedTriggers) return; this._finishedTriggers = true; if (!C3.Plugins.Timeline || this.constructor !== C3.TimelineState) return; C3.Plugins.Timeline.Cnds.PushTriggerTimeline(this); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnTimelineFinished); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnTimelineFinishedByName); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnTimelineFinishedByTags); this._timelineManager.Trigger(C3.Plugins.Timeline.Cnds.OnAnyTimelineFinished);
 			C3.Plugins.Timeline.Cnds.PopTriggerTimeline()
@@ -4290,8 +4290,8 @@ void main(void) {
 				0, l = this._propertyTracks.length; i < l; i++) { const propertyTrack = this._propertyTracks[i]; propertyTrack._SetUpdateState(); if (this._worldInfoChange === 0 && propertyTrack.GetWorldInfoChange() === 1) this._worldInfoChange = 1; if (this._renderChange === 0 && propertyTrack.GetRenderChange() === 1) this._renderChange = 1 }
 		} BeforeInterpolate() { const l = this._propertyTracks.length; for (let i = 0; i < l; i++)this._propertyTracks[i].BeforeInterpolate() } Interpolate(time, isTicking = false, setTime = false, ensureValue = false, firstTick = false, ignoreGlobals =
 			false, endState = false) {
-				if (!this._instance) this.GetInstance(); const instanceValid = this._instance && !this._instance.IsDestroyed(); const isInstanceTrack = this._trackDataItem._type === INSTANCE_TRACK; if (!instanceValid && isInstanceTrack) return; if (ignoreGlobals && isInstanceTrack && this.GetObjectClass().IsGlobal()) return; time = time - this.GetStartOffset(); if (time < 0) return; this.MaybeSetInitialStateOfNestedTrack(time, isTicking); this.MaybeTriggerKeyframeReachedConditions(time, isTicking, firstTick); for (let i = 0, l = this._propertyTracks.length; i <
-					l; i++)this._propertyTracks[i].Interpolate(time, setTime, ensureValue, endState); this.MaybeSetEndStateOfNestedTrack(time, isTicking); if (this._worldInfoChange !== 0) { if (!this._worldInfo) this._worldInfo = this._instance.GetWorldInfo(); if (this._worldInfo) this._worldInfo.SetBboxChanged() }
+			if (!this._instance) this.GetInstance(); const instanceValid = this._instance && !this._instance.IsDestroyed(); const isInstanceTrack = this._trackDataItem._type === INSTANCE_TRACK; if (!instanceValid && isInstanceTrack) return; if (ignoreGlobals && isInstanceTrack && this.GetObjectClass().IsGlobal()) return; time = time - this.GetStartOffset(); if (time < 0) return; this.MaybeSetInitialStateOfNestedTrack(time, isTicking); this.MaybeTriggerKeyframeReachedConditions(time, isTicking, firstTick); for (let i = 0, l = this._propertyTracks.length; i <
+				l; i++)this._propertyTracks[i].Interpolate(time, setTime, ensureValue, endState); this.MaybeSetEndStateOfNestedTrack(time, isTicking); if (this._worldInfoChange !== 0) { if (!this._worldInfo) this._worldInfo = this._instance.GetWorldInfo(); if (this._worldInfo) this._worldInfo.SetBboxChanged() }
 		} AfterInterpolate() { const l = this._propertyTracks.length; for (let i = 0; i < l; i++)this._propertyTracks[i].AfterInterpolate() } MaybeSetInitialStateOfNestedTrack(time, isTicking) {
 			if (!isTicking) return; if (!this._isNested) return; if (this._initialStateOfNestedSet) return;
 			const timeline = this.GetTimeline(); if (timeline.IsForwardPlayBack()) { if (time < 0) return; for (const propertyTrack of this._propertyTracks) propertyTrack.Interpolate(0, false, true) } else { if (time > this.GetLocalTotalTime()) return; for (const propertyTrack of this._propertyTracks) propertyTrack.Interpolate(this.GetLocalTotalTime(), false, true) } for (const propertyTrack of this._propertyTracks) propertyTrack.SetInitialState(); this._initialStateOfNestedSet = true
@@ -4343,7 +4343,7 @@ void main(void) {
 				null; this._absoluteValueObject = null
 		} static Create(track, propertyTrackDataItem) { return C3.New(C3.PropertyTrackState, track, propertyTrackDataItem) } Release() { this._track = null; if (this._sourceAdapter) { this._sourceAdapter.Release(); this._sourceAdapter = null } this._propertyKeyframeDataItems = null; this._propertyTrackDataItem = null; this._propertyTrackData = null } GetWorldInfoChange() { return this._worldInfoChange } GetRenderChange() { return this._renderChange } GetNeedsBeforeAndAfter() { return this._needsBeforeAndAfter } HasAbsoluteValueObject() { return !!this._absoluteValueObject } SetAbsoluteValueObject(avo) {
 			this._absoluteValueObject =
-			avo
+				avo
 		} GetAbsoluteValueObject() { return this._absoluteValueObject } GetTrack() { return this._track } GetPropertyTrackDataItem() { return this._propertyTrackDataItem } GetPropertyTrackData() { return this._propertyTrackData } GetTimeline() { return this._track.GetTimeline() } GetRuntime() { return this._track.GetRuntime() } GetInstance() { return this._track.GetInstance() } GetSourceAdapter() {
 			if (this._sourceAdapter) return this._sourceAdapter; const id = this._propertyTrackDataItem.GetSourceAdapterId(); let ret; switch (id) {
 				case "behavior": ret =
@@ -4419,7 +4419,7 @@ void main(void) {
 			const type = this._propertyTrack.GetPropertyKeyframeType(); let value; switch (type) {
 				case "numeric": {
 					value =
-					NS.NumericTypeAdapter.Interpolate(time, start, end, this._propertyTrack); break
+						NS.NumericTypeAdapter.Interpolate(time, start, end, this._propertyTrack); break
 				} case "angle": { value = NS.AngleTypeAdapter.Interpolate(time, start, end, this._propertyTrack); break } case "boolean": { value = NS.BooleanTypeAdapter.Interpolate(time, start, end, this._propertyTrack); break } case "color": { value = NS.ColorTypeAdapter.Interpolate(time, start, end, this._propertyTrack); break } case "text": { value = NS.TextTypeAdapter.Interpolate(time, start, end, this._propertyTrack); break }
 			}this._propertyAdapter.ChangeProperty(time, value,
 				start, end, setTime, ensureValue, endState)
@@ -4554,7 +4554,7 @@ void main(void) {
 								return
 							} const nowTime = self["performance"].now(); const postToDOMDeltaTime = (nowTime - thenTime) / 1E3; const startPlaybackOffset = startDeltaTime + postToDOMDeltaTime; if (this._actions) { let startVolume = this.GetVolume(); if (isNaN(startVolume)) { this.SetVolume(0); startVolume = 0 } else this.SetVolume(startVolume); this._actions.PlayFromTimeline.call(this._sdkInstance, this._fileArgs, startVolume, this._audioTag, startPlaybackOffset) }
 						} else {
-							const startTime = this._pauseTime; this._pauseTime = NaN; const startVolume = this._GetPauseVolume();
+						const startTime = this._pauseTime; this._pauseTime = NaN; const startVolume = this._GetPauseVolume();
 						this._pauseVolume = NaN; const state = this._sdkInstance.GetAudioContextState(); if (state === "suspended") { this._audioPlaybackStarted = false; return } if (this._actions) { this.SetVolume(startVolume); this._actions.PlayFromTimeline.call(this._sdkInstance, this._fileArgs, startVolume, this._audioTag, startTime) }
 					} break
 				} case "volume": { this._MaybeSetAudioSource(); super.Interpolate(time, start, end, setTime, ensureValue) }
@@ -4586,7 +4586,7 @@ void main(void) {
 				null
 		} MayNeedBeforeAndAfterInterpolate() { return false } TimelineRemoved() { } CleanCaches() { this._worldInfo = null; this._saveState = null; this._target = null } GetSourceAdapter() { return this._sourceAdapter } GetPropertyTrack() { return this._propertyTrack } GetWorldInfo() { if (this._worldInfo) return this._worldInfo; this._worldInfo = this._propertyTrack.GetTrack().GetWorldInfo(); return this._worldInfo } SetFirstAbsoluteUpdate(f) { this._firstAbsoluteUpdate = !!f } GetFirstAbsoluteUpdate() { return this._firstAbsoluteUpdate } SetResetState() { } SetInitialState() { } SetResumeState() { } SetSaveState() {
 			this._saveState =
-			this.GetCurrentState()
+				this.GetCurrentState()
 		} ClearSaveState() { this._saveState = null } GetCurrentState() { } CompareInitialStateWithCurrent() { } CompareSaveStateWithCurrent() { } CanChange(value) { const targetType = typeof this._Getter(); const newType = typeof value; return targetType === newType } BeforeChangeProperty() { } ChangeProperty(time, value, start, end, setTime, ensureValue, endState) { } AfterChangeProperty() { } _FirstKeyframeGetter() {
 			const propertyKeyframeDataItem = this._PickTimelinePlaybackMode(() => {
 				const propertyTrackDataItem = this._propertyTrack.GetPropertyTrackDataItem();
@@ -4660,15 +4660,15 @@ void main(void) {
 	class NoInterpolationAdapter extends C3.PropertyTrackState.PropertyInterpolationAdapter {
 		constructor(sourceAdapter) { super(sourceAdapter) } SetResetState() { } SetInitialState() { } SetResumeState() { } GetCurrentState() { return this._Getter() } CompareInitialStateWithCurrent() { const firstKeyframeValue = this._FirstKeyframeGetter(); return firstKeyframeValue !== this.GetCurrentState() } CompareSaveStateWithCurrent() { if (C3.IsNullOrUndefined(this._saveState)) return false; return this._saveState !== this.GetCurrentState() } MayNeedBeforeAndAfterInterpolate() { return false } ChangeProperty(time,
 			value, start, end, setTime) {
-				const propertyTrack = this._propertyTrack; const track = propertyTrack.GetTrack(); const id = propertyTrack.GetSourceAdapterId(); const timeline = propertyTrack.GetTimeline(); const instance = track.GetInstance(); const sourceAdapter = propertyTrack.GetSourceAdapter(); const property = this._property; const propertyTracks = timeline.GetSimilarPropertyTracks(instance, sourceAdapter, property); if (propertyTracks && propertyTracks.length > 1) {
-					const propertyKeyframeStubs = this._GetPropertyKeyframeStubs(propertyTracks);
-					const t = time + track.GetStartOffset(); const stub = this._GetLastPropertyKeyframeStub(timeline, t, propertyKeyframeStubs); if (stub) value = stub.value
-				} const type = propertyTrack.GetPropertyKeyframeType(); switch (type) {
-					case "numeric": { if (!NS.NumericTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break } case "angle": { if (!NS.AngleTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break } case "boolean": {
-						if (!NS.BooleanTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(),
-							value, id)) return; break
-					} case "color": { if (!NS.ColorTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break } case "text": { if (!NS.TextTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break }
-				}this._Setter(value)
+			const propertyTrack = this._propertyTrack; const track = propertyTrack.GetTrack(); const id = propertyTrack.GetSourceAdapterId(); const timeline = propertyTrack.GetTimeline(); const instance = track.GetInstance(); const sourceAdapter = propertyTrack.GetSourceAdapter(); const property = this._property; const propertyTracks = timeline.GetSimilarPropertyTracks(instance, sourceAdapter, property); if (propertyTracks && propertyTracks.length > 1) {
+				const propertyKeyframeStubs = this._GetPropertyKeyframeStubs(propertyTracks);
+				const t = time + track.GetStartOffset(); const stub = this._GetLastPropertyKeyframeStub(timeline, t, propertyKeyframeStubs); if (stub) value = stub.value
+			} const type = propertyTrack.GetPropertyKeyframeType(); switch (type) {
+				case "numeric": { if (!NS.NumericTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break } case "angle": { if (!NS.AngleTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break } case "boolean": {
+					if (!NS.BooleanTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(),
+						value, id)) return; break
+				} case "color": { if (!NS.ColorTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break } case "text": { if (!NS.TextTypeAdapter.WillChange(this._GetIndex(), this._GetTarget(), value, id)) return; break }
+			}this._Setter(value)
 		} _Getter() {
 			const id = this._propertyTrack.GetSourceAdapterId(); const target = this._GetTarget(); const index = this._GetIndex(); switch (id) {
 				case "behavior": return target.GetPropertyValueByIndex(index); case "effect": return target[index]; case "instance-variable": return target.GetInstanceVariableValue(index);
@@ -4764,7 +4764,7 @@ void main(void) {
 				}
 		} Release() {
 			this._typeAdapter =
-			null; this._instance_getter = null; this._instance_setter = null; this._instance_absolute_setter = null; this._absoluteToFactor = NaN; super.Release()
+				null; this._instance_getter = null; this._instance_setter = null; this._instance_absolute_setter = null; this._absoluteToFactor = NaN; super.Release()
 		} MayNeedBeforeAndAfterInterpolate() { return this._typeAdapter.MayNeedBeforeAndAfterInterpolate() } GetLastValue() { return this._lastValue } SetLastValue(v) { this._lastValue = v } SetResetState() { if (this._reset_action) this._reset_action(this) } SetInitialState() {
 			const initValue = this._typeAdapter.SetInitialState(); if (typeof initValue === "number") this._lastValue = initValue; if (this._init_action) {
 				const wi =
@@ -4783,10 +4783,10 @@ void main(void) {
 			switch (id) { case "behavior": target.OffsetPropertyValueByIndex(index, value); break; case "effect": target[index] += value; break; case "instance-variable": target.SetInstanceVariableOffset(index, value); break; case "plugin": target.OffsetPropertyValueByIndex(index, value, this.GetSourceAdapter().GetOptionalCallbacks()); break; case "world-instance": this._instance_setter(wi, value, track, this); break; case "audio": this._source_adapter_setter.call(this.GetSourceAdapter(), wi, value, track, this); break }
 		} _SetterAbsolute(value,
 			start, end) {
-				const target = this._GetTarget(); const index = this._GetIndex(); const wi = this.GetWorldInfo(); const track = this._propertyTrack.GetTrack(); const id = this._propertyTrack.GetSourceAdapterId(); switch (id) {
-					case "behavior": target.SetPropertyValueByIndex(index, value); break; case "effect": target[index] = value; break; case "instance-variable": target.SetInstanceVariableValue(index, value); break; case "plugin": target.SetPropertyValueByIndex(index, value, this.GetSourceAdapter().GetOptionalCallbacks()); break; case "world-instance": this._instance_absolute_setter(wi,
-						value, track); break; case "audio": this._source_adapter_absolute_setter.call(this.GetSourceAdapter(), wi, value, track); break
-				}
+			const target = this._GetTarget(); const index = this._GetIndex(); const wi = this.GetWorldInfo(); const track = this._propertyTrack.GetTrack(); const id = this._propertyTrack.GetSourceAdapterId(); switch (id) {
+				case "behavior": target.SetPropertyValueByIndex(index, value); break; case "effect": target[index] = value; break; case "instance-variable": target.SetInstanceVariableValue(index, value); break; case "plugin": target.SetPropertyValueByIndex(index, value, this.GetSourceAdapter().GetOptionalCallbacks()); break; case "world-instance": this._instance_absolute_setter(wi,
+					value, track); break; case "audio": this._source_adapter_absolute_setter.call(this.GetSourceAdapter(), wi, value, track); break
+			}
 		} _MaybeEnsureValue(time, start, end, setTime, lastValue, currentValue, forceEndValue, endState) { this._typeAdapter._MaybeEnsureValue(time, start, end, setTime, lastValue, currentValue, forceEndValue, endState) } _AddDelta(value, start, end, forceEndValue, endState) {
 			switch (this._propertyTrack.GetPropertyType()) { case "angle": { value = C3.toDegrees(value); break } default: { value = value; break } }const stringValue =
 				value.toString(); const decimalsString = stringValue.split(".")[1] || ""; const decimalPlaces = decimalsString.length; const v = this._Getter(); let rv; if (decimalPlaces === 0) if (this._round) rv = Math.round(v); else if (this._fRound) switch (this._propertyTrack.GetPropertyType()) { case "angle": { rv = C3.toRadians(Math.round(C3.toDegrees(v))); break } default: { rv = Math.round((v + Number.EPSILON) * 100) / 100; break } } else rv = v; else if (this._round) rv = Number(C3.toFixed(v, decimalPlaces)); else if (this._fRound) rv = v; else rv = v; this._Setter(rv -
@@ -4864,8 +4864,8 @@ void main(void) {
 				this._numericInterpolationAdapter; const inst = adapter.GetWorldInfo().GetInstance(); const runtime = adapter.GetPropertyTrack().GetRuntime(); const timelineManager = runtime.GetTimelineManager(); let activeTimelineCount = 0; for (const timeline of timelineManager.GetPlayingTimelines()) if (timeline.GetType() === 0) { if (timeline.HasTrackInstance(inst)) activeTimelineCount++ } else if (timeline.GetType() === 1) if (timeline.GetInstance() === inst) activeTimelineCount++; return activeTimelineCount <= 1
 		} _MaybeEnsureValue(time, start,
 			end, setTime, lastValue, currentValue, forceEndValue, endState) {
-				const adapter = this._numericInterpolationAdapter; if (setTime) if (start && time === start.GetTime()) adapter._AddDelta(start.GetValueWithResultMode(), start, end, forceEndValue, endState); else if (end && time === end.GetTime()) adapter._AddDelta(end.GetValueWithResultMode(), start, end, forceEndValue, endState); else { if (!end) adapter._AddDelta(start.GetValueWithResultMode(), start, end, forceEndValue, endState) } else if (start && time === start.GetTime()) adapter._AddDelta(start.GetValueWithResultMode(),
-					start, end, forceEndValue, endState); else if (end && time === end.GetTime()) adapter._AddDelta(end.GetValueWithResultMode(), start, end, forceEndValue, endState); else if (currentValue - lastValue === 0) adapter._AddDelta(start.GetValueWithResultMode(), start, end, forceEndValue, endState)
+			const adapter = this._numericInterpolationAdapter; if (setTime) if (start && time === start.GetTime()) adapter._AddDelta(start.GetValueWithResultMode(), start, end, forceEndValue, endState); else if (end && time === end.GetTime()) adapter._AddDelta(end.GetValueWithResultMode(), start, end, forceEndValue, endState); else { if (!end) adapter._AddDelta(start.GetValueWithResultMode(), start, end, forceEndValue, endState) } else if (start && time === start.GetTime()) adapter._AddDelta(start.GetValueWithResultMode(),
+				start, end, forceEndValue, endState); else if (end && time === end.GetTime()) adapter._AddDelta(end.GetValueWithResultMode(), start, end, forceEndValue, endState); else if (currentValue - lastValue === 0) adapter._AddDelta(start.GetValueWithResultMode(), start, end, forceEndValue, endState)
 		}
 	} C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTween = NumericInterpolationAdapterForTween;
 
@@ -4998,7 +4998,7 @@ void main(void) {
 			this._trackData = null
 		} GetTrackData() { if (!this._trackData) this._trackData = new C3.TrackData(null, this); return this._trackData } GetName() { return this._name } SetName(n) { this._name = n } GetTotalTime() { return this._totalTime } SetTotalTime(tt) { this._totalTime = tt } GetStep() { return this._step } SetStep(s) { this._step = s } GetInterpolationMode() { return this._interpolationMode } SetInterpolationMode(im) { this._interpolationMode = im } GetResultMode() { return this._resultMode } SetResultMode(rm) { this._resultMode = rm } GetLoop() { return this._loop } SetLoop(l) {
 			this._loop =
-			l
+				l
 		} GetPingPong() { return this._pingPong } SetPingPong(p) { this._pingPong = p } GetRepeatCount() { return this._repeatCount } SetRepeatCount(rc) { this._repeatCount = rc } GetStartOnLayout() { return this._startOnLayout } GetTransformWithSceneGraph() { return this._transformWithSceneGraph } GetUseSystemTimescale() { return this._useSystemTimescale } _SaveToJson() {
 			return {
 				"trackDataJson": this._trackData._SaveToJson(), "name": this._name, "totalTime": this._totalTime, "step": this._step, "interpolationMode": this._interpolationMode, "resultMode": this._resultMode,
@@ -5028,7 +5028,7 @@ void main(void) {
 				this); return this._propertyTrackData
 		} GetInstanceData() { return this._instanceData } GetObjectClassIndex() { return this._objectClassIndex } SetObjectClassIndex(index) { this._objectClassIndex = index } GetInstanceUID() { return this._instanceUid } SetInstanceUID(uid) { this._instanceUid = uid } GetInterpolationMode() { return this._interpolationMode } SetInterpolationMode(im) { this._interpolationMode = im } GetResultMode() { return this._resultMode } SetResultMode(rm) { this._resultMode = rm } GetEnable() { return this._enabled } SetEnable(e) {
 			this._enabled =
-			!!e
+				!!e
 		} GetId() { return this._id } GetStartOffset() { return this._startOffset } GetLocalTotalTime() { return this._localTotalTime } SetLocalTotalTime(t) { this._localTotalTime = t } GetOriginalWidth() { return this._additionalInstanceData[ORIGINAL_WIDTH] } SetOriginalWidth(w) { if (!this._additionalInstanceData) this._additionalInstanceData = []; this._additionalInstanceData[ORIGINAL_WIDTH] = w } GetOriginalHeight() { if (!this._additionalInstanceData) this._additionalInstanceData = []; return this._additionalInstanceData[ORIGINAL_HEIGHT] } SetOriginalHeight(h) {
 			if (!this._additionalInstanceData) this._additionalInstanceData =
 				[]; this._additionalInstanceData[ORIGINAL_HEIGHT] = h
@@ -5040,7 +5040,7 @@ void main(void) {
 		} _LoadFromJson(o) {
 			if (!o) return; this._instanceData = o["instanceData"]; this._instanceUid = o["instanceUid"]; this._objectClassIndex = o["objectClassIndex"]; this._interpolationMode = o["interpolationMode"]; this._resultMode = o["resultMode"]; this._enabled = o["enabled"]; this._id = o["id"]; this._type = o["type"] ? o["type"] : 0; this._name = o["name"] ? o["name"] : ""; this._localTotalTime = this._trackData.GetTimelineDataItem().GetTotalTime(); if (o["nestedData"]) {
 				this._nestedData =
-				o["nestedData"]; this._startOffset = this._nestedData[START_OFFSET]; this._localTotalTime = this._nestedData[LOCAL_TOTAL_TIME]
+					o["nestedData"]; this._startOffset = this._nestedData[START_OFFSET]; this._localTotalTime = this._nestedData[LOCAL_TOTAL_TIME]
 			} if (o["additionalInstanceData"]) this._additionalInstanceData = o["additionalInstanceData"]; this.GetKeyframeData()._LoadFromJson(o["keyframeDataJson"]); this.GetPropertyTrackData()._LoadFromJson(o["propertyTrackDataJson"])
 		}
 	}
@@ -5074,10 +5074,10 @@ void main(void) {
 					propertyTrackDataJson[CAN_HAVE_PROPERTY_KEYFRAMES]
 		} Release() { this._propertyKeyframeData.Release(); this._propertyKeyframeData = null; this._propertyTrackData = null; this._sourceAdapterArguments = null } GetPropertyTrackData() { return this._propertyTrackData } GetPropertyKeyframeData() { if (!this._propertyKeyframeData) this._propertyKeyframeData = new C3.PropertyKeyframeData(null, this); return this._propertyKeyframeData } GetSourceAdapterId() { return this._sourceAdapterId } SetSourceAdapterId(said) {
 			this._sourceAdapterId =
-			said
+				said
 		} GetSourceAdapterArguments() { return this._sourceAdapterArguments } SetSourceAdapterArguments(sargs) { this._sourceAdapterArguments = sargs } GetProperty() { return this._property } SetProperty(p) { this._property = p } GetType() { return this._type } SetType(t) { this._type = t } GetMin() { return this._min } SetMin(min) { this._min = min } GetMax() { return this._max } SetMax(max) { this._max = max } GetInterpolationMode() { return this._interpolationMode } SetInterpolationMode(im) { this._interpolationMode = im } GetResultMode() { return this._resultMode } SetResultMode(rm) {
 			this._resultMode =
-			rm
+				rm
 		} GetEnable() { return this._enabled } SetEnable(e) { this._enabled = !!e } CanHavePropertyKeyframes() { return !!this._canHavePropertyKeyframes } _SaveToJson() { return { "propertyKeyframeDataJson": this._propertyKeyframeData._SaveToJson(), "sourceAdapterId": this._sourceAdapterId, "sourceAdapterArguments": this._sourceAdapterArguments, "property": this._property, "type": this._type, "min": this._min, "max": this._max, "interpolationMode": this._interpolationMode, "resultMode": this._resultMode, "enabled": this._enabled, "canHavePropertyKeyframes": this._canHavePropertyKeyframes } } _LoadFromJson(o) {
 			if (!o) return;
 			this._sourceAdapterId = o["sourceAdapterId"]; this._sourceAdapterArguments = o["sourceAdapterArguments"]; this._property = o["property"]; this._type = o["type"]; this._min = o["min"]; this._max = o["max"]; this._interpolationMode = o["interpolationMode"]; this._resultMode = o["resultMode"]; this._enabled = o["enabled"]; this._canHavePropertyKeyframes = o["canHavePropertyKeyframes"]; this.GetPropertyKeyframeData()._LoadFromJson(o["propertyKeyframeDataJson"])
@@ -5111,7 +5111,7 @@ void main(void) {
 	class KeyframeDataItem {
 		constructor(keyframeDataJson, keyframeData) { this._keyframeData = keyframeData; this._time = -1; this._ease = "noease"; this._enable = false; this._tags = null; this._lowerTags = null; if (!keyframeDataJson) return; this._time = keyframeDataJson[TIME]; this._ease = keyframeDataJson[EASE]; this._enable = !!keyframeDataJson[ENABLE]; const tagStr = keyframeDataJson[TAGS]; this._tags = tagStr ? tagStr.split(" ") : []; this._lowerTags = new Set(this._tags.map(t => t.toLowerCase())); this._next = null } Release() {
 			this._keyframeData =
-			null; C3.clearArray(this._tags); this._tags = null; this._lowerTags.clear(); this._lowerTags = null; this._next = null
+				null; C3.clearArray(this._tags); this._tags = null; this._lowerTags.clear(); this._lowerTags = null; this._next = null
 		} GetKeyframeData() { return this._keyframeData } GetNext() { return this._next } SetNext(next) { this._next = next } GetTime() { return this._time } SetTime(t) { this._time = t; this._keyframeData._LinkKeyframeDataItems() } GetEase() { return this._ease } SetEase(e) { this._ease = e } GetEnable() { return this._enable } SetEnable(e) { this._enable = !!e } GetTags() { return this._tags } SetTags(t) {
 			this._tags = t ? t.split(" ") : []; this._lowerTags =
 				new Set(this._tags.map(t => t.toLowerCase()))
@@ -5149,7 +5149,7 @@ void main(void) {
 				"color" && C3.IsFiniteNumber(aValue)) { this._aValue[0] = C3.GetRValue(aValue); this._aValue[1] = C3.GetGValue(aValue); this._aValue[2] = C3.GetBValue(aValue) } else this._aValue = aValue
 		} GetValueWithResultMode() { const rm = this._propertyKeyframeData.GetPropertyTrackDataItem().GetResultMode(); if (rm === "relative") return this.GetValue(); else if (rm === "absolute") return this.GetAbsoluteValue() } GetType() { return this._type } SetType(t) { this._type = t } GetTime() { return this._time } SetTime(t) { this._time = t; this._propertyKeyframeData._LinkPropertyKeyframeDataItems() } GetEase() { return this._ease } SetEase(e) {
 			this._ease =
-			e
+				e
 		} GetEnable() { return this._enable } SetEnable(e) { this._enable = !!e } GetPathMode() { return this._pathMode } GetAddOn(id) {
 			if (!this._addonData) return; if (this._addonInstance || this._addonInstance === null) return this._addonInstance; const addonArray = this._addonData.GetAddDataItemArray(); if (!addonArray) { this._addonInstance = null; return this._addonInstance } const len = addonArray.length; for (let i = 0; i < len; i++) { const addon = addonArray[i]; if (addon.GetId() === id) { this._addonInstance = addon; return this._addonInstance } } this._addonInstance =
 				null; return this._addonInstance
@@ -5246,7 +5246,7 @@ void main(void) {
 			const propertyTrackDataItem = propertyTrackState.GetPropertyTrackDataItem(); const propertyKeyframeDataItem = propertyTrackData.GetLastPropertyKeyframeDataItem(propertyTrackDataItem); propertyKeyframeDataItem.SetTime(this.GetTotalTime()); propertyKeyframeDataItem.SetValue(endValue); propertyKeyframeDataItem.SetAbsoluteValue(endValue)
 		} SetId(id) { this._id = id } GetId() { return this._id } SetInitialValueMode(initialValueMode) { this._initialValueMode = initialValueMode } GetInitialValueMode() { return this._initialValueMode } SetDestroyInstanceOnComplete(releaseOnComplete) {
 			this._destroyInstanceOnComplete =
-			releaseOnComplete
+				releaseOnComplete
 		} GetDestroyInstanceOnComplete() { return this._destroyInstanceOnComplete } OnStarted() { if (this._on_started_callbacks) for (const c of this._on_started_callbacks) c(this); if (this.IsComplete()) return; for (const track of this._tracks) track.CompareSaveStateWithCurrent() } OnCompleted() { this._completedTick = this._runtime.GetTickCount() } FinishTriggers() { if (this._finishedTriggers) return; this._finishedTriggers = true; if (this._on_completed_callbacks) for (const c of this._on_completed_callbacks) c(this) } SetTime(time) {
 			this._DeleteIntermediateKeyframes();
 			super.SetTime(time)
@@ -5430,7 +5430,7 @@ void main(void) {
 			else return this._instances
 		} HasAnyElseInstances() { return !!this._elseInstances.length } GetElseInstances() { return this._elseInstances } GetExpressionInstances() { const ret = this.GetInstances(); if (ret.length) return ret; else return this._elseInstances } Reset() { this._selectAll = true; C3.clearArray(this._elseInstances) } Clear() { this._selectAll = true } Copy(sol) { if (sol.IsSelectAll()) this.Reset(); else { this._selectAll = false; C3.shallowAssignArray(this._instances, sol._instances); C3.clearArray(this._elseInstances) } } _PushInstance(inst) { this._instances.push(inst) } _PushElseInstance(inst) { this._elseInstances.push(inst) } _SetSelectAll(s) {
 			this._selectAll =
-			!!s
+				!!s
 		} _GetOwnInstances() { return this._instances } _GetOwnElseInstances() { return this._elseInstances } SetSinglePicked(inst) { this._selectAll = false; C3.clearArray(this._instances); this._instances.push(inst) } SetArrayPicked(arr) { this._selectAll = false; C3.shallowAssignArray(this._instances, arr) } SetSetPicked(set) { this._selectAll = false; C3.clearArray(this._instances); for (const item of set) this._instances.push(item) } AddElseInstances(setOfPicked, arrayOfAllPicked) { for (const inst of arrayOfAllPicked) if (!setOfPicked.has(inst)) this._elseInstances.push(inst) } TransferElseInstancesToOwn(setOfPicked) {
 			for (const inst of setOfPicked) this._instances.push(inst);
 			C3.arrayRemoveAllInSet(this._elseInstances, setOfPicked)
@@ -5463,10 +5463,10 @@ void main(void) {
 			this._cndIndex = 0; this._actIndex = 0; this._lastEventTrue = false; this._elseBranchRan = false; this._dynamicSolModifiers = null
 		} _Restore(currentEvent, actIndex) { this._currentEvent = currentEvent; this._cndIndex = 0; this._actIndex = actIndex } ResetQuick() { this._cndIndex = 0; this._actIndex = 0 } GetCurrentEvent() { return this._currentEvent } SetCurrentEvent(currentEvent) { this._currentEvent = currentEvent } GetConditionIndex() { return this._cndIndex } SetConditionIndex(i) { this._cndIndex = i } GetActionIndex() { return this._actIndex } SetActionIndex(i) {
 			this._actIndex =
-			i
+				i
 		} SetLastEventTrue(t) { this._lastEventTrue = !!t } GetLastEventTrue() { return this._lastEventTrue } SetElseBranchRan(r) { this._elseBranchRan = !!r } GetElseBranchRan() { return this._elseBranchRan } SetExpressionObjectClass(objectClass) { this._expressionObjectClass = objectClass } GetExpressionObjectClass() { return this._expressionObjectClass } InitCallFunctionExpression(returnType, defaultReturnValue) { this._functionReturnType = returnType; this._functionReturnValue = defaultReturnValue } GetFunctionReturnType() { return this._functionReturnType } SetFunctionReturnValue(v) {
 			this._functionReturnValue =
-			v
+				v
 		} GetFunctionReturnValue() { return this._functionReturnValue } IsSolModifierAfterCnds() { const currentEvent = this._currentEvent; if (currentEvent.IsSolWriterAfterCnds()) return true; if (this._cndIndex < currentEvent.GetConditionCount() - 1) return !!currentEvent.GetSolModifiers().length; return false } SetDynamicSolModifiers(solModifiers) { this._dynamicSolModifiers = solModifiers } GetDynamicSolModifiers() { return this._dynamicSolModifiers }
 	};
 
@@ -5573,7 +5573,7 @@ void main(void) {
 				null; const ret = new Promise(r => resolve = r); this._queuedDebugTriggers.push([method, inst, behaviorType, resolve]); return ret
 		} *_RunQueuedDebugTriggersGen() { if (this._runtime.HitBreakpoint()) throw new Error("should not be in breakpoint"); const layoutManager = this._runtime.GetLayoutManager(); while (this._queuedDebugTriggers.length) { const [method, inst, behaviorType, resolve] = this._queuedDebugTriggers.shift(); const ret = yield* this._DebugTrigger(layoutManager, method, inst, behaviorType); resolve(ret) } } async RunQueuedDebugTriggersAsync() { for (const breakEventObject of this._RunQueuedDebugTriggersGen()) await this._runtime.DebugBreak(breakEventObject) } _FastTrigger(layoutManager,
 			method, inst, value) {
-				let ret = false; const layout = layoutManager.GetMainRunningLayout(); const eventSheet = layout.GetEventSheet(); if (!eventSheet) return; this._executingTriggerDepth++; this._runtime.PushCurrentLayout(layout); const deepIncludes = eventSheet.deepIncludes(); for (let i = 0, len = deepIncludes.length; i < len; ++i) { const result = deepIncludes[i]._FastTrigger(method, inst, value); ret = ret || result } const result2 = eventSheet._FastTrigger(method, inst, value); ret = ret || result2; this._runtime.PopCurrentLayout(); this._executingTriggerDepth--;
+			let ret = false; const layout = layoutManager.GetMainRunningLayout(); const eventSheet = layout.GetEventSheet(); if (!eventSheet) return; this._executingTriggerDepth++; this._runtime.PushCurrentLayout(layout); const deepIncludes = eventSheet.deepIncludes(); for (let i = 0, len = deepIncludes.length; i < len; ++i) { const result = deepIncludes[i]._FastTrigger(method, inst, value); ret = ret || result } const result2 = eventSheet._FastTrigger(method, inst, value); ret = ret || result2; this._runtime.PopCurrentLayout(); this._executingTriggerDepth--;
 			return ret
 		} *_DebugFastTrigger(layoutManager, method, inst, value) {
 			let ret = false; const layout = layoutManager.GetMainRunningLayout(); const eventSheet = layout.GetEventSheet(); if (!eventSheet) return; this._executingTriggerDepth++; this._runtime.PushCurrentLayout(layout); const deepIncludes = eventSheet.deepIncludes(); for (let i = 0, len = deepIncludes.length; i < len; ++i) { const result = yield* deepIncludes[i]._DebugFastTrigger(method, inst, value); ret = ret || result } const result2 = yield* eventSheet._DebugFastTrigger(method, inst, value);
@@ -5643,7 +5643,7 @@ void main(void) {
 				} else {
 					let ocInfo = this._triggers.get(objectClass); if (!ocInfo) { ocInfo = { methodMap: new Map, behaviors: new Map }; this._triggers.set(objectClass, ocInfo) } const behaviorType = cnd.GetBehaviorType(); let methodMap; if (behaviorType) {
 						methodMap =
-						ocInfo.behaviors.get(behaviorType); if (!methodMap) { methodMap = new Map; ocInfo.behaviors.set(behaviorType, methodMap) }
+							ocInfo.behaviors.get(behaviorType); if (!methodMap) { methodMap = new Map; ocInfo.behaviors.set(behaviorType, methodMap) }
 					} else methodMap = ocInfo.methodMap; let triggerArr = methodMap.get(func); if (!triggerArr) { triggerArr = []; methodMap.set(func, triggerArr) } triggerArr.push([eventBlock, i])
 				}
 			} _PostInit() { const events = this._events; for (let i = 0, len = events.length; i < len; ++i) { const hasElseBlock = i < len - 1 && events[i + 1] instanceof C3.EventBlock && events[i + 1].IsElseBlock(); events[i]._PostInit(hasElseBlock) } } _AddShallowInclude(include) { this._shallowIncludes.push(include) } _UpdateDeepIncludes() {
@@ -5693,7 +5693,7 @@ void main(void) {
 					const isRecursive = triggerDepth > 1; if (isRecursive) eventSheetManager.GetLocalVarStack().Push(); const frame = eventStack.Push(trigger); if (inst) { const objectClass = trigger.GetConditions()[index].GetObjectClass(); const sol = objectClass.GetCurrentSol(); sol.SetSinglePicked(inst); if (inst.IsInContainer()) inst.SetSiblingsSinglePicked() } let okToRun = true; if (trigger.GetParent()) {
 						const parents = trigger.GetTriggerParents(); for (let i = 0, len = parents.length; i < len; ++i)if (!(yield* parents[i].DebugRunPreTrigger(frame))) {
 							okToRun =
-							false; break
+								false; break
 						}
 					} if (okToRun) { if (trigger.IsOrBlock()) yield* trigger.DebugRunOrBlockTrigger(frame, index); else yield* trigger.DebugRun(frame); ret = frame.GetLastEventTrue() } eventStack.Pop(); if (isRecursive) eventSheetManager.GetLocalVarStack().Pop(); eventSheetManager.PopSol(trigger.GetSolModifiersIncludingParents()); if (currentEvent) eventSheetManager.PopSol(currentEvent.GetSolModifiersIncludingParents()); if (!currentEvent && triggerDepth === 1) { eventSheetManager.ClearAsyncActionPromises(); if (!eventSheetManager.IsFlushingBlocked()) runtime.FlushPendingInstances() } return ret
 				} _GetPerfRecord() { return this._perfRecord }
@@ -5743,13 +5743,13 @@ void main(void) {
 				}
 			} _IdentifyTriggerParents() { if (!this.HasAnyTriggeredCondition()) return; this._triggerParents = []; let p = this.GetParent(); while (p) { this._triggerParents.push(p); p = p.GetParent() } this._triggerParents.reverse() } SetSolWriterAfterCnds() {
 				this._isSolWriterAfterCnds =
-				true; if (this._parent) this._parent.SetSolWriterAfterCnds()
+					true; if (this._parent) this._parent.SetSolWriterAfterCnds()
 			} IsSolWriterAfterCnds() { return this._isSolWriterAfterCnds } GetSolModifiers() { return this._solModifiers } GetSolModifiersIncludingParents() { if (!this._hasGotSolModifiersIncludingParents) { this._hasGotSolModifiersIncludingParents = true; this._IdentifySolModifiersIncludingParents() } return this._solModifiersIncludingParents } HasSolModifier(objectClass) { return this._solModifiers.includes(objectClass) } GetTriggerParents() { return this._triggerParents } GetEventSheet() { return this._eventSheet } GetEventSheetManager() { return this._eventSheet.GetEventSheetManager() } GetRuntime() { return this._runtime } GetParent() { return this._parent } _SetScopeParent(p) {
 				this._scopeParent =
-				p
+					p
 			} GetScopeParent() { return this._scopeParent || this._parent } GetDisplayNumber() { return this._displayNumber } IsDebugBreakable() { return this._debugData && this._debugData.isBreakable } IsDebugBreakpoint() { return this.IsDebugBreakable() && this._debugData.isBreakpoint } _SetDebugBreakpoint(b) { this._debugData.isBreakpoint = !!b; this._UpdateCanRunFastRecursive() } IsGroup() { return this._isGroup } IsTopLevelGroup() { return this._isTopLevelGroup } IsElseBlock() { return this._isElseBlock } HasElseBlock() { return this._hasElseBlock } GetGroupName() { return this._groupName } IsGroupActive() { return this._isGroupActive } ResetInitialActivation() { this.SetGroupActive(this._isInitiallyActive) } SetGroupActive(a) {
 				a =
-				!!a; if (!this._isGroup) throw new Error("not a group"); if (this._isGroupActive === a) return; this._isGroupActive = a; for (const include of this._containedIncludes) include.UpdateActive(); if (this._containedIncludes.length) { const currentLayout = this._runtime.GetCurrentLayout(); const mainEventSheet = currentLayout.GetEventSheet(); if (mainEventSheet) mainEventSheet._UpdateDeepIncludes() }
+					!!a; if (!this._isGroup) throw new Error("not a group"); if (this._isGroupActive === a) return; this._isGroupActive = a; for (const include of this._containedIncludes) include.UpdateActive(); if (this._containedIncludes.length) { const currentLayout = this._runtime.GetCurrentLayout(); const mainEventSheet = currentLayout.GetEventSheet(); if (mainEventSheet) mainEventSheet._UpdateDeepIncludes() }
 			} GetSID() { return this._sid } IsOrBlock() { return this._isOrBlock } IsTrigger() { return this._conditions.length && this._conditions[0].IsTrigger() } IsForFunctionBlock() {
 				return this._scopeParent &&
 					this._scopeParent instanceof C3.FunctionBlock
@@ -5850,12 +5850,12 @@ void main(void) {
 				this._scopeParent.SetFunctionParameters(paramResults); if (hasAnySolModifiers) if (isCopyPicked) eventSheetManager.PushCopySol(solModifiers); else eventSheetManager.PushCleanSol(solModifiers); const frame = eventStack.Push(this); if (this._CheckParentsOKToRun(frame)) { frame.SetCurrentEvent(this); this._RunAndBlock(frame) } eventStack.Pop(); if (isRecursive) eventSheetManager.GetLocalVarStack().Pop(); if (hasAnySolModifiers) eventSheetManager.PopSol(solModifiers); eventSheetManager._DecTriggerDepth()
 			} *DebugRunAsMappedFunctionCall(paramResults,
 				isCopyPicked) {
-					if (this.IsDebugBreakpoint() || this._runtime.DebugBreakNext()) yield this; const solModifiers = this.GetSolModifiersIncludingParents(); const hasAnySolModifiers = solModifiers.length > 0; const runtime = this._runtime; const eventStack = this._eventStack; const eventSheetManager = runtime.GetEventSheetManager(); const triggerDepth = eventSheetManager._IncTriggerDepth(); const isRecursive = triggerDepth > 1; if (isRecursive) eventSheetManager.GetLocalVarStack().Push(); this._scopeParent.SetFunctionParameters(paramResults);
+			if (this.IsDebugBreakpoint() || this._runtime.DebugBreakNext()) yield this; const solModifiers = this.GetSolModifiersIncludingParents(); const hasAnySolModifiers = solModifiers.length > 0; const runtime = this._runtime; const eventStack = this._eventStack; const eventSheetManager = runtime.GetEventSheetManager(); const triggerDepth = eventSheetManager._IncTriggerDepth(); const isRecursive = triggerDepth > 1; if (isRecursive) eventSheetManager.GetLocalVarStack().Push(); this._scopeParent.SetFunctionParameters(paramResults);
 			if (hasAnySolModifiers) if (isCopyPicked) eventSheetManager.PushCopySol(solModifiers); else eventSheetManager.PushCleanSol(solModifiers); const frame = eventStack.Push(this); if (yield* this._DebugCheckParentsOKToRun(frame)) { frame.SetCurrentEvent(this); yield* this._DebugRunAndBlock(frame) } eventStack.Pop(); if (isRecursive) eventSheetManager.GetLocalVarStack().Pop(); if (hasAnySolModifiers) eventSheetManager.PopSol(solModifiers); eventSheetManager._DecTriggerDepth()
 		} RunAsExpressionFunctionCall(combinedSolModifiers, isCopyPicked,
 			returnType, defaultReturnValue, ...paramResults) {
-				let ret; let asyncId; const hasAnySolModifiers = combinedSolModifiers.length > 0; const runtime = this._runtime; const eventStack = this._eventStack; const eventSheetManager = runtime.GetEventSheetManager(); const triggerDepth = eventSheetManager._IncTriggerDepth(); const isRecursive = triggerDepth > 1; if (isRecursive) eventSheetManager.GetLocalVarStack().Push(); if (paramResults.length > 0) this._scopeParent.SetFunctionParameters(paramResults); if (hasAnySolModifiers) if (isCopyPicked) eventSheetManager.PushCopySol(combinedSolModifiers);
-				else eventSheetManager.PushCleanSol(combinedSolModifiers); const frame = eventStack.Push(this); frame.InitCallFunctionExpression(returnType, defaultReturnValue); eventStack.PushExpFunc(frame); runtime.SetDebuggingEnabled(false); if (this._CheckParentsOKToRun(frame)) { frame.SetCurrentEvent(this); const isAsync = this._scopeParent.IsAsync(); if (isAsync) [asyncId, ret] = this._scopeParent.StartAsyncFunctionCall(); this._RunAndBlock(frame); if (isAsync) this._scopeParent.MaybeFinishAsyncFunctionCall(asyncId) } runtime.SetDebuggingEnabled(true);
+			let ret; let asyncId; const hasAnySolModifiers = combinedSolModifiers.length > 0; const runtime = this._runtime; const eventStack = this._eventStack; const eventSheetManager = runtime.GetEventSheetManager(); const triggerDepth = eventSheetManager._IncTriggerDepth(); const isRecursive = triggerDepth > 1; if (isRecursive) eventSheetManager.GetLocalVarStack().Push(); if (paramResults.length > 0) this._scopeParent.SetFunctionParameters(paramResults); if (hasAnySolModifiers) if (isCopyPicked) eventSheetManager.PushCopySol(combinedSolModifiers);
+			else eventSheetManager.PushCleanSol(combinedSolModifiers); const frame = eventStack.Push(this); frame.InitCallFunctionExpression(returnType, defaultReturnValue); eventStack.PushExpFunc(frame); runtime.SetDebuggingEnabled(false); if (this._CheckParentsOKToRun(frame)) { frame.SetCurrentEvent(this); const isAsync = this._scopeParent.IsAsync(); if (isAsync) [asyncId, ret] = this._scopeParent.StartAsyncFunctionCall(); this._RunAndBlock(frame); if (isAsync) this._scopeParent.MaybeFinishAsyncFunctionCall(asyncId) } runtime.SetDebuggingEnabled(true);
 			eventStack.Pop(); eventStack.PopExpFunc(); if (isRecursive) eventSheetManager.GetLocalVarStack().Pop(); if (hasAnySolModifiers) eventSheetManager.PopSol(combinedSolModifiers); eventSheetManager._DecTriggerDepth(); return ret || frame.GetFunctionReturnValue()
 		}
 	};
@@ -6047,10 +6047,10 @@ void main(void) {
 	class InstVarParameter extends C3.Parameter {
 		constructor(owner, type, index, data) { super(owner, type, index); this._instVarIndex = data[1]; const ownerObjectClass = this._owner.GetObjectClass(); if (this._owner instanceof C3.Condition && this._owner.IsStatic()) { this.Get = this.GetInstanceVariable; this._isConstant = true } else if (ownerObjectClass && ownerObjectClass.IsFamily()) { this.Get = this.GetFamilyInstanceVariable; this.SetVariesPerInstance() } else { this.Get = this.GetInstanceVariable; this._isConstant = true } } GetInstanceVariable() { return this._instVarIndex } GetFamilyInstanceVariable(solIndex) {
 			solIndex =
-			solIndex || 0; const familyType = this._owner.GetObjectClass(); const sol = familyType.GetCurrentSol(); const instances = sol.GetInstances(); let realType = null; if (instances.length) realType = instances[solIndex % instances.length].GetObjectClass(); else if (sol.HasAnyElseInstances()) { const elseInstances = sol.GetElseInstances(); realType = elseInstances[solIndex % elseInstances.length].GetObjectClass() } else if (familyType.GetInstanceCount() > 0) {
-				const familyInstances = familyType.GetInstances(); realType = familyInstances[solIndex %
-					familyInstances.length].GetObjectClass()
-			} else return 0; return this._instVarIndex + realType.GetFamilyInstanceVariableOffset(familyType.GetFamilyIndex())
+				solIndex || 0; const familyType = this._owner.GetObjectClass(); const sol = familyType.GetCurrentSol(); const instances = sol.GetInstances(); let realType = null; if (instances.length) realType = instances[solIndex % instances.length].GetObjectClass(); else if (sol.HasAnyElseInstances()) { const elseInstances = sol.GetElseInstances(); realType = elseInstances[solIndex % elseInstances.length].GetObjectClass() } else if (familyType.GetInstanceCount() > 0) {
+					const familyInstances = familyType.GetInstances(); realType = familyInstances[solIndex %
+						familyInstances.length].GetObjectClass()
+				} else return 0; return this._instVarIndex + realType.GetFamilyInstanceVariableOffset(familyType.GetFamilyIndex())
 		}
 	}
 	class EventVarParameter extends C3.Parameter { constructor(owner, type, index, data) { super(owner, type, index); this._eventVarSid = data[1]; this._eventVar = null; this.Get = this.GetEventVariable; this._isConstant = true } _PostInit() { this._eventVar = this.GetRuntime().GetEventSheetManager().GetEventVariableBySID(this._eventVarSid) } GetEventVariable() { return this._eventVar } }
@@ -6081,24 +6081,24 @@ void main(void) {
 			index) { return C3.New(C3.Condition, eventBlock, data, index) } _PostInit() {
 				for (const param of this._parameters) { param._PostInit(); if (param.VariesPerInstance()) this._anyParamVariesPerInstance = true } if (this._isFastTrigger) { this.Run = this._RunFastTrigger; this.DebugRun = this._DebugRunFastTrigger } else if (this._systemPlugin) { this._SetSystemRunMethod(); this.DebugRun = this._DebugRunSystem } else if (this._objectClass.GetPlugin().IsSingleGlobal()) { this._SetSingleGlobalRunMethod(); this.DebugRun = this._DebugRunSingleGlobal } else if (this._isStatic) {
 					this.Run =
-					this._RunStatic; this.DebugRun = this._DebugRunStatic
+						this._RunStatic; this.DebugRun = this._DebugRunStatic
 				} else { this.Run = this._RunObject; this.DebugRun = this._DebugRunObject }
 			} _SetSystemRunMethod() { const plugin = this._systemPlugin; const bindThis = this._systemPlugin; this._SetRunMethodForBoundFunc(plugin, bindThis, this._RunSystem) } _SetSingleGlobalRunMethod() { const plugin = this._objectClass.GetPlugin(); const bindThis = this._objectClass.GetSingleGlobalInstance().GetSdkInstance(); this._SetRunMethodForBoundFunc(plugin, bindThis, this._RunSingleGlobal) } _SetRunMethodForBoundFunc(plugin,
 				bindThis, fallbackMethod) {
-					const func = this._func; const isInverted = this._isInverted; const parameters = this._parameters; if (parameters.length === 0) { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); if (isInverted) this.Run = function RunSingleCnd_0param() { return C3.xor(boundFunc(), isInverted) }; else this.Run = boundFunc } else if (parameters.length === 1) {
-						const param0 = parameters[0]; if (!isInverted && param0.IsConstant()) this.Run = plugin._GetBoundACEMethod_1param(func, bindThis, param0.Get(0)); else {
-							const boundFunc =
-								plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleCnd_1param() { return C3.xor(boundFunc(param0.Get(0)), isInverted) }
-						}
-					} else if (parameters.length === 2) {
-						const param0 = parameters[0]; const param1 = parameters[1]; if (!isInverted && param0.IsConstant() && param1.IsConstant()) this.Run = plugin._GetBoundACEMethod_2params(func, bindThis, param0.Get(0), param1.Get(0)); else {
-							const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleCnd_2params() {
-								return C3.xor(boundFunc(param0.Get(0),
-									param1.Get(0)), isInverted)
-							}
-						}
-					} else if (parameters.length === 3) { const param0 = parameters[0]; const param1 = parameters[1]; const param2 = parameters[2]; if (!isInverted && param0.IsConstant() && param1.IsConstant() && param2.IsConstant()) this.Run = plugin._GetBoundACEMethod_3params(func, bindThis, param0.Get(0), param1.Get(0), param2.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleCnd_3params() { return C3.xor(boundFunc(param0.Get(0), param1.Get(0), param2.Get(0)), isInverted) } } } else this.Run =
-						fallbackMethod
+			const func = this._func; const isInverted = this._isInverted; const parameters = this._parameters; if (parameters.length === 0) { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); if (isInverted) this.Run = function RunSingleCnd_0param() { return C3.xor(boundFunc(), isInverted) }; else this.Run = boundFunc } else if (parameters.length === 1) {
+				const param0 = parameters[0]; if (!isInverted && param0.IsConstant()) this.Run = plugin._GetBoundACEMethod_1param(func, bindThis, param0.Get(0)); else {
+					const boundFunc =
+						plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleCnd_1param() { return C3.xor(boundFunc(param0.Get(0)), isInverted) }
+				}
+			} else if (parameters.length === 2) {
+				const param0 = parameters[0]; const param1 = parameters[1]; if (!isInverted && param0.IsConstant() && param1.IsConstant()) this.Run = plugin._GetBoundACEMethod_2params(func, bindThis, param0.Get(0), param1.Get(0)); else {
+					const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleCnd_2params() {
+						return C3.xor(boundFunc(param0.Get(0),
+							param1.Get(0)), isInverted)
+					}
+				}
+			} else if (parameters.length === 3) { const param0 = parameters[0]; const param1 = parameters[1]; const param2 = parameters[2]; if (!isInverted && param0.IsConstant() && param1.IsConstant() && param2.IsConstant()) this.Run = plugin._GetBoundACEMethod_3params(func, bindThis, param0.Get(0), param1.Get(0), param2.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleCnd_3params() { return C3.xor(boundFunc(param0.Get(0), param1.Get(0), param2.Get(0)), isInverted) } } } else this.Run =
+				fallbackMethod
 		} GetSID() { return this._sid } _GetFunc() { return this._func } GetObjectClass() { return this._objectClass } GetBehaviorType() { return this._behaviorType } GetEventBlock() { return this._eventBlock } GetRuntime() { return this._runtime } GetIndex() { return this._index } GetDebugIndex() { return this.GetIndex() } IsTrigger() { return this._isTrigger } IsFastTrigger() { return this._isFastTrigger } IsInverted() { return this._isInverted } IsLooping() { return this._isLooping } IsStatic() { return this._isStatic } IsBreakpoint() { return this._debugData.isBreakpoint } IsSystemCondition() { return !!this._systemPlugin } GetFirstObjectParameterObjectClass() {
 			for (const p of this._parameters) if (p.IsObjectParameter()) return p.GetObjectClass();
 			return null
@@ -6131,12 +6131,12 @@ void main(void) {
 			const objectClass = this._objectClass; const isFamily = objectClass.IsFamily(); const familyIndex = objectClass.GetFamilyIndex(); const isInContainer = objectClass.IsInContainer(); const behaviorIndex = this._behaviorIndex;
 			const isBehavior = behaviorIndex >= 0; const paramsVary = this._anyParamVariesPerInstance; const results = this._results; const func = this._func; const isInverted = this._isInverted; const isInOrBlock = this._isInOrBlock && !this._isTrigger; const solInstances = sol._GetOwnInstances(); const solElseInstances = sol._GetOwnElseInstances(); const isUsingElseInstances = isInOrBlock && !this._eventBlock.IsFirstConditionOfType(this); const arr = isUsingElseInstances ? solElseInstances : solInstances; let k = 0; let isAnyTrue = false; for (let i = 0,
 				len = arr.length; i < len; ++i) {
-					const inst = arr[i]; if (paramsVary) this._EvaluateVaryingParameters(i); let ret; if (isBehavior) { const offset = isFamily ? inst.GetObjectClass().GetFamilyBehaviorOffset(familyIndex) : 0; ret = func.apply(inst.GetBehaviorInstances()[behaviorIndex + offset].GetSdkInstance(), results) } else ret = func.apply(inst.GetSdkInstance(), results); if (C3.xor(ret, isInverted)) {
-						isAnyTrue = true; if (isUsingElseInstances) { solInstances.push(inst); if (isInContainer) inst._PushSiblingsToSolInstances() } else {
-							arr[k] = inst;
-							if (isInContainer) inst._SetSiblingsToSolInstancesIndex(k); ++k
-						}
-					} else if (isUsingElseInstances) { arr[k] = inst; if (isInContainer) inst._SetSiblingsToSolElseInstancesIndex(k); ++k } else if (isInOrBlock) { solElseInstances.push(inst); if (isInContainer) inst._PushSiblingsToSolElseInstances() }
+				const inst = arr[i]; if (paramsVary) this._EvaluateVaryingParameters(i); let ret; if (isBehavior) { const offset = isFamily ? inst.GetObjectClass().GetFamilyBehaviorOffset(familyIndex) : 0; ret = func.apply(inst.GetBehaviorInstances()[behaviorIndex + offset].GetSdkInstance(), results) } else ret = func.apply(inst.GetSdkInstance(), results); if (C3.xor(ret, isInverted)) {
+					isAnyTrue = true; if (isUsingElseInstances) { solInstances.push(inst); if (isInContainer) inst._PushSiblingsToSolInstances() } else {
+						arr[k] = inst;
+						if (isInContainer) inst._SetSiblingsToSolInstancesIndex(k); ++k
+					}
+				} else if (isUsingElseInstances) { arr[k] = inst; if (isInContainer) inst._SetSiblingsToSolElseInstancesIndex(k); ++k } else if (isInOrBlock) { solElseInstances.push(inst); if (isInContainer) inst._PushSiblingsToSolElseInstances() }
 			} C3.truncateArray(arr, k); if (isInContainer) objectClass._TruncateContainerSols(isUsingElseInstances, k); const pickInFinish = isAnyTrue; if (isUsingElseInstances && !isAnyTrue) isAnyTrue = this._OrBlockCheckInstances(solInstances); objectClass.FinishCondition(pickInFinish ||
 				isInOrBlock); return isInOrBlock ? isAnyTrue : sol.HasAnyInstances()
 		} _OrBlockCheckInstances(solInstances) {
@@ -6177,10 +6177,10 @@ void main(void) {
 						this._func; const localVars = this._runtime.GetEventSheetManager()._GetLocalVariablesScriptInterface(this._eventBlock); this._func = userMethod.bind(null, this._runtime.GetIRuntime(), localVars)
 				} else if (this._behaviorType) if (this.IsAsync()) { this.Run = this._RunBehavior_Async; this.DebugRun = this._DebugRunBehavior_Async } else { this.Run = this._RunBehavior; this.DebugRun = this._DebugRunBehavior } else if (this._objectClass.GetPlugin().IsSingleGlobal()) { this._SetSingleGlobalRunMethod(); this.DebugRun = this._DebugRunSingleGlobal } else if (this.IsAsync()) {
 					this.Run =
-					this._RunObject_Async; this.DebugRun = this._DebugRunObject_Async
+						this._RunObject_Async; this.DebugRun = this._DebugRunObject_Async
 				} else if (this.CallBeforeAfterHooks()) { this.Run = this._RunObject_BeforeAfterHooks; this.DebugRun = this._DebugRunObject_BeforeAfterHooks } else if (!this._parameters.length) { this.Run = this._RunObject_ParamsConst; this.DebugRun = this._DebugRunObject_ParamsConst } else if (this._parameters.every(p => p.VariesPerInstance())) { this.Run = this._RunObject_AllParamsVary; this.DebugRun = this._DebugRunObject_AllParamsVary } else if (this._anyParamVariesPerInstance) {
 					this.Run =
-					this._RunObject_SomeParamsVary; this.DebugRun = this._DebugRunObject_SomeParamsVary
+						this._RunObject_SomeParamsVary; this.DebugRun = this._DebugRunObject_SomeParamsVary
 				} else if (this._parameters.every(p => p.IsConstant())) { EvalParams(this._parameters, this._results); this.Run = this._RunObject_ParamsConst; this.DebugRun = this._DebugRunObject_ParamsConst } else { this.Run = this._RunObject_ParamsDontVary; this.DebugRun = this._DebugRunObject_ParamsDontVary }
 			} _SetSystemRunMethod() { const plugin = this._systemPlugin; const bindThis = this._systemPlugin; this._SetRunMethodForBoundFunc(plugin, bindThis, this._RunSystem) } _SetSingleGlobalRunMethod() {
 				const plugin =
@@ -6207,13 +6207,13 @@ void main(void) {
 					} else { this.Run = noop; this.DebugRun = noopGenerator }
 			} _SetRunMethodForBoundFunc(plugin,
 				bindThis, fallbackMethod) {
-					const func = this._func; const parameters = this._parameters; if (parameters.length === 0) this.Run = plugin._GetBoundACEMethod(func, bindThis); else if (parameters.length === 1) { const param0 = parameters[0]; if (param0.IsConstant()) this.Run = plugin._GetBoundACEMethod_1param(func, bindThis, param0.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleAct_1param() { return boundFunc(param0.Get(0)) } } } else if (parameters.length === 2) {
-						const param0 = parameters[0];
-						const param1 = parameters[1]; if (param0.IsConstant() && param1.IsConstant()) this.Run = plugin._GetBoundACEMethod_2params(func, bindThis, param0.Get(0), param1.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleAct_2params() { return boundFunc(param0.Get(0), param1.Get(0)) } }
-					} else if (parameters.length === 3) {
-						const param0 = parameters[0]; const param1 = parameters[1]; const param2 = parameters[2]; if (param0.IsConstant() && param1.IsConstant() && param2.IsConstant()) this.Run = plugin._GetBoundACEMethod_3params(func,
-							bindThis, param0.Get(0), param1.Get(0), param2.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleAct_3params() { return boundFunc(param0.Get(0), param1.Get(0), param2.Get(0)) } }
-					} else this.Run = fallbackMethod
+			const func = this._func; const parameters = this._parameters; if (parameters.length === 0) this.Run = plugin._GetBoundACEMethod(func, bindThis); else if (parameters.length === 1) { const param0 = parameters[0]; if (param0.IsConstant()) this.Run = plugin._GetBoundACEMethod_1param(func, bindThis, param0.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleAct_1param() { return boundFunc(param0.Get(0)) } } } else if (parameters.length === 2) {
+				const param0 = parameters[0];
+				const param1 = parameters[1]; if (param0.IsConstant() && param1.IsConstant()) this.Run = plugin._GetBoundACEMethod_2params(func, bindThis, param0.Get(0), param1.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleAct_2params() { return boundFunc(param0.Get(0), param1.Get(0)) } }
+			} else if (parameters.length === 3) {
+				const param0 = parameters[0]; const param1 = parameters[1]; const param2 = parameters[2]; if (param0.IsConstant() && param1.IsConstant() && param2.IsConstant()) this.Run = plugin._GetBoundACEMethod_3params(func,
+					bindThis, param0.Get(0), param1.Get(0), param2.Get(0)); else { const boundFunc = plugin._GetBoundACEMethod(func, bindThis); this.Run = function RunSingleAct_3params() { return boundFunc(param0.Get(0), param1.Get(0), param2.Get(0)) } }
+			} else this.Run = fallbackMethod
 		} GetSID() { return this._sid } IsAsync() { return this._actionType === 1 } CanBailOut() { return this._actionType === 2 } CallBeforeAfterHooks() { return this._actionType === 3 } CanPickAnyObjectClass() { return (this._flags & FLAG_CANPICKANYOBJECTCLASS) !== 0 } HasReturnType() {
 			return this.IsAsync() ||
 				this.CanBailOut()
@@ -6385,11 +6385,11 @@ void main(void) {
 			const linst = linstances[l]; if (rsol.IsSelectAll()) { collisionEngine.GetCollisionCandidates(linst.GetWorldInfo().GetLayer(), rtype, linst.GetWorldInfo().GetBoundingBox(), tempCandidates1); rinstances = tempCandidates1; collisionEngine.AddRegisteredCollisionCandidates(linst, rtype, rinstances) } else rinstances = rsol.GetInstances(); for (let r = 0; r < rinstances.length; ++r) {
 				const rinst = rinstances[r]; if (collisionEngine.TestOverlap(linst,
 					rinst) || collisionEngine.CheckRegisteredCollision(linst, rinst)) {
-						const entry = CollMemory_Get(collMemory, linst, rinst); let entryExists = false; let lastCollTickCount = -2; if (typeof entry === "number") { entryExists = true; lastCollTickCount = entry } const shouldRun = !entryExists || lastCollTickCount < lastTickCount; CollMemory_Add(collMemory, linst, rinst, tickCount); if (shouldRun) {
-							const solModifiers = currentEvent.GetSolModifiers(); eventSheetManager.PushCopySol(solModifiers); const curlsol = ltype.GetCurrentSol(); const currsol = rtype.GetCurrentSol();
-							curlsol._SetSelectAll(false); currsol._SetSelectAll(false); if (ltype === rtype) { const solInstances = curlsol._GetOwnInstances(); C3.clearArray(solInstances); solInstances.push(linst); solInstances.push(rinst); ltype.ApplySolToContainer() } else { const lsolInstances = curlsol._GetOwnInstances(); const rsolInstances = currsol._GetOwnInstances(); C3.clearArray(lsolInstances); C3.clearArray(rsolInstances); lsolInstances.push(linst); rsolInstances.push(rinst); ltype.ApplySolToContainer(); rtype.ApplySolToContainer() } yield* currentEvent.DebugRetrigger(oldFrame,
-								newFrame); eventSheetManager.PopSol(solModifiers)
-						}
+					const entry = CollMemory_Get(collMemory, linst, rinst); let entryExists = false; let lastCollTickCount = -2; if (typeof entry === "number") { entryExists = true; lastCollTickCount = entry } const shouldRun = !entryExists || lastCollTickCount < lastTickCount; CollMemory_Add(collMemory, linst, rinst, tickCount); if (shouldRun) {
+						const solModifiers = currentEvent.GetSolModifiers(); eventSheetManager.PushCopySol(solModifiers); const curlsol = ltype.GetCurrentSol(); const currsol = rtype.GetCurrentSol();
+						curlsol._SetSelectAll(false); currsol._SetSelectAll(false); if (ltype === rtype) { const solInstances = curlsol._GetOwnInstances(); C3.clearArray(solInstances); solInstances.push(linst); solInstances.push(rinst); ltype.ApplySolToContainer() } else { const lsolInstances = curlsol._GetOwnInstances(); const rsolInstances = currsol._GetOwnInstances(); C3.clearArray(lsolInstances); C3.clearArray(rsolInstances); lsolInstances.push(linst); rsolInstances.push(rinst); ltype.ApplySolToContainer(); rtype.ApplySolToContainer() } yield* currentEvent.DebugRetrigger(oldFrame,
+							newFrame); eventSheetManager.PopSol(solModifiers)
+					}
 				} else CollMemory_Remove(collMemory, linst, rinst)
 			} C3.clearArray(tempCandidates1)
 		} eventStack.Pop(); return false
@@ -6448,7 +6448,7 @@ void main(void) {
 		const isSingleGlobal = pluginData[1]; const hasPositionACEs = pluginData[3]; const hasSizeACEs = pluginData[4]; const hasAngleACEs = pluginData[5]; const hasAppearanceACEs = pluginData[6]; const hasZOrderACEs = pluginData[7]; const hasEffectsACEs = pluginData[8]; const hasElementACEs = pluginData[10]; const hasElementFocusACEs = pluginData[11]; const hasElementEnabledACEs = pluginData[12]; const hasSceneGraphACEs = pluginData[13]; const hasMeshACEs = pluginData[14]; const hasCollisionACEs =
 			pluginData[15]; const hasTemplateACEs = pluginData[16]; const Cnds = pluginCtor.Cnds; const Acts = pluginCtor.Acts; const Exps = pluginCtor.Exps; if (hasPositionACEs) { Cnds.CompareX = CompareX; Cnds.CompareY = CompareY; Cnds.IsOnScreen = IsOnScreen; Cnds.IsOutsideLayout = IsOutsideLayout; Cnds.PickDistance = PickDistance; Acts.SetX = SetX; Acts.SetY = SetY; Acts.SetPos = SetPos; Acts.SetPosToObject = SetPosToObject; Acts.MoveForward = MoveForward; Acts.MoveAtAngle = MoveAtAngle; Exps.X = GetX; Exps.Y = GetY; Exps.dt = GetDt } if (hasSizeACEs) {
 				Cnds.CompareWidth =
-				CompareWidth; Cnds.CompareHeight = CompareHeight; Acts.SetWidth = SetWidth; Acts.SetHeight = SetHeight; Acts.SetSize = SetSize; Exps.Width = GetWidth; Exps.Height = GetHeight; Exps.BBoxLeft = GetBboxLeft; Exps.BBoxTop = GetBboxTop; Exps.BBoxRight = GetBboxRight; Exps.BBoxBottom = GetBboxBottom; Exps.BBoxMidX = GetBboxMidX; Exps.BBoxMidY = GetBboxMidY
+					CompareWidth; Cnds.CompareHeight = CompareHeight; Acts.SetWidth = SetWidth; Acts.SetHeight = SetHeight; Acts.SetSize = SetSize; Exps.Width = GetWidth; Exps.Height = GetHeight; Exps.BBoxLeft = GetBboxLeft; Exps.BBoxTop = GetBboxTop; Exps.BBoxRight = GetBboxRight; Exps.BBoxBottom = GetBboxBottom; Exps.BBoxMidX = GetBboxMidX; Exps.BBoxMidY = GetBboxMidY
 			} if (hasAngleACEs) {
 				Cnds.AngleWithin = IsAngleWithin; Cnds.IsClockwiseFrom = IsAngleClockwiseFrom; Cnds.IsBetweenAngles = IsBetweenAngles; Acts.SetAngle = SetAngle; Acts.RotateClockwise = RotateClockwise;
 				Acts.RotateCounterclockwise = RotateCounterclockwise; Acts.RotateTowardAngle = RotateTowardAngle; Acts.RotateTowardPosition = RotateTowardPosition; Acts.SetTowardPosition = SetTowardPosition; Exps.Angle = GetAngle
@@ -6463,8 +6463,8 @@ void main(void) {
 					SetElementCSSStyle; Acts.SetElemAttribute = SetElementAttribute; Acts.RemoveElemAttribute = RemoveElementAttribute
 			} if (hasElementFocusACEs) { Cnds.IsFocused = IsElementFocused; Acts.SetFocus = SetElementFocus; Acts.SetBlur = SetElementBlur } if (hasElementEnabledACEs) { Cnds.IsEnabled = IsElementEnabled; Acts.SetEnabled = SetElementEnabled } if (hasCollisionACEs) { Cnds.OnCollision = OnCollision; Cnds.IsOverlapping = IsOverlapping; Cnds.IsOverlappingOffset = IsOverlappingOffset; pluginCtor.FinishCollisionCondition = FinishCollisionCondition } if (!isSingleGlobal) {
 				Cnds.CompareInstanceVar =
-				CompareInstanceVar; Cnds.IsBoolInstanceVarSet = IsBoolInstanceVarSet; Cnds.PickInstVarHiLow = PickInstVarHiLow; Cnds.PickByUID = PickByUID; Acts.SetInstanceVar = SetInstanceVar; Acts.AddInstanceVar = AddInstanceVar; Acts.SubInstanceVar = SubInstanceVar; Acts.SetBoolInstanceVar = SetBoolInstanceVar; Acts.ToggleBoolInstanceVar = ToggleBoolInstanceVar; Cnds.OnCreated = OnCreated; Cnds.OnDestroyed = OnDestroyed; Acts.Destroy = Destroy; if (!Acts.LoadFromJsonString) Acts.LoadFromJsonString = LoadFromJsonString; if (!Exps.AsJSON) Exps.AsJSON =
-					AsJSON; Exps.Count = Count; Exps.PickedCount = PickedCount; Exps.IID = GetIID; Exps.UID = GetUID; Exps.ObjectTypeName = ObjectTypeName
+					CompareInstanceVar; Cnds.IsBoolInstanceVarSet = IsBoolInstanceVarSet; Cnds.PickInstVarHiLow = PickInstVarHiLow; Cnds.PickByUID = PickByUID; Acts.SetInstanceVar = SetInstanceVar; Acts.AddInstanceVar = AddInstanceVar; Acts.SubInstanceVar = SubInstanceVar; Acts.SetBoolInstanceVar = SetBoolInstanceVar; Acts.ToggleBoolInstanceVar = ToggleBoolInstanceVar; Cnds.OnCreated = OnCreated; Cnds.OnDestroyed = OnDestroyed; Acts.Destroy = Destroy; if (!Acts.LoadFromJsonString) Acts.LoadFromJsonString = LoadFromJsonString; if (!Exps.AsJSON) Exps.AsJSON =
+						AsJSON; Exps.Count = Count; Exps.PickedCount = PickedCount; Exps.IID = GetIID; Exps.UID = GetUID; Exps.ObjectTypeName = ObjectTypeName
 			} if (hasTemplateACEs) Exps.TemplateName = TemplateName
 	};
 
@@ -6502,13 +6502,13 @@ void main(void) {
 				{}; const o = { "t": this._time, "st": this._signalTag, "s": this._isSignalled, "ev": this._event.GetSID(), "sm": this._solModifiers.map(oc => oc.GetSID()), "dsm": this._dynamicSolModifiers ? [...this._dynamicSolModifiers].map(oc => oc.GetSID()) : null, "sols": sols }; if (this._event._HasActionIndex(this._actIndex)) o["act"] = this._event.GetActionAt(this._actIndex).GetSID(); for (const [objectClass, solState] of this._sols) sols[objectClass.GetSID().toString()] = solState._SaveToJson(); return o
 		} static _CreateFromJson(eventSheetManager,
 			o) {
-				const runtime = eventSheetManager.GetRuntime(); const event = eventSheetManager.GetEventBlockBySID(o["ev"]); if (!event) return null; let actIndex = 0; if (o.hasOwnProperty("act")) { const act = eventSheetManager.GetActionBySID(o["act"]); if (!act) return null; actIndex = act.GetIndex() } const sw = C3.New(C3.ScheduledWait, eventSheetManager); sw._time = o["t"]; sw._type = sw._time === -1 ? "signal" : "timer"; sw._signalTag = o["st"]; sw._isSignalled = o["s"]; sw._event = event; sw._actIndex = actIndex; for (const sid of o["sm"]) {
-					const objectClass =
-						runtime.GetObjectClassBySID(sid); if (objectClass) sw._solModifiers.push(objectClass)
-				} if (Array.isArray(o["dsm"])) for (const sid of o["dsm"]) { const objectClass = runtime.GetObjectClassBySID(sid); if (objectClass) { if (!sw._dynamicSolModifiers) sw._dynamicSolModifiers = new Set; sw._dynamicSolModifiers.add(objectClass) } } for (const [sidStr, solData] of Object.entries(o["sols"])) {
-					const sid = parseInt(sidStr, 10); const objectClass = runtime.GetObjectClassBySID(sid); if (!objectClass) continue; const solState = C3.New(C3.SolState,
-						null); solState._LoadFromJson(eventSheetManager, solData); sw._sols.set(objectClass, solState)
-				} return sw
+			const runtime = eventSheetManager.GetRuntime(); const event = eventSheetManager.GetEventBlockBySID(o["ev"]); if (!event) return null; let actIndex = 0; if (o.hasOwnProperty("act")) { const act = eventSheetManager.GetActionBySID(o["act"]); if (!act) return null; actIndex = act.GetIndex() } const sw = C3.New(C3.ScheduledWait, eventSheetManager); sw._time = o["t"]; sw._type = sw._time === -1 ? "signal" : "timer"; sw._signalTag = o["st"]; sw._isSignalled = o["s"]; sw._event = event; sw._actIndex = actIndex; for (const sid of o["sm"]) {
+				const objectClass =
+					runtime.GetObjectClassBySID(sid); if (objectClass) sw._solModifiers.push(objectClass)
+			} if (Array.isArray(o["dsm"])) for (const sid of o["dsm"]) { const objectClass = runtime.GetObjectClassBySID(sid); if (objectClass) { if (!sw._dynamicSolModifiers) sw._dynamicSolModifiers = new Set; sw._dynamicSolModifiers.add(objectClass) } } for (const [sidStr, solData] of Object.entries(o["sols"])) {
+				const sid = parseInt(sidStr, 10); const objectClass = runtime.GetObjectClassBySID(sid); if (!objectClass) continue; const solState = C3.New(C3.SolState,
+					null); solState._LoadFromJson(eventSheetManager, solData); sw._sols.set(objectClass, solState)
+			} return sw
 		}
 	};
 
@@ -6649,7 +6649,7 @@ void main(void) {
 					layer.GetDisplayScale() + this._autoFontSizeOffset; this.PostToDOMElement("update-position", { "left": Math.round(this._lastRect.getLeft()) + canvasManager.GetCanvasClientX(), "top": Math.round(this._lastRect.getTop()) + canvasManager.GetCanvasClientY(), "width": Math.round(this._lastRect.width()), "height": Math.round(this._lastRect.height()), "fontSize": fontSize })
 		} FocusElement() { this._PostToDOMElementMaybeSync("focus", { "focus": true }) } BlurElement() { this._PostToDOMElementMaybeSync("focus", { "focus": false }) } _OnElemFocused() {
 			this._elemHasFocus =
-			true
+				true
 		} _OnElemBlurred() { this._elemHasFocus = false } IsElementFocused() { return this._elemHasFocus } SetElementCSSStyle(prop, val) { this.PostToDOMElement("set-css-style", { "prop": C3.CSSToCamelCase(prop), "val": val }) } SetElementAttribute(attribName, value) { this.PostToDOMElement("set-attribute", { "name": attribName, "val": value }) } RemoveElementAttribute(attribName) { this.PostToDOMElement("remove-attribute", { "name": attribName }) } UpdateElementState() {
 			if (this._isPendingUpdateState) return; this._isPendingUpdateState = true; Promise.resolve().then(() => { this._isPendingUpdateState = false; this.PostToDOMElement("update-state", this.GetElementState()) })
 		} GetElementState() { } GetElementId() { return this._elementId }
@@ -6727,7 +6727,7 @@ void main(void) {
 		constructor() { super(); this._generation = 0; this._url = ""; this._size = 0; this._offsetX = 0; this._offsetY = 0; this._width = 0; this._height = 0; this._isRotated = false; this._hasMetaData = false; this._imageAsset = null; this._textureState = ""; this._rcTex = C3.New(C3.Rect); this._quadTex = C3.New(C3.Quad); this._blobUrl = ""; this._iImageInfo = new self.IImageInfo(this); allImageInfos.add(this) } Release() { this.ReleaseTexture(); this._imageAsset = null; allImageInfos.delete(this); this.ReleaseBlobURL() } static OnRendererContextLost() {
 			for (const imageInfo of allImageInfos) {
 				imageInfo._textureState =
-				""; imageInfo._rcTex.set(0, 0, 0, 0); imageInfo._quadTex.setFromRect(imageInfo._rcTex)
+					""; imageInfo._rcTex.set(0, 0, 0, 0); imageInfo._quadTex.setFromRect(imageInfo._rcTex)
 			}
 		} LoadData(imageData) { this._url = imageData[0]; this._size = imageData[1]; this._offsetX = imageData[2]; this._offsetY = imageData[3]; this._width = imageData[4]; this._height = imageData[5]; this._isRotated = imageData[6]; this._hasMetaData = true } LoadDynamicAsset(runtime, url) {
 			if (this._imageAsset) throw new Error("already loaded asset"); this._url = url; const opts = {}; if (C3.IsAbsoluteURL(url)) opts.loadPolicy = "remote"; this.LoadAsset(runtime, opts);
@@ -6836,13 +6836,13 @@ void main(void) {
 				this._usedBehaviorCtors.has(Ctor)
 		} GetInstanceVariablesCount() { return this._instVars.length } GetInstanceVariableSIDs() { return this._instVars.map(iv => iv.sid) } GetInstanceVariableIndexBySID(sid) { return this._instVars.findIndex(iv => iv.sid === sid) } GetInstanceVariableIndexByName(name) { return this._instVars.findIndex(iv => iv.name === name) } _GetAllInstanceVariableNames() { return this._instVars.map(iv => iv.name) } _GetAllInstanceVariableJsPropNames() { return this._instVars.map(iv => iv.jsPropName) } GetInstanceVariableType(i) {
 			i =
-			Math.floor(i); if (i < 0 || i >= this._instVars.length) throw new RangeError("invalid instance variable index"); return this._instVars[i].type
+				Math.floor(i); if (i < 0 || i >= this._instVars.length) throw new RangeError("invalid instance variable index"); return this._instVars[i].type
 		} GetInstanceVariableName(i) { i = Math.floor(i); if (i < 0 || i >= this._instVars.length) throw new RangeError("invalid instance variable index"); return this._instVars[i].name } GetEffectTypesCount() { return this._effectsCount } GetBehaviorTypesIncludingInherited() { return this._behaviorTypesIncludingInherited } GetBehaviorTypeByName(name) {
 			return this._behaviorsByName.get(name.toLowerCase()) ||
 				null
 		} GetBehaviorIndexByName(name) { const ret = this._behaviorNameToIndex.get(name.toLowerCase()); if (typeof ret === "undefined") return -1; else return ret } GetEffectList() { return this._effectList } HasEffects() { return this._plugin.HasEffects() } UsesEffects() { return this._effectList && this._effectList.HasAnyEffectType() } GetSolStack() { return this._solStack } GetCurrentSol() { return this._solStack.GetCurrentSol() } GetImageInfo() { return this._imageInfo } SetDefaultInstanceData(d) { this._defaultInstanceData = d } GetDefaultInstanceData() { return this._defaultInstanceData } _SetDefaultLayerIndex(i) {
 			this._defaultLayerIndex =
-			i
+				i
 		} GetDefaultLayerIndex() { return this._defaultLayerIndex } GetAnimations() { return this._animations } GetAnimationCount() { return this._animations.length } GetFamilies() { return this._families } BelongsToFamily(family) { return this._familiesSet.has(family) } GetFamilyMembers() { return this._familyMembers } FamilyHasMember(objectType) { return this._familyMembersSet.has(objectType) } GetFamilyBehaviorOffset(familyIndex) { return this._familyBehaviorMap[familyIndex] } GetFamilyInstanceVariableOffset(familyIndex) { return this._familyInstVarMap[familyIndex] } AddCustomAction(customAceBlock) {
 			this._customActionMap.set(customAceBlock.GetACEName().toLowerCase(),
 				customAceBlock)
@@ -6880,7 +6880,7 @@ void main(void) {
 				this._SetIIDsStale()
 			} _GetLoadInstancesJson() { return this._loadInstancesJson } _ClearLoadInstancesJson() { this._loadInstancesJson = null } _SetupSceneGraphConnectionsOnChangeOfLayout() { for (let i = 0, len = this._instances; i < len; ++i)this._instances[i]._SetupSceneGraphConnectionsOnChangeOfLayout() } GetIObjectClass() { return this._iObjectClass } UserScriptDispatcher() { return this._userScriptDispatcher } _GetUserScriptInstanceClass() { return this._instanceUserScriptClass } _SetUserScriptInstanceClass(Class) {
 				this._instanceUserScriptClass =
-				Class
+					Class
 			} DispatchUserScriptEvent(e) { const runtime = this._runtime; const shouldTime = runtime.IsDebug() && !runtime.GetEventSheetManager().IsInEventEngine(); if (shouldTime) C3Debugger.StartMeasuringScriptTime(); this._userScriptDispatcher.dispatchEvent(e); if (shouldTime) C3Debugger.AddScriptTime() }
 	};
 
@@ -6916,7 +6916,7 @@ void main(void) {
 				len; ++i)this._behaviorInstances[i].PostCreate()
 		} GetSdkInstance() { return this._sdkInst } GetWorldInfo() { return this._worldInfo } GetRuntime() { return this._runtime } GetTimeScale() { return this._timeScale } GetActiveTimeScale() { const ts = this._timeScale; if (ts === -1) return this.GetRuntime().GetTimeScale(); else return ts } SetTimeScale(ts) { ts = +ts; if (ts < 0 || !isFinite(ts)) ts = 0; this._timeScale = ts; if (this.GetObjectClass().UsesEffects()) this._runtime._SetTrackingInstanceTime(this, true) } RestoreTimeScale() {
 			this._timeScale =
-			-1; if (this.GetObjectClass().UsesEffects()) this._runtime._SetTrackingInstanceTime(this, false)
+				-1; if (this.GetObjectClass().UsesEffects()) this._runtime._SetTrackingInstanceTime(this, false)
 		} GetInstanceGameTime() { return this._runtime._GetInstanceGameTime(this) } Dispatcher() { if (!this._dispatcher) this._dispatcher = C3.New(C3.Event.Dispatcher); return this._dispatcher } Draw(renderer) { this._sdkInst.Draw(renderer) } OnCreate(properties) { this._sdkInst.OnCreate(properties) } _SetHasTilemap() { this._flags |= FLAG_TILEMAP } HasTilemap() { return (this._flags & FLAG_TILEMAP) !== 0 } _MarkDestroyed() { this._flags |= FLAG_DESTROYED } IsDestroyed() {
 			return (this._flags &
 				FLAG_DESTROYED) !== 0
@@ -6942,12 +6942,12 @@ void main(void) {
 			if (!childrenData) return; for (const childData of childrenData) { const child = this._runtime.GetInstanceByUID(childData[2]); if (child) { const flags = childData[3]; this.AddChild(child, { transformX: !!(flags >> 0 & 1), transformY: !!(flags >> 1 & 1), transformWidth: !!(flags >> 2 & 1), transformHeight: !!(flags >> 3 & 1), transformAngle: !!(flags >> 4 & 1), destroyWithParent: !!(flags >> 5 & 1), transformZElevation: !!(flags >> 6 & 1), transformOpacity: !!(flags >> 7 & 1), transformVisibility: !!(flags >> 8 & 1) }) } }
 		} SetupPersistedSceneGraphConnections(instanceToPersistedDataMap,
 			persistedIndexToInstanceMap) {
-				const persistedData = instanceToPersistedDataMap.get(this); if (!persistedData) return; for (const persistedChildData of persistedData["sceneGraphJson"]["children"]) {
-					const child = persistedIndexToInstanceMap.get(persistedChildData["index"]); if (!child) continue; const flags = persistedChildData["flags"]; this.AddChild(child, {
-						transformX: !!(flags >> 0 & 1), transformY: !!(flags >> 1 & 1), transformWidth: !!(flags >> 2 & 1), transformHeight: !!(flags >> 3 & 1), transformAngle: !!(flags >> 4 & 1), destroyWithParent: !!(flags >>
-							5 & 1), transformZElevation: !!(flags >> 6 & 1), transformOpacity: !!(flags >> 7 & 1), transformVisibility: !!(flags >> 8 & 1)
-					})
-				}
+			const persistedData = instanceToPersistedDataMap.get(this); if (!persistedData) return; for (const persistedChildData of persistedData["sceneGraphJson"]["children"]) {
+				const child = persistedIndexToInstanceMap.get(persistedChildData["index"]); if (!child) continue; const flags = persistedChildData["flags"]; this.AddChild(child, {
+					transformX: !!(flags >> 0 & 1), transformY: !!(flags >> 1 & 1), transformWidth: !!(flags >> 2 & 1), transformHeight: !!(flags >> 3 & 1), transformAngle: !!(flags >> 4 & 1), destroyWithParent: !!(flags >>
+						5 & 1), transformZElevation: !!(flags >> 6 & 1), transformOpacity: !!(flags >> 7 & 1), transformVisibility: !!(flags >> 8 & 1)
+				})
+			}
 		} GetTemplateName() { const templateManager = this._runtime.GetTemplateManager(); return templateManager ? templateManager.GetInstanceTemplateName(this) : "" } IsInContainer() { return this._siblings !== null } _AddSibling(inst) { this._siblings.push(inst) } GetSiblings() { return this._siblings } HasSibling(objectClass) { return !!this.GetSibling(objectClass) } GetSibling(objectClass) {
 			const siblings = this.siblings(); if (siblings ===
 				null || siblings.length === 0) return false; for (const s of siblings) if (s.GetObjectClass() === objectClass) return s; return null
@@ -6959,7 +6959,7 @@ void main(void) {
 			if (behInst) return behInst.GetSdkInstance(); else return null
 		} GetBehaviorIndexBySID(sid) { const behaviorInstances = this._behaviorInstances; for (let i = 0, len = behaviorInstances.length; i < len; ++i)if (behaviorInstances[i].GetBehaviorType().GetSID() === sid) return i; return -1 } GetAllInstanceVariableValues() { return this._instVarValues } _GetAllInstanceVariableNames() { return this._objectType._GetAllInstanceVariableNames() } GetInstanceVariableCount() { return this._instVarValues.length } GetInstanceVariableValue(index) {
 			index =
-			index | 0; const instVarValues = this._instVarValues; if (index < 0 || index >= instVarValues.length) throw new RangeError("invalid instance variable"); return instVarValues[index]
+				index | 0; const instVarValues = this._instVarValues; if (index < 0 || index >= instVarValues.length) throw new RangeError("invalid instance variable"); return instVarValues[index]
 		} _GetInstanceVariableValueUnchecked(index) { return this._instVarValues[index] } _GetInstanceVariableTypedValue(index) { const ret = this._instVarValues[index]; if (this._objectType.GetInstanceVariableType(index) === 0) return !!ret; else return ret } SetInstanceVariableValue(index, value) {
 			index = index | 0; const instVarValues = this._instVarValues; if (index <
 				0 || index >= instVarValues.length) throw new RangeError("invalid instance variable"); const type = this._objectType.GetInstanceVariableType(index); switch (type) { case 0: instVarValues[index] = value ? 1 : 0; break; case 1: instVarValues[index] = typeof value === "number" ? value : parseFloat(value); break; case 2: instVarValues[index] = typeof value === "string" ? value : value.toString(); break; default: throw new Error("unknown instance variable type"); }
@@ -7301,7 +7301,7 @@ void main(void) {
 						} else if (sourcePoly) { transformedPoly.copy(sourcePoly); transformedPoly.transformPrecalc(w, h, sinA, cosA) } else transformedPoly.setFromQuad(this.GetBoundingQuad(), -this.GetX(), -this.GetY()); tpi.width = w; tpi.height = h; tpi.angle = a; return transformedPoly
 				} _DiscardTransformedCollisionPoly() { this.SetPhysicsBodyChanged(true); const tpi = this._transformedPolyInfo; if (tpi === null) return; tpi.width = NaN } CreateMesh(hsize, vsize) {
 					hsize =
-					Math.floor(hsize); vsize = Math.floor(vsize); if (!this.GetInstance().GetPlugin().SupportsMesh()) throw new Error("object does not support mesh"); this.ReleaseMesh(); this._meshInfo = { sourceMesh: C3.New(C3.Gfx.Mesh, hsize, vsize), transformedMesh: C3.New(C3.Gfx.Mesh, hsize, vsize), meshPoly: null }
+						Math.floor(hsize); vsize = Math.floor(vsize); if (!this.GetInstance().GetPlugin().SupportsMesh()) throw new Error("object does not support mesh"); this.ReleaseMesh(); this._meshInfo = { sourceMesh: C3.New(C3.Gfx.Mesh, hsize, vsize), transformedMesh: C3.New(C3.Gfx.Mesh, hsize, vsize), meshPoly: null }
 				} HasMesh() { return this._meshInfo !== null } GetSourceMesh() { if (!this.HasMesh()) throw new Error("no mesh"); return this._meshInfo.sourceMesh } GetTransformedMesh() { if (!this.HasMesh()) throw new Error("no mesh"); return this._meshInfo.transformedMesh } SetMeshChanged(e) {
 					this._SetFlag(FLAG_MESH_CHANGED,
 						e)
@@ -7403,7 +7403,7 @@ void main(void) {
 		} Release() { for (const cpb of this._effectParamBuffers) cpb.Release(); C3.clearArray(this._effectParamBuffers); C3.clearArray(this._allEffectTypes); C3.clearArray(this._activeEffectTypes); this._effectTypesByName.clear(); C3.clearArray(this._effectParams); this._owner = null } _AddInstanceEffectList(iel) { this._allInstanceEffectLists.add(iel) } _RemoveInstanceEffectList(iel) { this._allInstanceEffectLists.delete(iel) } _InitRenderer(renderer) {
 			if (renderer.IsWebGPU()) {
 				this._effectParamBuffers =
-				this._allEffectTypes.map(et => { const shaderProgram = et.GetShaderProgram(); if (shaderProgram.GetCustomParametersByteSize() > 0) return C3.New(C3.Gfx.WebGPUEffectCustomParamsBuffer, shaderProgram); else return null }); this._UpdateAllEffectParamBuffers()
+					this._allEffectTypes.map(et => { const shaderProgram = et.GetShaderProgram(); if (shaderProgram.GetCustomParametersByteSize() > 0) return C3.New(C3.Gfx.WebGPUEffectCustomParamsBuffer, shaderProgram); else return null }); this._UpdateAllEffectParamBuffers()
 			} for (const iel of this._allInstanceEffectLists) iel._InitRenderer(renderer)
 		} PrependEffectTypes(arr) {
 			if (!arr.length) return; this._allEffectTypes = arr.concat(this._allEffectTypes); for (const et of arr) this._effectTypesByName.set(et.GetName().toLowerCase(), et); for (let i =
@@ -7531,13 +7531,13 @@ void main(void) {
 				if (!tilemapWi.GetBoundingQuad().intersectsQuad(tempQuadB)) return false; tempPolyC.copy(nonTilemapWi.GetTransformedCollisionPoly()); const ptsArrB = tempPolyC.pointsArr(); for (let i = 0, len = ptsArrB.length; i < len; i += 2) { const j = i + 1; ptsArrB[i] += deltaX; ptsArrB[j] += deltaY } tempPolyC.setBboxChanged(); return this.TestTilemapOverlap(tilemapWi, nonTilemapWi, nonTilemapTransformedX, nonTilemapTransformedY, tempPolyC, tempRect3, tempQuadB)
 			} TestTilemapOverlap(tmWi, wi, transformedWiX, transformedWiY, transformedCollisionPoly, transformedBoundingBox,
 				transformedBoundingQuad) {
-					const bbox = transformedBoundingBox !== undefined ? transformedBoundingBox : wi.GetBoundingBox(); const tmX = tmWi.GetX(); const tmY = tmWi.GetY(); const tmSdkInst = tmWi.GetInstance().GetSdkInstance(); const instX = transformedWiX !== undefined ? transformedWiX : wi.GetX(); const instY = transformedWiY !== undefined ? transformedWiY : wi.GetY(); const instHasPoly = wi.HasOwnCollisionPoly(); const instQuad = transformedBoundingQuad !== undefined ? transformedBoundingQuad : wi.GetBoundingQuad(); const collRects = tileCollRectCandidates;
+			const bbox = transformedBoundingBox !== undefined ? transformedBoundingBox : wi.GetBoundingBox(); const tmX = tmWi.GetX(); const tmY = tmWi.GetY(); const tmSdkInst = tmWi.GetInstance().GetSdkInstance(); const instX = transformedWiX !== undefined ? transformedWiX : wi.GetX(); const instY = transformedWiY !== undefined ? transformedWiY : wi.GetY(); const instHasPoly = wi.HasOwnCollisionPoly(); const instQuad = transformedBoundingQuad !== undefined ? transformedBoundingQuad : wi.GetBoundingQuad(); const collRects = tileCollRectCandidates;
 			tmSdkInst.GetCollisionRectCandidates(bbox, collRects); for (let i = 0, len = collRects.length; i < len; ++i) {
 				const c = collRects[i]; const rc = c.GetRect(); this._collisionCheckCount++; if (bbox.intersectsRectOffset(rc, tmX, tmY)) {
 					tempQuad.setFromRect(rc); tempQuad.offset(tmX, tmY); if (tempQuad.intersectsQuad(instQuad)) if (instHasPoly) {
 						const instPoly = transformedCollisionPoly !== undefined ? transformedCollisionPoly : wi.GetTransformedCollisionPoly(); let instOffX = instX; let instOffY = instY; if (transformedCollisionPoly !== undefined) {
 							instOffX =
-							wi.GetX(); instOffY = wi.GetY()
+								wi.GetX(); instOffY = wi.GetY()
 						} const tilePoly = c.GetPoly(); if (tilePoly) { this._polyCheckCount++; if (tilePoly.intersectsPoly(instPoly, instOffX - (tmX + rc.getLeft()), instOffY - (tmY + rc.getTop()))) { C3.clearArray(collRects); return true } } else { tempPolyA.setFromQuad(tempQuad, 0, 0); if (tempPolyA.intersectsPoly(instPoly, instOffX, instOffY)) { C3.clearArray(collRects); return true } }
 					} else {
 						const tilePoly = c.GetPoly(); if (tilePoly) {
@@ -7564,10 +7564,10 @@ void main(void) {
 			} objectClass.ApplySolToContainer(); interactiveLayersCache.clear(); if (isInverted) return true; else return sol.HasAnyInstances()
 		} GetCollisionCandidates(layer,
 			rtype, bbox, candidates) {
-				const isParallaxed = layer ? layer.GetParallaxX() !== 1 || layer.GetParallaxY() !== 1 : false; if (rtype.IsFamily()) for (const memberType of rtype.GetFamilyMembers()) if (isParallaxed || memberType.IsAnyInstanceParallaxed()) C3.appendArray(candidates, memberType.GetInstances()); else { memberType._UpdateAllCollisionCells(); memberType._GetCollisionCellGrid().QueryRange(bbox, candidates) } else if (isParallaxed || rtype.IsAnyInstanceParallaxed()) C3.appendArray(candidates, rtype.GetInstances()); else {
-					rtype._UpdateAllCollisionCells();
-					rtype._GetCollisionCellGrid().QueryRange(bbox, candidates)
-				}
+			const isParallaxed = layer ? layer.GetParallaxX() !== 1 || layer.GetParallaxY() !== 1 : false; if (rtype.IsFamily()) for (const memberType of rtype.GetFamilyMembers()) if (isParallaxed || memberType.IsAnyInstanceParallaxed()) C3.appendArray(candidates, memberType.GetInstances()); else { memberType._UpdateAllCollisionCells(); memberType._GetCollisionCellGrid().QueryRange(bbox, candidates) } else if (isParallaxed || rtype.IsAnyInstanceParallaxed()) C3.appendArray(candidates, rtype.GetInstances()); else {
+				rtype._UpdateAllCollisionCells();
+				rtype._GetCollisionCellGrid().QueryRange(bbox, candidates)
+			}
 		} GetObjectClassesCollisionCandidates(layer, objectClasses, bbox, candidates) { for (const objectClass of objectClasses) this.GetCollisionCandidates(layer, objectClass, bbox, candidates) } GetSolidCollisionCandidates(layer, bbox, candidates) { const solidBehavior = this._runtime.GetSolidBehavior(); if (!solidBehavior) return; this.GetObjectClassesCollisionCandidates(layer, solidBehavior.GetObjectClasses(), bbox, candidates) } GetJumpthruCollisionCandidates(layer, bbox,
 			candidates) { const jumpthruBehavior = this._runtime.GetJumpthruBehavior(); if (!jumpthruBehavior) return; this.GetObjectClassesCollisionCandidates(layer, jumpthruBehavior.GetObjectClasses(), bbox, candidates) } IsSolidCollisionAllowed(solidInst, inst) { return solidInst._IsSolidEnabled() && (!inst || inst.GetWorldInfo().IsSolidCollisionAllowed(solidInst.GetSavedDataMap().get("solidTags"))) } TestOverlapSolid(inst) {
 				const wi = inst.GetWorldInfo(); this.GetSolidCollisionCandidates(wi.GetLayer(), wi.GetBoundingBox(), tempCandidates);
@@ -7580,24 +7580,24 @@ void main(void) {
 					dist = dist || 50; const wi = inst.GetWorldInfo(); const oldX = wi.GetX(); const oldY = wi.GetY(); let lastOverlapped = null; let secondLastOverlapped = null; for (let i = 0; i < dist; ++i) {
 						wi.SetXY(oldX + xdir * i, oldY + ydir * i); wi.SetBboxChanged(); if (!this.TestOverlap(inst, lastOverlapped)) {
 							lastOverlapped =
-							this.TestOverlapSolid(inst); if (lastOverlapped) secondLastOverlapped = lastOverlapped; else { if (includeJumpthrus) { if (specificJumpthru) lastOverlapped = this.TestOverlap(inst, specificJumpthru) ? specificJumpthru : null; else lastOverlapped = this.TestOverlapJumpthru(inst); if (lastOverlapped) secondLastOverlapped = lastOverlapped } if (!lastOverlapped) { if (secondLastOverlapped) this.PushInFractional(inst, xdir, ydir, secondLastOverlapped, 16, true); return true } }
+								this.TestOverlapSolid(inst); if (lastOverlapped) secondLastOverlapped = lastOverlapped; else { if (includeJumpthrus) { if (specificJumpthru) lastOverlapped = this.TestOverlap(inst, specificJumpthru) ? specificJumpthru : null; else lastOverlapped = this.TestOverlapJumpthru(inst); if (lastOverlapped) secondLastOverlapped = lastOverlapped } if (!lastOverlapped) { if (secondLastOverlapped) this.PushInFractional(inst, xdir, ydir, secondLastOverlapped, 16, true); return true } }
 						}
 					} wi.SetXY(oldX, oldY); wi.SetBboxChanged(); return false
 				} PushOutSolidAxis(inst,
 					xdir, ydir, dist) {
-						dist = dist || 50; const wi = inst.GetWorldInfo(); const oldX = wi.GetX(); const oldY = wi.GetY(); let lastOverlapped = null; let secondLastOverlapped = null; for (let i = 0; i < dist; ++i)for (let which = 0; which < 2; ++which) {
-							const sign = which * 2 - 1; wi.SetXY(oldX + xdir * i * sign, oldY + ydir * i * sign); wi.SetBboxChanged(); if (!this.TestOverlap(inst, lastOverlapped)) {
-								lastOverlapped = this.TestOverlapSolid(inst); if (lastOverlapped) secondLastOverlapped = lastOverlapped; else {
-									if (secondLastOverlapped) this.PushInFractional(inst, xdir * sign,
-										ydir * sign, secondLastOverlapped, 16, true); return true
-								}
-							}
-						} wi.SetXY(oldX, oldY); wi.SetBboxChanged(); return false
+			dist = dist || 50; const wi = inst.GetWorldInfo(); const oldX = wi.GetX(); const oldY = wi.GetY(); let lastOverlapped = null; let secondLastOverlapped = null; for (let i = 0; i < dist; ++i)for (let which = 0; which < 2; ++which) {
+				const sign = which * 2 - 1; wi.SetXY(oldX + xdir * i * sign, oldY + ydir * i * sign); wi.SetBboxChanged(); if (!this.TestOverlap(inst, lastOverlapped)) {
+					lastOverlapped = this.TestOverlapSolid(inst); if (lastOverlapped) secondLastOverlapped = lastOverlapped; else {
+						if (secondLastOverlapped) this.PushInFractional(inst, xdir * sign,
+							ydir * sign, secondLastOverlapped, 16, true); return true
+					}
+				}
+			} wi.SetXY(oldX, oldY); wi.SetBboxChanged(); return false
 		} PushInFractional(inst, xdir, ydir, otherInst, limit, includeAnySolid) {
 			let divisor = 2; let forward = false; let overlapping = false; const wi = inst.GetWorldInfo(); let bestX = wi.GetX(); let bestY = wi.GetY(); while (divisor <= limit) {
 				const frac = 1 / divisor; divisor *= 2; wi.OffsetXY(xdir * frac * (forward ? 1 : -1), ydir * frac * (forward ? 1 : -1)); wi.SetBboxChanged(); if (this.TestOverlap(inst, otherInst) || includeAnySolid && this.TestOverlapSolid(inst)) {
 					forward =
-					true; overlapping = true
+						true; overlapping = true
 				} else { forward = false; overlapping = false; bestX = wi.GetX(); bestY = wi.GetY() }
 			} if (overlapping) { wi.SetXY(bestX, bestY); wi.SetBboxChanged() }
 		} PushOutSolidNearest(inst, maxDist = 100) {
@@ -7709,12 +7709,12 @@ void main(void) {
 						0; this._splashFadeInFinishTime = 0; this._splashFadeOutStartTime = 0; this._splashState = "fade-in"; this._splashDoneResolve = null; this._splashDonePromise = new Promise(resolve => this._splashDoneResolve = resolve)
 		} _SetGPUPowerPreference(pref) { this._gpuPreference = pref } _SetWebGPUEnabled(e) { this._isWebGPUEnabled = !!e } _SetZAxisScale(s) { this._zAxisScale = s } _SetFieldOfView(f) { this._fieldOfView = f } _SetZDistances(zNear, zFar) { this._zNear = zNear; this._zFar = zFar } _SetLimitedToWebGL1(l) { this._isLimitedToWebGL1 = !!l } async CreateCanvas(opts) {
 			this._canvas =
-			opts["canvas"]; this._runtime.AddDOMComponentMessageHandler("runtime", "window-resize", e => this._OnWindowResize(e)); this._runtime.AddDOMComponentMessageHandler("runtime", "fullscreenchange", e => this._OnFullscreenChange(e)); this._runtime.AddDOMComponentMessageHandler("runtime", "fullscreenerror", e => this._OnFullscreenError(e)); this._canvas.addEventListener("webglcontextlost", e => this._OnWebGLContextLost(e)); this._canvas.addEventListener("webglcontextrestored", e => this._OnWebGLContextRestored(e)); this._isDocumentFullscreen =
-				!!opts["isFullscreen"]; const useWebGPU = navigator["gpu"] && this._isWebGPUEnabled; let hasMajorPerformanceCaveat = false; if (useWebGPU) try { await this._InitWebGPUContext(true) } catch (err) { this._MaybeLogRendererError("WebGPU", err); this._webgpuRenderer = null } if (!this.GetRenderer()) try { await this._InitWebGLContext(true) } catch (err) { this._MaybeLogRendererError("WebGL", err); this._webglRenderer = null } if (!this.GetRenderer()) hasMajorPerformanceCaveat = true; if (!this.GetRenderer() && useWebGPU) try { await this._InitWebGPUContext(false) } catch (err) {
-					this._MaybeLogRendererError("WebGPU",
-						err); this._webgpuRenderer = null
-				} if (!this.GetRenderer()) try { await this._InitWebGLContext(false) } catch (err) { this._MaybeLogRendererError("WebGL", err); this._webglRenderer = null } const renderer = this.GetRenderer(); if (!renderer) throw new Error("failed to acquire a renderer - check WebGL or WebGPU is supported"); renderer.SetHasMajorPerformanceCaveat(hasMajorPerformanceCaveat); if (this._webgpuRenderer) { this._webgpuRenderer.ondevicelost = () => this._OnWebGPUDeviceLost(); this._webgpuRenderer.ondevicerestored = () => this._OnWebGPUDeviceRestored() } if (this._zAxisScale ===
-					"normalized") renderer.SetZAxisScaleNormalized(); else { renderer.SetZAxisScaleRegular(); renderer.SetFovY(this._fieldOfView) } this.SetSize(opts["windowInnerWidth"], opts["windowInnerHeight"], true); await this._InitRenderer()
+				opts["canvas"]; this._runtime.AddDOMComponentMessageHandler("runtime", "window-resize", e => this._OnWindowResize(e)); this._runtime.AddDOMComponentMessageHandler("runtime", "fullscreenchange", e => this._OnFullscreenChange(e)); this._runtime.AddDOMComponentMessageHandler("runtime", "fullscreenerror", e => this._OnFullscreenError(e)); this._canvas.addEventListener("webglcontextlost", e => this._OnWebGLContextLost(e)); this._canvas.addEventListener("webglcontextrestored", e => this._OnWebGLContextRestored(e)); this._isDocumentFullscreen =
+					!!opts["isFullscreen"]; const useWebGPU = navigator["gpu"] && this._isWebGPUEnabled; let hasMajorPerformanceCaveat = false; if (useWebGPU) try { await this._InitWebGPUContext(true) } catch (err) { this._MaybeLogRendererError("WebGPU", err); this._webgpuRenderer = null } if (!this.GetRenderer()) try { await this._InitWebGLContext(true) } catch (err) { this._MaybeLogRendererError("WebGL", err); this._webglRenderer = null } if (!this.GetRenderer()) hasMajorPerformanceCaveat = true; if (!this.GetRenderer() && useWebGPU) try { await this._InitWebGPUContext(false) } catch (err) {
+						this._MaybeLogRendererError("WebGPU",
+							err); this._webgpuRenderer = null
+					} if (!this.GetRenderer()) try { await this._InitWebGLContext(false) } catch (err) { this._MaybeLogRendererError("WebGL", err); this._webglRenderer = null } const renderer = this.GetRenderer(); if (!renderer) throw new Error("failed to acquire a renderer - check WebGL or WebGPU is supported"); renderer.SetHasMajorPerformanceCaveat(hasMajorPerformanceCaveat); if (this._webgpuRenderer) { this._webgpuRenderer.ondevicelost = () => this._OnWebGPUDeviceLost(); this._webgpuRenderer.ondevicerestored = () => this._OnWebGPUDeviceRestored() } if (this._zAxisScale ===
+						"normalized") renderer.SetZAxisScaleNormalized(); else { renderer.SetZAxisScaleRegular(); renderer.SetFovY(this._fieldOfView) } this.SetSize(opts["windowInnerWidth"], opts["windowInnerHeight"], true); await this._InitRenderer()
 		} _MaybeLogRendererError(rendererType, err) { if (err && typeof err.message === "string" && err.message.startsWith("renderer-unavailable")) return; console.error(`Error creating ${rendererType} renderer: `, err) } async _InitWebGPUContext(failIfMajorPerformanceCaveat) {
 			const rendererOpts = {
 				powerPreference: this._gpuPreference,
@@ -7750,7 +7750,7 @@ void main(void) {
 				!!e["isFullscreen"]; this.SetSize(e["innerWidth"], e["innerHeight"]); runtime.UpdateRender(); const ev = new C3.Event("window-resize"); ev.data = e; runtime.Dispatcher().dispatchEventAndWaitAsyncSequential(ev); const ev2 = new C3.Event("resize"); ev2.cssWidth = this.GetCssWidth(); ev2.cssHeight = this.GetCssHeight(); ev2.deviceWidth = this.GetDeviceWidth(); ev2.deviceHeight = this.GetDeviceHeight(); runtime.DispatchUserScriptEvent(ev2); if (runtime.IsDebug() && (runtime.HitBreakpoint() || self.C3Debugger.IsDebuggerPaused())) runtime.Render()
 		} _OnFullscreenChange(e) {
 			this._isDocumentFullscreen =
-			!!e["isFullscreen"]; this.SetSize(e["innerWidth"], e["innerHeight"], true); this._runtime.UpdateRender()
+				!!e["isFullscreen"]; this.SetSize(e["innerWidth"], e["innerHeight"], true); this._runtime.UpdateRender()
 		} _OnFullscreenError(e) { this._isDocumentFullscreen = !!e["isFullscreen"]; this.SetSize(e["innerWidth"], e["innerHeight"], true); this._runtime.UpdateRender() } SetSize(availableWidth, availableHeight, force = false) {
 			availableWidth = Math.floor(availableWidth); availableHeight = Math.floor(availableHeight); if (availableWidth <= 0 || availableHeight <= 0) throw new Error("invalid size"); if (this._windowInnerWidth === availableWidth &&
 				this._windowInnerHeight === availableHeight && !force) return; this._windowInnerWidth = availableWidth; this._windowInnerHeight = availableHeight; const fullscreenMode = this.GetCurrentFullscreenMode(); if (fullscreenMode === "letterbox-scale") this._CalculateLetterboxScale(availableWidth, availableHeight); else if (fullscreenMode === "letterbox-integer-scale") this._CalculateLetterboxIntegerScale(availableWidth, availableHeight); else if (fullscreenMode === "off") this._CalculateFixedSizeCanvas(availableWidth, availableHeight);
@@ -7758,11 +7758,11 @@ void main(void) {
 					this._canvasDeviceHeight, true); for (const rt of this._availableAdditionalRenderTargets) renderer.DeleteRenderTarget(rt); C3.clearArray(this._availableAdditionalRenderTargets); renderer.CalculatePerspectiveMatrix(this._defaultProjectionMatrix, this.GetDrawWidth() / this.GetDrawHeight()); const layoutManager = this._runtime.GetLayoutManager(); layoutManager.SetAllLayerProjectionChanged(); layoutManager.SetAllLayerMVChanged()
 		} GetDefaultProjectionMatrix() { return this._defaultProjectionMatrix } _CalculateLetterboxScale(availableWidth,
 			availableHeight) {
-				const dpr = this._runtime.GetDevicePixelRatio(); const originalViewportWidth = this._runtime.GetOriginalViewportWidth(); const originalViewportHeight = this._runtime.GetOriginalViewportHeight(); const originalAspectRatio = originalViewportWidth / originalViewportHeight; const availableAspectRatio = availableWidth / availableHeight; if (availableAspectRatio > originalAspectRatio) {
-					const letterboxedWidth = availableHeight * originalAspectRatio; this._canvasCssWidth = Math.round(letterboxedWidth); this._canvasCssHeight =
-						availableHeight; this._canvasCssOffsetX = Math.floor((availableWidth - this._canvasCssWidth) / 2); this._canvasCssOffsetY = 0
-				} else { const letterboxedHeight = availableWidth / originalAspectRatio; this._canvasCssWidth = availableWidth; this._canvasCssHeight = Math.round(letterboxedHeight); this._canvasCssOffsetX = 0; this._canvasCssOffsetY = Math.floor((availableHeight - this._canvasCssHeight) / 2) } this._canvasDeviceWidth = Math.round(this._canvasCssWidth * dpr); this._canvasDeviceHeight = Math.round(this._canvasCssHeight * dpr); this._runtime.SetViewportSize(originalViewportWidth,
-					originalViewportHeight)
+			const dpr = this._runtime.GetDevicePixelRatio(); const originalViewportWidth = this._runtime.GetOriginalViewportWidth(); const originalViewportHeight = this._runtime.GetOriginalViewportHeight(); const originalAspectRatio = originalViewportWidth / originalViewportHeight; const availableAspectRatio = availableWidth / availableHeight; if (availableAspectRatio > originalAspectRatio) {
+				const letterboxedWidth = availableHeight * originalAspectRatio; this._canvasCssWidth = Math.round(letterboxedWidth); this._canvasCssHeight =
+					availableHeight; this._canvasCssOffsetX = Math.floor((availableWidth - this._canvasCssWidth) / 2); this._canvasCssOffsetY = 0
+			} else { const letterboxedHeight = availableWidth / originalAspectRatio; this._canvasCssWidth = availableWidth; this._canvasCssHeight = Math.round(letterboxedHeight); this._canvasCssOffsetX = 0; this._canvasCssOffsetY = Math.floor((availableHeight - this._canvasCssHeight) / 2) } this._canvasDeviceWidth = Math.round(this._canvasCssWidth * dpr); this._canvasDeviceHeight = Math.round(this._canvasCssHeight * dpr); this._runtime.SetViewportSize(originalViewportWidth,
+				originalViewportHeight)
 		} _CalculateLetterboxIntegerScale(availableWidth, availableHeight) {
 			const dpr = this._runtime.GetDevicePixelRatio(); if (dpr !== 1) { availableWidth += 1; availableHeight += 1 } const originalViewportWidth = this._runtime.GetOriginalViewportWidth(); const originalViewportHeight = this._runtime.GetOriginalViewportHeight(); const originalAspectRatio = originalViewportWidth / originalViewportHeight; const availableAspectRatio = availableWidth / availableHeight; let intScale; if (availableAspectRatio > originalAspectRatio) {
 				const letterboxedWidth =
@@ -7778,7 +7778,7 @@ void main(void) {
 		} _UpdateFullscreenScalingQuality(fullscreenMode) {
 			if (this._wantFullscreenScalingQuality === "high") {
 				this._drawWidth =
-				this._canvasDeviceWidth; this._drawHeight = this._canvasDeviceHeight; this._fullscreenScalingQuality = "high"
+					this._canvasDeviceWidth; this._drawHeight = this._canvasDeviceHeight; this._fullscreenScalingQuality = "high"
 			} else {
 				let viewportWidth, viewportHeight; if (this.GetCurrentFullscreenMode() === "off") { viewportWidth = this._runtime.GetViewportWidth(); viewportHeight = this._runtime.GetViewportHeight() } else { viewportWidth = this._runtime.GetOriginalViewportWidth(); viewportHeight = this._runtime.GetOriginalViewportHeight() } if (this._canvasDeviceWidth < viewportWidth || this._canvasDeviceHeight < viewportHeight) {
 					this._drawWidth = this._canvasDeviceWidth;
@@ -7837,7 +7837,7 @@ void main(void) {
 			} _UpdateTick() { if (this._webglRenderer && this._webglRenderer.SupportsGPUProfiling()) this._UpdateTick_WebGL(); if (this._webgpuRenderer && this._webgpuRenderer.SupportsGPUProfiling()) this._UpdateTick_WebGPU() } _UpdateTick_WebGL() {
 				if (!isNaN(this._gpuCurUtilisation)) return; this._gpuCurUtilisation = this._gpuFrameTimingsBuffer.GetFrameRangeResultSum(this._gpuTimeStartFrame, this._gpuTimeEndFrame); if (isNaN(this._gpuCurUtilisation)) return; if (this._runtime.IsDebug()) for (const p of this.activeLayersGpuProfiles()) {
 					p.curUtilisation =
-					p.timingsBuffer.GetFrameRangeResultSum(this._gpuTimeStartFrame, this._gpuTimeEndFrame); if (isNaN(p.curUtilisation)) return
+						p.timingsBuffer.GetFrameRangeResultSum(this._gpuTimeStartFrame, this._gpuTimeEndFrame); if (isNaN(p.curUtilisation)) return
 				} this._gpuFrameTimingsBuffer.DeleteAllBeforeFrameNumber(this._gpuTimeEndFrame); this._gpuLastUtilisation = Math.min(this._gpuCurUtilisation, 1); if (this._runtime.IsDebug()) {
 					for (const p of this.activeLayersGpuProfiles()) { p.timingsBuffer.DeleteAllBeforeFrameNumber(this._gpuTimeEndFrame); p.lastUtilisation = Math.min(p.curUtilisation, 1) } self.C3Debugger.UpdateGPUProfile(this._gpuLastUtilisation,
 						[...this.activeLayersGpuProfiles()])
@@ -7854,7 +7854,7 @@ void main(void) {
 			} _AddWebGPUFrameTiming(frameTiming) { this._webgpuFrameTimings.set(this._webgpuRenderer.GetFrameNumber(), frameTiming) } GetGPUUtilisation() { return this._gpuLastUtilisation } SnapshotCanvas(format, quality, x, y, width, height) {
 				this._snapshotFormat = format; this._snapshotQuality = quality; this._snapshotArea.setWH(x, y, width, height); if (this._snapshotPromise) return this._snapshotPromise; this._snapshotPromise = new Promise(resolve => {
 					this._snapshotResolve =
-					resolve
+						resolve
 				}); return this._snapshotPromise
 			} _MaybeTakeSnapshot() {
 				if (!this._snapshotFormat) return; let canvas = this._canvas; const snapArea = this._snapshotArea; const x = C3.clamp(Math.floor(snapArea.getLeft()), 0, canvas.width); const y = C3.clamp(Math.floor(snapArea.getTop()), 0, canvas.height); let w = snapArea.width(); if (w === 0) w = canvas.width - x; else w = C3.clamp(Math.floor(w), 0, canvas.width - x); let h = snapArea.height(); if (h === 0) h = canvas.height - y; else h = C3.clamp(Math.floor(h), 0, canvas.height - y); if ((x !== 0 || y !== 0 || w !== canvas.width ||
@@ -7872,7 +7872,7 @@ void main(void) {
 					await C3.FetchBlob(url); const drawable = await this._runtime.RasterSvgImage(blob, 2048, 2048); return await this.GetRenderer().CreateStaticTextureAsync(drawable, { mipMapQuality: "high" })
 			} async _LoadBitmapSplashImage(url) { url = (new URL(url, this._runtime.GetRuntimeBaseURL())).toString(); const blob = await C3.FetchBlob(url); return await this.GetRenderer().CreateStaticTextureAsync(blob, { mipMapQuality: "high" }) } HideCordovaSplashScreen() { this._runtime.PostComponentMessageToDOM("runtime", "hide-cordova-splash") } StartLoadingScreen() {
 				this._loaderStartTime =
-				Date.now(); this._runtime.Dispatcher().addEventListener("loadingprogress", this._loadingprogress_handler); this._rafId = requestAnimationFrame(() => this._DrawLoadingScreen()); const loaderStyle = this._runtime.GetLoaderStyle(); if (loaderStyle !== 3) this.HideCordovaSplashScreen()
+					Date.now(); this._runtime.Dispatcher().addEventListener("loadingprogress", this._loadingprogress_handler); this._rafId = requestAnimationFrame(() => this._DrawLoadingScreen()); const loaderStyle = this._runtime.GetLoaderStyle(); if (loaderStyle !== 3) this.HideCordovaSplashScreen()
 			} async EndLoadingScreen() {
 				const renderer = this.GetRenderer(); this._loadingProgress = 1; const loaderStyle = this._runtime.GetLoaderStyle(); if (loaderStyle === 4) await this._splashDonePromise; this._splashDoneResolve = null; this._splashDonePromise =
 					null; if (this._rafId !== -1) { cancelAnimationFrame(this._rafId); this._rafId = -1 } this._runtime.Dispatcher().removeEventListener("loadingprogress", this._loadingprogress_handler); this._loadingprogress_handler = null; if (this._percentText) { this._percentText.Release(); this._percentText = null } this._runtime.ReleaseLoadingLogoAsset(); renderer.Start(); if (this._splashTextures.logo) { renderer.DeleteTexture(this._splashTextures.logo); this._splashTextures.logo = null } if (this._splashTextures.powered) {
@@ -7901,7 +7901,7 @@ void main(void) {
 				let drawW, drawH; if (this._canvasCssHeight > 256) {
 					renderer.SetColorRgba(.302 * a, .334 * a, .365 * a, a); drawW = w; drawH = Math.max(h * .005, 2); tempRect.setWH(0, h * .8 - drawH / 2, drawW, drawH); renderer.Rect(tempRect); if (hasHadError) renderer.SetColorRgba(a, 0, 0, a); else renderer.SetColorRgba(.161 * a, .953 * a, .816 * a, a); drawW = w * this._loadingProgress; tempRect.setWH(w * .5 - drawW / 2, h * .8 - drawH / 2, drawW, drawH); renderer.Rect(tempRect); renderer.SetColorRgba(a, a, a, a); renderer.SetTextureFillMode(); if (poweredTex) {
 						drawW = C3.clamp(h * .22, 105, w * .6) *
-						1.5; drawH = drawW / 8; tempRect.setWH(w * .5 - drawW / 2, h * .2 - drawH / 2, drawW, drawH); renderer.SetTexture(poweredTex); renderer.Rect(tempRect)
+							1.5; drawH = drawW / 8; tempRect.setWH(w * .5 - drawW / 2, h * .2 - drawH / 2, drawW, drawH); renderer.SetTexture(poweredTex); renderer.Rect(tempRect)
 					} if (logoTex) { drawW = Math.min(h * .395, w * .95); drawH = drawW; tempRect.setWH(w * .5 - drawW / 2, h * .485 - drawH / 2, drawW, drawH); renderer.SetTexture(logoTex); renderer.Rect(tempRect) } if (websiteTex) { drawW = C3.clamp(h * .22, 105, w * .6) * 1.5; drawH = drawW / 8; tempRect.setWH(w * .5 - drawW / 2, h * .868 - drawH / 2, drawW, drawH); renderer.SetTexture(websiteTex); renderer.Rect(tempRect) }
 				} else {
 					renderer.SetColorRgba(.302 * a,
@@ -7995,7 +7995,7 @@ void main(void) {
 			return this._exportToVideo.AddFrame(this._canvasManager.GetCanvas(), time)
 		} _ExportToVideoAddKeyframe() { if (this._exportToVideo) this._exportToVideo.AddKeyframe() } _OnOfflineAudioRenderCompleted(e) { this._exportToVideo.OnOfflineAudioRenderCompleted(e) } _ExportToVideoFinish() { return this._exportToVideo.Finish() } IsFBInstantAvailable() { return this._isFBInstantAvailable } IsLoading() { return this._isLoading } AddLoadPromise(promise) { this._additionalLoadPromises.push(promise) } SetUsingCreatePromises(e) {
 			this._isUsingCreatePromises =
-			!!e
+				!!e
 		} AddCreatePromise(promise) { if (!this._isUsingCreatePromises) return; this._additionalCreatePromises.push(promise) } GetCreatePromises() { return this._additionalCreatePromises } _GetNextFamilyIndex() { return this._familyCount++ } GetFamilyCount() { return this._familyCount } _AddEffectList(el) { this._allEffectLists.push(el) } _GetAllEffectLists() { return this._allEffectLists } async _InitialiseCanvas(opts) { if (!this._canvasManager) return; await this._canvasManager.CreateCanvas(opts); this._canvasManager.InitLoadingScreen(this._loaderStyle) } async _MaybeLoadOpusDecoder() {
 			if (this._assetManager.IsAudioFormatSupported("audio/webm; codecs=opus")) return;
 			let wasmBlob = null; let wasmBuffer = null; try { if (this.IsiOSCordova() && this._assetManager.IsFileProtocol()) wasmBuffer = await this._assetManager.CordovaFetchLocalFileAsArrayBuffer(this._opusWasmBinaryUrl); else wasmBuffer = await this._assetManager.FetchArrayBuffer(this._opusWasmBinaryUrl) } catch (err) { console.info("Failed to fetch Opus decoder WASM; assuming project has no Opus audio.", err); return } if (wasmBuffer) this.AddJobWorkerBuffer(wasmBuffer, "opus-decoder-wasm"); else this.AddJobWorkerBlob(wasmBlob, "opus-decoder-wasm");
@@ -8004,7 +8004,7 @@ void main(void) {
 			this._hasStarted = true; this._startTime = Date.now(); if (this._usesLoaderLayout) {
 				for (const objectClass of this._allObjectClasses) if (!objectClass.IsFamily() && !objectClass.IsOnLoaderLayout() && objectClass.IsWorldType()) objectClass.OnCreate(); this._assetManager.WaitForAllToLoad().then(() => {
 					this._isLoading =
-					false; this._OnLoadFinished()
+						false; this._OnLoadFinished()
 				})
 			} else this._isLoading = false; this._assetManager.SetInitialLoadFinished(); if (this.IsDebug()) C3Debugger.RuntimeInit(ife); for (const layout of this._layoutManager.GetAllLayouts()) layout._CreateGlobalNonWorlds(); if (this.IsExportToVideo()) await this._InitExportToVideo(); const firstLayout = this._layoutManager.GetFirstLayout(); await firstLayout._Load(null, this.GetRenderer()); await firstLayout._StartRunning(true); this._fpsLastTime = performance.now(); if (!this._usesLoaderLayout) this._OnLoadFinished();
 			const state = await this.PostComponentMessageToDOMAsync("runtime", "before-start-ticking"); if (state["isSuspended"] && !this.IsExportToVideo()) this._suspendCount++; else this.Tick()
@@ -8040,26 +8040,26 @@ void main(void) {
 		} IsLinearSampling() { return this.GetSampling() !== "nearest" } GetFramerateMode() { return this._framerateMode } GetCompositingMode() { return this._compositingMode } GetSampling() { return this._sampling } UsesLoaderLayout() { return this._usesLoaderLayout } GetLoadingLogoAsset() { return this._loadingLogoAsset } ReleaseLoadingLogoAsset() { if (this._loadingLogoAsset) { this._loadingLogoAsset.Release(); this._loadingLogoAsset = null } } GetLayoutManager() { return this._layoutManager } GetMainRunningLayout() { return this._layoutManager.GetMainRunningLayout() } GetTimelineManager() { return this._timelineManager } GetTransitionManager() { return this._transitionManager } GetTemplateManager() { return this._templateManager } GetAssetManager() { return this._assetManager } LoadImage(opts) { return this._assetManager.LoadImage(opts) } CreateInstance(objectClass,
 			layer, x, y, createHierarchy, templateName) { if (templateName && this._templateManager) { const templateData = this._templateManager.GetTemplateData(objectClass, templateName); if (templateData) { const inst = this.CreateInstanceFromData(templateData, layer, false, x, y, false, createHierarchy, undefined, createHierarchy); this._templateManager.MapInstanceToTemplateName(inst, templateName); return inst } } return this.CreateInstanceFromData(objectClass, layer, false, x, y, false, createHierarchy, undefined, createHierarchy) } CreateInstanceFromData(instData_or_objectClass,
 				layer, isStartupInstance, x, y, skipSiblings, createHierarchy, previousInstance, creatingHierarchy) {
-					let instData = null; let objectClass = null; if (instData_or_objectClass instanceof C3.ObjectClass) { objectClass = instData_or_objectClass; if (objectClass.IsFamily()) { const members = objectClass.GetFamilyMembers(); const i = Math.floor(this.Random() * members.length); objectClass = members[i] } instData = objectClass.GetDefaultInstanceData() } else { instData = instData_or_objectClass; objectClass = this.GetObjectClassByIndex(instData[1]) } const isWorld =
-						objectClass.GetPlugin().IsWorldType(); if (this._isLoading && isWorld && !objectClass.IsOnLoaderLayout()) return null; const originalLayer = layer; if (!isWorld) layer = null; let uid; if (isStartupInstance && !skipSiblings && instData && !this._instancesByUid.has(instData[2])) uid = instData[2]; else uid = this._nextUid++; const worldData = instData ? instData[0] : null; const inst = C3.New(C3.Instance, { runtime: this, objectType: objectClass, layer: layer, worldData, instVarData: instData ? instData[3] : null, uid: uid }); this._instancesByUid.set(uid,
-							inst); let wi = null; if (isWorld) { wi = inst.GetWorldInfo(); if (typeof x !== "undefined" && typeof y !== "undefined") { wi.SetX(x); wi.SetY(y) } objectClass._SetAnyCollisionCellChanged(true) } if (layer) { if (!creatingHierarchy) layer._AddInstance(inst, true); if (layer.GetParallaxX() !== 1 || layer.GetParallaxY() !== 1) objectClass._SetAnyInstanceParallaxed(true); layer.GetLayout().MaybeLoadTexturesFor(objectClass) } this._objectCount++; let needsSiblingCreation = true; if (previousInstance) {
-								const previousObjectClass = previousInstance.GetObjectClass();
-								if (previousObjectClass.IsInContainer() && objectClass.IsInContainer()) { const container = objectClass.GetContainer(); const previousContainer = previousObjectClass.GetContainer(); if (container === previousContainer) needsSiblingCreation = false }
-							} if (objectClass.IsInContainer() && !isStartupInstance && !skipSiblings && needsSiblingCreation) {
-								for (const containerType of objectClass.GetContainer().objectTypes()) {
-									if (containerType === objectClass) continue; const siblingInst = this.CreateInstanceFromData(containerType, originalLayer,
-										false, wi ? wi.GetX() : x, wi ? wi.GetY() : y, true, false, undefined, creatingHierarchy); inst._AddSibling(siblingInst)
-								} for (const s of inst.siblings()) { s._AddSibling(inst); for (const s2 of inst.siblings()) if (s !== s2) s._AddSibling(s2) }
-							} if (isWorld && !isStartupInstance && !!createHierarchy) this._CreateChildInstancesFromData(inst, worldData, wi, layer, x, y, creatingHierarchy); if (objectClass.IsInContainer() && !isStartupInstance && !skipSiblings && !!createHierarchy) for (const sibling of inst.siblings()) {
-								const swi = sibling.GetWorldInfo();
-								if (!swi) continue; const siblingPlugin = sibling.GetPlugin(); const sWorldData = sibling.GetObjectClass().GetDefaultInstanceData()[0]; if (siblingPlugin.IsWorldType()) this._CreateChildInstancesFromData(sibling, sWorldData, swi, layer, swi.GetX(), swi.GetY(), creatingHierarchy); else this._CreateChildInstancesFromData(sibling, sWorldData, swi, layer, undefined, undefined, creatingHierarchy)
-							} if (!skipSiblings && !!createHierarchy) {
-								if (typeof x === "undefined") x = worldData[0]; if (typeof y === "undefined") y = worldData[1]; const pwi = wi.GetTopParent();
-								const newX = x - wi.GetX() + pwi.GetX(); const newY = y - wi.GetY() + pwi.GetY(); pwi.SetXY(newX, newY)
-							} objectClass._SetIIDsStale(); const instPropertyData = instData ? C3.cloneArray(instData[5]) : null; const behPropertyData = instData ? instData[4].map(bp => C3.cloneArray(bp)) : null; const hasTilemap = isWorld && worldData && worldData[13]; if (hasTilemap) inst._SetHasTilemap(); inst._CreateSdkInstance(instPropertyData, behPropertyData); if (hasTilemap) {
-								const tilemapData = worldData[13]; inst.GetSdkInstance().LoadTilemapData(tilemapData[2],
-									tilemapData[0], tilemapData[1])
-							} this._instancesPendingCreate.push(inst); this._hasPendingInstances = true; if (this.IsDebug()) C3Debugger.InstanceCreated(inst); return inst
+			let instData = null; let objectClass = null; if (instData_or_objectClass instanceof C3.ObjectClass) { objectClass = instData_or_objectClass; if (objectClass.IsFamily()) { const members = objectClass.GetFamilyMembers(); const i = Math.floor(this.Random() * members.length); objectClass = members[i] } instData = objectClass.GetDefaultInstanceData() } else { instData = instData_or_objectClass; objectClass = this.GetObjectClassByIndex(instData[1]) } const isWorld =
+				objectClass.GetPlugin().IsWorldType(); if (this._isLoading && isWorld && !objectClass.IsOnLoaderLayout()) return null; const originalLayer = layer; if (!isWorld) layer = null; let uid; if (isStartupInstance && !skipSiblings && instData && !this._instancesByUid.has(instData[2])) uid = instData[2]; else uid = this._nextUid++; const worldData = instData ? instData[0] : null; const inst = C3.New(C3.Instance, { runtime: this, objectType: objectClass, layer: layer, worldData, instVarData: instData ? instData[3] : null, uid: uid }); this._instancesByUid.set(uid,
+					inst); let wi = null; if (isWorld) { wi = inst.GetWorldInfo(); if (typeof x !== "undefined" && typeof y !== "undefined") { wi.SetX(x); wi.SetY(y) } objectClass._SetAnyCollisionCellChanged(true) } if (layer) { if (!creatingHierarchy) layer._AddInstance(inst, true); if (layer.GetParallaxX() !== 1 || layer.GetParallaxY() !== 1) objectClass._SetAnyInstanceParallaxed(true); layer.GetLayout().MaybeLoadTexturesFor(objectClass) } this._objectCount++; let needsSiblingCreation = true; if (previousInstance) {
+						const previousObjectClass = previousInstance.GetObjectClass();
+						if (previousObjectClass.IsInContainer() && objectClass.IsInContainer()) { const container = objectClass.GetContainer(); const previousContainer = previousObjectClass.GetContainer(); if (container === previousContainer) needsSiblingCreation = false }
+					} if (objectClass.IsInContainer() && !isStartupInstance && !skipSiblings && needsSiblingCreation) {
+						for (const containerType of objectClass.GetContainer().objectTypes()) {
+							if (containerType === objectClass) continue; const siblingInst = this.CreateInstanceFromData(containerType, originalLayer,
+								false, wi ? wi.GetX() : x, wi ? wi.GetY() : y, true, false, undefined, creatingHierarchy); inst._AddSibling(siblingInst)
+						} for (const s of inst.siblings()) { s._AddSibling(inst); for (const s2 of inst.siblings()) if (s !== s2) s._AddSibling(s2) }
+					} if (isWorld && !isStartupInstance && !!createHierarchy) this._CreateChildInstancesFromData(inst, worldData, wi, layer, x, y, creatingHierarchy); if (objectClass.IsInContainer() && !isStartupInstance && !skipSiblings && !!createHierarchy) for (const sibling of inst.siblings()) {
+						const swi = sibling.GetWorldInfo();
+						if (!swi) continue; const siblingPlugin = sibling.GetPlugin(); const sWorldData = sibling.GetObjectClass().GetDefaultInstanceData()[0]; if (siblingPlugin.IsWorldType()) this._CreateChildInstancesFromData(sibling, sWorldData, swi, layer, swi.GetX(), swi.GetY(), creatingHierarchy); else this._CreateChildInstancesFromData(sibling, sWorldData, swi, layer, undefined, undefined, creatingHierarchy)
+					} if (!skipSiblings && !!createHierarchy) {
+						if (typeof x === "undefined") x = worldData[0]; if (typeof y === "undefined") y = worldData[1]; const pwi = wi.GetTopParent();
+						const newX = x - wi.GetX() + pwi.GetX(); const newY = y - wi.GetY() + pwi.GetY(); pwi.SetXY(newX, newY)
+					} objectClass._SetIIDsStale(); const instPropertyData = instData ? C3.cloneArray(instData[5]) : null; const behPropertyData = instData ? instData[4].map(bp => C3.cloneArray(bp)) : null; const hasTilemap = isWorld && worldData && worldData[13]; if (hasTilemap) inst._SetHasTilemap(); inst._CreateSdkInstance(instPropertyData, behPropertyData); if (hasTilemap) {
+						const tilemapData = worldData[13]; inst.GetSdkInstance().LoadTilemapData(tilemapData[2],
+							tilemapData[0], tilemapData[1])
+					} this._instancesPendingCreate.push(inst); this._hasPendingInstances = true; if (this.IsDebug()) C3Debugger.InstanceCreated(inst); return inst
 		} _CreateChildInstancesFromData(parentInstance, parentWorldData, parentWorldInfo, layer, x, y, creatingHierarchy) {
 			const parentZIndex = parentWorldInfo.GetSceneGraphZIndexExportData(); const childrenData = parentWorldInfo.GetSceneGraphChildrenExportData(); parentInstance.GetWorldInfo().SetSceneGraphZIndex(parentZIndex); if (!childrenData) return; if (typeof x ===
 				"undefined") x = parentWorldData[0]; if (typeof y === "undefined") y = parentWorldData[1]; const sceneGraphSiblings = new Set; const parentX = parentWorldData[0]; const parentY = parentWorldData[1]; for (const childData of childrenData) {
@@ -8071,10 +8071,10 @@ void main(void) {
 										8 & 1)
 								}); sceneGraphSiblings.add(childObjectClass)
 						} else {
-							const childX = x + childInstData[0][0] - parentX; const childY = y + childInstData[0][1] - parentY; const childInst = this.CreateInstanceFromData(childInstData, layer, false, childX, childY, false, true, parentInstance, creatingHierarchy); childInst.GetWorldInfo().SetSceneGraphZIndex(childZIndex); parentInstance.AddChild(childInst, {
-								transformX: !!(childFlags >> 0 & 1), transformY: !!(childFlags >> 1 & 1), transformWidth: !!(childFlags >> 2 & 1), transformHeight: !!(childFlags >> 3 & 1), transformAngle: !!(childFlags >>
-									4 & 1), destroyWithParent: !!(childFlags >> 5 & 1), transformZElevation: !!(childFlags >> 6 & 1), transformOpacity: !!(childFlags >> 7 & 1), transformVisibility: !!(childFlags >> 8 & 1)
-							})
+						const childX = x + childInstData[0][0] - parentX; const childY = y + childInstData[0][1] - parentY; const childInst = this.CreateInstanceFromData(childInstData, layer, false, childX, childY, false, true, parentInstance, creatingHierarchy); childInst.GetWorldInfo().SetSceneGraphZIndex(childZIndex); parentInstance.AddChild(childInst, {
+							transformX: !!(childFlags >> 0 & 1), transformY: !!(childFlags >> 1 & 1), transformWidth: !!(childFlags >> 2 & 1), transformHeight: !!(childFlags >> 3 & 1), transformAngle: !!(childFlags >>
+								4 & 1), destroyWithParent: !!(childFlags >> 5 & 1), transformZElevation: !!(childFlags >> 6 & 1), transformOpacity: !!(childFlags >> 7 & 1), transformVisibility: !!(childFlags >> 8 & 1)
+						})
 					}
 				}
 		} DestroyInstance(inst) {
@@ -8121,7 +8121,7 @@ void main(void) {
 			} this._behInstsToTick.SetQueueingEnabled(false)
 		} *_DebugBehaviorPostTick() { this._behInstsToPostTick.SetQueueingEnabled(true); for (const bi of this._behInstsToPostTick) { const ret = bi.PostTick(); if (C3.IsIterator(ret)) yield* ret } this._behInstsToPostTick.SetQueueingEnabled(false) } *_DebugBehaviorTick2() { this._behInstsToTick2.SetQueueingEnabled(true); for (const bi of this._behInstsToTick2) { const ret = bi.Tick2(); if (C3.IsIterator(ret)) yield* ret } this._behInstsToTick2.SetQueueingEnabled(false) } async Tick(timestamp,
 			isDebugStep, mode) {
-				this._hasStartedTicking = true; const isBackgroundWake = mode === "background-wake"; const shouldRender = mode !== "background-wake" && mode !== "skip-render"; if (!this._hasStarted || this.IsSuspended() && !isDebugStep && !isBackgroundWake) return; const startTime = performance.now(); this._isInTick = true; this._MeasureDt(timestamp || 0); const beforePreTickRet = this.Step_BeforePreTick(); if (this.IsDebugging()) await beforePreTickRet; const pretickRet = this._dispatcher.dispatchEventAndWait_AsyncOptional(this._eventObjects["pretick"]);
+			this._hasStartedTicking = true; const isBackgroundWake = mode === "background-wake"; const shouldRender = mode !== "background-wake" && mode !== "skip-render"; if (!this._hasStarted || this.IsSuspended() && !isDebugStep && !isBackgroundWake) return; const startTime = performance.now(); this._isInTick = true; this._MeasureDt(timestamp || 0); const beforePreTickRet = this.Step_BeforePreTick(); if (this.IsDebugging()) await beforePreTickRet; const pretickRet = this._dispatcher.dispatchEventAndWait_AsyncOptional(this._eventObjects["pretick"]);
 			if (pretickRet instanceof Promise) await pretickRet; const afterPreTickRet = this.Step_AfterPreTick(); if (this.IsDebugging()) await afterPreTickRet; if (this._NeedsHandleSaveOrLoad()) await this._HandleSaveOrLoad(); if (this.GetLayoutManager().IsPendingChangeMainLayout()) await this._MaybeChangeLayout(); const runEventsRet = this.Step_RunEventsEtc(); if (this.IsDebugging()) await runEventsRet; if (shouldRender) this.Render(); if (this.IsExportToVideo()) {
 				await this._ExportToVideoAddFrame(); if (this.GetGameTime() >= this.GetExportVideoDuration()) {
 					this._ExportToVideoFinish();
@@ -8376,10 +8376,10 @@ void main(void) {
 						eventSheetManager.PushCopySol(solModifiers); const inst =
 							instances[i]; objectClass.GetCurrentSol().SetSinglePicked(inst); if (isInContainer) inst.SetSiblingsSinglePicked(); loop.SetIndex(i); currentEvent.Retrigger(oldFrame, newFrame); eventSheetManager.PopSol(solModifiers)
 					} else {
-						sol._SetSelectAll(false); const solInstances = sol._GetOwnInstances(); C3.clearArray(solInstances); solInstances.push(null); for (let i = 0, len = instances.length; i < len && !loop.IsStopped(); ++i) {
-							const inst = instances[i]; solInstances[0] = inst; if (isInContainer) inst.SetSiblingsSinglePicked(); loop.SetIndex(i);
-							currentEvent.Retrigger(oldFrame, newFrame)
-						}
+					sol._SetSelectAll(false); const solInstances = sol._GetOwnInstances(); C3.clearArray(solInstances); solInstances.push(null); for (let i = 0, len = instances.length; i < len && !loop.IsStopped(); ++i) {
+						const inst = instances[i]; solInstances[0] = inst; if (isInContainer) inst.SetSiblingsSinglePicked(); loop.SetIndex(i);
+						currentEvent.Retrigger(oldFrame, newFrame)
+					}
 				} eventStack.Pop(); loopStack.Pop(); C3.clearArray(instances); forEachStack.Pop(); return false
 			} *_DebugForEach(objectClass) {
 				const eventSheetManager = this._runtime.GetEventSheetManager(); const eventStack = eventSheetManager.GetEventStack(); const oldFrame = eventStack.GetCurrentStackFrame(); const currentEvent = oldFrame.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiers(); const isSolModifierAfterCnds = oldFrame.IsSolModifierAfterCnds(); const newFrame = eventStack.Push(currentEvent);
@@ -8392,10 +8392,10 @@ void main(void) {
 				const eventSheetManager = this._runtime.GetEventSheetManager(); const eventStack = eventSheetManager.GetEventStack(); const cnd = eventSheetManager.GetCurrentCondition(); const oldFrame = eventStack.GetCurrentStackFrame(); const currentEvent = oldFrame.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiers(); const isSolModifierAfterCnds = oldFrame.IsSolModifierAfterCnds(); const newFrame = eventStack.Push(currentEvent); const loopStack = eventSheetManager.GetLoopStack();
 				const loop = loopStack.Push(); const isInContainer = objectClass.IsInContainer(); const sol = objectClass.GetCurrentSol(); const instancesData = forEachStack.Push(); C3.clearArray(instancesData); const iterInstances = sol.GetInstances(); loop.SetEnd(iterInstances.length); for (let i = 0, len = iterInstances.length; i < len; ++i)instancesData.push([iterInstances[i], cnd.ReevaluateParameter(1, i)]); instancesData.sort(ForEachOrdered_SortInstances); if (order === 1) instancesData.reverse(); if (isSolModifierAfterCnds) for (let i = 0, len = instancesData.length; i <
 					len && !loop.IsStopped(); ++i) { eventSheetManager.PushCopySol(solModifiers); const inst = instancesData[i][0]; objectClass.GetCurrentSol().SetSinglePicked(inst); if (isInContainer) inst.SetSiblingsSinglePicked(); loop.SetIndex(i); currentEvent.Retrigger(oldFrame, newFrame); eventSheetManager.PopSol(solModifiers) } else {
-						sol._SetSelectAll(false); const solInstances = sol._GetOwnInstances(); C3.clearArray(solInstances); solInstances.push(null); for (let i = 0, len = instancesData.length; i < len && !loop.IsStopped(); ++i) {
-							const inst =
-								instancesData[i][0]; solInstances[0] = inst; if (isInContainer) inst.SetSiblingsSinglePicked(); loop.SetIndex(i); currentEvent.Retrigger(oldFrame, newFrame)
-						}
+					sol._SetSelectAll(false); const solInstances = sol._GetOwnInstances(); C3.clearArray(solInstances); solInstances.push(null); for (let i = 0, len = instancesData.length; i < len && !loop.IsStopped(); ++i) {
+						const inst =
+							instancesData[i][0]; solInstances[0] = inst; if (isInContainer) inst.SetSiblingsSinglePicked(); loop.SetIndex(i); currentEvent.Retrigger(oldFrame, newFrame)
+					}
 				} eventStack.Pop(); loopStack.Pop(); C3.clearArray(instancesData); forEachStack.Pop(); return false
 			} *_DebugForEachOrdered(objectClass, order) {
 				const eventSheetManager = this._runtime.GetEventSheetManager(); const eventStack = eventSheetManager.GetEventStack(); const cnd = eventSheetManager.GetCurrentCondition(); const oldFrame = eventStack.GetCurrentStackFrame(); const currentEvent =
@@ -8433,10 +8433,10 @@ void main(void) {
 					C3.toRadians(a2))
 			}, IsBetweenAngles(a, la, ua) { let angle = C3.toRadians(a); let lower = C3.toRadians(la); let upper = C3.toRadians(ua); let obtuse = !C3.angleClockwise(upper, lower); if (obtuse) return !(!C3.angleClockwise(angle, lower) && C3.angleClockwise(angle, upper)); else return C3.angleClockwise(angle, lower) && !C3.angleClockwise(angle, upper) }, IsValueType(v, t) { if (typeof v === "number") return t === 0; else return t === 1 }, EvaluateExpression(v) { return !!v }, OnSignal(tag) { return tag.toLowerCase() === this._signalTags.at(-1) }, PickByComparison(objectClass,
 				exp, cmp, val) {
-					if (!objectClass) return false; const forEachStack = this._GetForEachStack(); const tempInstances = forEachStack.Push(); const sol = objectClass.GetCurrentSol(); C3.shallowAssignArray(tempInstances, sol.GetInstances()); if (sol.IsSelectAll()) C3.clearArray(sol._GetOwnElseInstances()); const cnd = this._runtime.GetCurrentCondition(); let k = 0; for (let i = 0, len = tempInstances.length; i < len; ++i) {
-						const inst = tempInstances[i]; tempInstances[k] = inst; exp = cnd.ReevaluateParameter(1, i); val = cnd.ReevaluateParameter(3, i); if (C3.compare(exp,
-							cmp, val)) ++k; else sol._PushElseInstance(inst)
-					} C3.truncateArray(tempInstances, k); sol.SetArrayPicked(tempInstances); const ret = !!tempInstances.length; C3.clearArray(tempInstances); forEachStack.Pop(); objectClass.ApplySolToContainer(); return ret
+				if (!objectClass) return false; const forEachStack = this._GetForEachStack(); const tempInstances = forEachStack.Push(); const sol = objectClass.GetCurrentSol(); C3.shallowAssignArray(tempInstances, sol.GetInstances()); if (sol.IsSelectAll()) C3.clearArray(sol._GetOwnElseInstances()); const cnd = this._runtime.GetCurrentCondition(); let k = 0; for (let i = 0, len = tempInstances.length; i < len; ++i) {
+					const inst = tempInstances[i]; tempInstances[k] = inst; exp = cnd.ReevaluateParameter(1, i); val = cnd.ReevaluateParameter(3, i); if (C3.compare(exp,
+						cmp, val)) ++k; else sol._PushElseInstance(inst)
+				} C3.truncateArray(tempInstances, k); sol.SetArrayPicked(tempInstances); const ret = !!tempInstances.length; C3.clearArray(tempInstances); forEachStack.Pop(); objectClass.ApplySolToContainer(); return ret
 			}, PickByEvaluate(objectClass, exp) {
 				if (!objectClass) return false; const forEachStack = this._GetForEachStack(); const tempInstances = forEachStack.Push(); const sol = objectClass.GetCurrentSol(); C3.shallowAssignArray(tempInstances, sol.GetInstances()); if (sol.IsSelectAll()) C3.clearArray(sol._GetOwnElseInstances());
 				const cnd = this._runtime.GetCurrentCondition(); let k = 0; for (let i = 0, len = tempInstances.length; i < len; ++i) { const inst = tempInstances[i]; tempInstances[k] = inst; exp = cnd.ReevaluateParameter(1, i); if (exp) ++k; else sol._PushElseInstance(inst) } C3.truncateArray(tempInstances, k); sol.SetArrayPicked(tempInstances); const ret = !!tempInstances.length; C3.clearArray(tempInstances); forEachStack.Pop(); objectClass.ApplySolToContainer(); return ret
@@ -8543,11 +8543,11 @@ void main(void) {
 				const firstFunctionBlock = C3.first(mapEntry.strMap.values()) || mapEntry.defaultFunc; if (firstFunctionBlock) { const firstReturnsValue = firstFunctionBlock.GetReturnType() !== 0; const curReturnsValue = functionBlock.GetReturnType() !== 0; if (firstReturnsValue !== curReturnsValue) { console.error(`[Construct] Function map '${name}' default: function return type not compatible with other functions in the map; entry ignored`); return } } mapEntry.defaultFunc = functionBlock
 			}, CallMappedFunction(name, str, forwardParams) {
 				forwardParams =
-				Math.floor(forwardParams); const mapEntry = this._GetFunctionMap(name.toLowerCase(), false); if (!mapEntry) { console.warn(`[Construct] Call mapped function: map name '${name}' not found; call ignored`); return } let functionBlock = mapEntry.strMap.get(str.toLowerCase()); if (!functionBlock) if (mapEntry.defaultFunc) { functionBlock = mapEntry.defaultFunc; forwardParams = 0 } else {
-					console.warn(`[Construct] Call mapped function: no function associated with map '${name}' string '${str}'; call ignored (consider setting a default)`);
-					return
-				} if (!functionBlock.IsEnabled()) return; if (functionBlock.GetReturnType() !== 0) { console.warn(`[Construct] Call mapped function: map '${name}' string '${str}' has a return type so cannot be called`); return } const runtime = this._runtime; const eventSheetManager = runtime.GetEventSheetManager(); const currentEvent = eventSheetManager.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiersIncludingParents(); const hasAnySolModifiers = solModifiers.length > 0; if (hasAnySolModifiers) if (functionBlock.IsCopyPicked()) eventSheetManager.PushCopySol(solModifiers);
-				else eventSheetManager.PushCleanSol(solModifiers); const paramResults = []; const callerFunctionBlock = eventSheetManager.FindFirstFunctionBlockParent(currentEvent); if (callerFunctionBlock) { const callerParameters = callerFunctionBlock.GetFunctionParameters(); for (let i = forwardParams, len = callerParameters.length; i < len; ++i)paramResults.push(callerParameters[i].GetValue()) } const calleeParameters = functionBlock.GetFunctionParameters(); for (let i = paramResults.length, len = calleeParameters.length; i < len; ++i)paramResults.push(calleeParameters[i].GetInitialValue());
+					Math.floor(forwardParams); const mapEntry = this._GetFunctionMap(name.toLowerCase(), false); if (!mapEntry) { console.warn(`[Construct] Call mapped function: map name '${name}' not found; call ignored`); return } let functionBlock = mapEntry.strMap.get(str.toLowerCase()); if (!functionBlock) if (mapEntry.defaultFunc) { functionBlock = mapEntry.defaultFunc; forwardParams = 0 } else {
+						console.warn(`[Construct] Call mapped function: no function associated with map '${name}' string '${str}'; call ignored (consider setting a default)`);
+						return
+					} if (!functionBlock.IsEnabled()) return; if (functionBlock.GetReturnType() !== 0) { console.warn(`[Construct] Call mapped function: map '${name}' string '${str}' has a return type so cannot be called`); return } const runtime = this._runtime; const eventSheetManager = runtime.GetEventSheetManager(); const currentEvent = eventSheetManager.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiersIncludingParents(); const hasAnySolModifiers = solModifiers.length > 0; if (hasAnySolModifiers) if (functionBlock.IsCopyPicked()) eventSheetManager.PushCopySol(solModifiers);
+					else eventSheetManager.PushCleanSol(solModifiers); const paramResults = []; const callerFunctionBlock = eventSheetManager.FindFirstFunctionBlockParent(currentEvent); if (callerFunctionBlock) { const callerParameters = callerFunctionBlock.GetFunctionParameters(); for (let i = forwardParams, len = callerParameters.length; i < len; ++i)paramResults.push(callerParameters[i].GetValue()) } const calleeParameters = functionBlock.GetFunctionParameters(); for (let i = paramResults.length, len = calleeParameters.length; i < len; ++i)paramResults.push(calleeParameters[i].GetInitialValue());
 				if (runtime.IsDebugging()) return this._DebugDoCallMappedFunction(eventSheetManager, functionBlock, paramResults, hasAnySolModifiers, solModifiers); else return this._DoCallMappedFunction(eventSheetManager, functionBlock, paramResults, hasAnySolModifiers, solModifiers)
 			}
 		}
@@ -8599,8 +8599,8 @@ void main(void) {
 					this._runtime.GetCurrentLayout().GetLayer(layerParam); return layer ? layer.GetIndex() : -1
 			}, canvassnapshot() { const canvasManager = this._runtime.GetCanvasManager(); if (!canvasManager) return ""; return canvasManager.GetCanvasSnapshotUrl() }, loopindex(name) { const loopStack = this._loopStack; if (!loopStack.IsInLoop()) return 0; if (name) { const loop = loopStack.FindByName(name); return loop ? loop.GetIndex() : 0 } else return loopStack.GetCurrent().GetIndex() }, savestatejson() { return this._runtime.GetLastSaveJsonString() }, callmapped(name,
 				str, ...paramResults) {
-					const mapEntry = this._GetFunctionMap(name.toLowerCase(), false); if (!mapEntry) { console.warn(`[Construct] Call mapped function: map name '${name}' not found; returning 0`); return 0 } let functionBlock = mapEntry.strMap.get(str.toLowerCase()); if (!functionBlock) if (mapEntry.defaultFunc) functionBlock = mapEntry.defaultFunc; else { console.warn(`[Construct] Call mapped function: no function associated with map '${name}' string '${str}'; returning 0 (consider setting a default)`); return 0 } const returnType =
-						functionBlock.GetReturnType(); const defaultReturnValue = functionBlock.GetDefaultReturnValue(); if (returnType === 0) { console.warn(`[Construct] Call mapped function: map '${name}' string '${str}' has no return type so cannot be called from an expression; returning 0`); return 0 } if (!functionBlock.IsEnabled()) return defaultReturnValue; const runtime = this._runtime; const eventSheetManager = runtime.GetEventSheetManager(); const currentEvent = eventSheetManager.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiersIncludingParents();
+				const mapEntry = this._GetFunctionMap(name.toLowerCase(), false); if (!mapEntry) { console.warn(`[Construct] Call mapped function: map name '${name}' not found; returning 0`); return 0 } let functionBlock = mapEntry.strMap.get(str.toLowerCase()); if (!functionBlock) if (mapEntry.defaultFunc) functionBlock = mapEntry.defaultFunc; else { console.warn(`[Construct] Call mapped function: no function associated with map '${name}' string '${str}'; returning 0 (consider setting a default)`); return 0 } const returnType =
+					functionBlock.GetReturnType(); const defaultReturnValue = functionBlock.GetDefaultReturnValue(); if (returnType === 0) { console.warn(`[Construct] Call mapped function: map '${name}' string '${str}' has no return type so cannot be called from an expression; returning 0`); return 0 } if (!functionBlock.IsEnabled()) return defaultReturnValue; const runtime = this._runtime; const eventSheetManager = runtime.GetEventSheetManager(); const currentEvent = eventSheetManager.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiersIncludingParents();
 				const hasAnySolModifiers = solModifiers.length > 0; if (hasAnySolModifiers) if (functionBlock.IsCopyPicked()) eventSheetManager.PushCopySol(solModifiers); else eventSheetManager.PushCleanSol(solModifiers); const calleeParameters = functionBlock.GetFunctionParameters(); for (let i = paramResults.length, len = calleeParameters.length; i < len; ++i)paramResults.push(calleeParameters[i].GetInitialValue()); const callEventBlock = functionBlock.GetEventBlock(); const returnValue = callEventBlock.RunAsExpressionFunctionCall(callEventBlock.GetSolModifiersIncludingParents(),
 					functionBlock.IsCopyPicked(), returnType, defaultReturnValue, ...paramResults); if (hasAnySolModifiers) eventSheetManager.PopSol(solModifiers); return returnValue
 			}, loadingprogress() { return this._runtime.GetAssetManager().GetLoadProgress() }, imageloadingprogress() { if (this._imagesLoadingTotal === 0) return 1; return this._imagesLoadingComplete / this._imagesLoadingTotal }, renderer() { if (this._runtime.GetWebGPURenderer()) return "webgpu"; else return "webgl" }, rendererdetail() {
@@ -8657,7 +8657,7 @@ void main(void) {
 					nextFrame)
 			} _FinishAnimation(reverse) { this._currentFrameIndex = reverse ? 0 : this._currentAnimation.GetFrameCount() - 1; this.SetAnimationPlaying(false); this._animTriggerName = this._currentAnimation.GetName(); this.SetInAnimationTrigger(true); this.DispatchScriptEvent("animationend", false, { animationName: this._animTriggerName }); this.Trigger(C3.Plugins.Sprite.Cnds.OnAnyAnimFinished); this.Trigger(C3.Plugins.Sprite.Cnds.OnAnimFinished); this.SetInAnimationTrigger(false); this._animationRepeats = 0 } _OnFrameChanged(prevFrame,
 				nextFrame, opts) {
-					if (prevFrame === nextFrame) return; const wi = this.GetWorldInfo(); const prevImage = prevFrame.GetImageInfo(); const nextImage = nextFrame.GetImageInfo(); const oldW = prevImage.GetWidth(); const oldH = prevImage.GetHeight(); const newW = nextImage.GetWidth(); const newH = nextImage.GetHeight(); if (opts && opts.onFrameChange) opts.onFrameChange(wi, oldW, oldH, newW, newH); else { if (oldW !== newW) wi.SetWidth(wi.GetWidth() * (newW / oldW)); if (oldH !== newH) wi.SetHeight(wi.GetHeight() * (newH / oldH)) } wi.SetOriginX(nextFrame.GetOriginX());
+				if (prevFrame === nextFrame) return; const wi = this.GetWorldInfo(); const prevImage = prevFrame.GetImageInfo(); const nextImage = nextFrame.GetImageInfo(); const oldW = prevImage.GetWidth(); const oldH = prevImage.GetHeight(); const newW = nextImage.GetWidth(); const newH = nextImage.GetHeight(); if (opts && opts.onFrameChange) opts.onFrameChange(wi, oldW, oldH, newW, newH); else { if (oldW !== newW) wi.SetWidth(wi.GetWidth() * (newW / oldW)); if (oldH !== newH) wi.SetHeight(wi.GetHeight() * (newH / oldH)) } wi.SetOriginX(nextFrame.GetOriginX());
 				wi.SetOriginY(nextFrame.GetOriginY()); wi.SetSourceCollisionPoly(nextFrame.GetCollisionPoly()); wi.SetBboxChanged(); this._currentAnimationFrame = nextFrame; this._currentTexture = nextImage.GetTexture(); this._currentRcTex = nextImage.GetTexRect(); this._currentQuadTex = nextImage.GetTexQuad(); const behaviorInstances = this.GetInstance().GetBehaviorInstances(); for (let i = 0, len = behaviorInstances.length; i < len; ++i)behaviorInstances[i].OnSpriteFrameChanged(prevFrame, nextFrame); this.DispatchScriptEvent("framechange",
 					false, { animationName: this._currentAnimation.GetName(), animationFrame: this._currentFrameIndex }); this.Trigger(C3.Plugins.Sprite.Cnds.OnFrameChanged); this._runtime.UpdateRender()
 			} _StartAnim(from) { this.SetAnimationPlaying(true); this._frameStartTime = this.GetAnimationTime(); if (from === 1 && this._currentFrameIndex !== 0) { this._changeAnimFrameIndex = 0; if (!this.IsInAnimationTrigger()) this._DoChangeAnimFrame() } this._StartTicking() } _SetAnim(animName, from) {
@@ -8665,7 +8665,7 @@ void main(void) {
 					from; this._StartTicking(); if (!this.IsInAnimationTrigger()) this._DoChangeAnimation()
 			} _GetCurrentAnimation() { return this._currentAnimation } _GetCurrentAnimationName() { if (this._changeAnimationName) return this._changeAnimationName; else return this._currentAnimation.GetName() } _SetAnimFrame(frameNum) { if (!isFinite(frameNum)) return; this._changeAnimFrameIndex = frameNum; if (!this.IsInAnimationTrigger()) this._DoChangeAnimFrame() } _GetAnimFrame() { return this._currentFrameIndex } _SetAnimSpeed(s) {
 				this._currentAnimationSpeed =
-				Math.abs(s); this.SetPlayingForwards(s >= 0); if (this._currentAnimationSpeed > 0) this._StartTicking()
+					Math.abs(s); this.SetPlayingForwards(s >= 0); if (this._currentAnimationSpeed > 0) this._StartTicking()
 			} _GetAnimSpeed() { return this.IsPlayingForwards() ? this._currentAnimationSpeed : -this._currentAnimationSpeed } _SetAnimRepeatToFrame(f) { f = C3.clamp(Math.floor(f), 0, this._currentAnimation.GetFrameCount() - 1); this._currentAnimationRepeatTo = f } _GetAnimRepeatToFrame() { return this._currentAnimationRepeatTo } _DoChangeAnimation(opts) {
 				const prevFrame = this._currentAnimationFrame; const animation = this._objectClass.GetAnimationByName(this._changeAnimationName);
 				this._changeAnimationName = ""; if (!animation) return; if (animation === this._currentAnimation && this.IsAnimationPlaying()) return; this._currentAnimation = animation; this.SetPlayingForwards(animation.GetSpeed() >= 0); this._currentAnimationSpeed = Math.abs(animation.GetSpeed()); this._currentAnimationRepeatTo = animation.GetRepeatTo(); this._currentFrameIndex = C3.clamp(this._currentFrameIndex, 0, this._currentAnimation.GetFrameCount() - 1); if (this._changeAnimationFrom === 1) this._currentFrameIndex = 0; this.SetAnimationPlaying(true);
@@ -8774,10 +8774,10 @@ void main(void) {
 		const C3 = self.C3; const C3X = self.C3X; const INITIALLY_VISIBLE = 0; const ORIGIN = 1; const IMAGE_OFFSET_X = 4; const IMAGE_OFFSET_Y = 5; const IMAGE_SCALE_X = 6; const IMAGE_SCALE_Y = 7; const IMAGE_ANGLE = 8; const ENABLE_TILE_RANDOMIZATION = 9; const TILE_XRANDOM = 10; const TILE_YRANDOM = 11; const TILE_ANGLERANDOM = 12; const TILE_BLENDMARGINX = 13; const TILE_BLENDMARGINY = 14; const tempRect = C3.New(C3.Rect); const tempQuad = C3.New(C3.Quad); const rcTex = C3.New(C3.Rect); const qTex = C3.New(C3.Quad); C3.Plugins.TiledBg.Instance = class TiledBgInstance extends C3.SDKWorldInstanceBase {
 			constructor(inst,
 				properties) {
-					super(inst); this._imageOffsetX = 0; this._imageOffsetY = 0; this._imageScaleX = 1; this._imageScaleY = 1; this._imageAngle = 0; this._enableTileRandomization = false; this._tileXRandom = 0; this._tileYRandom = 0; this._tileAngleRandom = 0; this._tileBlendMarginX = 0; this._tileBlendMarginY = 0; this._ownImageInfo = null; if (properties) {
-						this.GetWorldInfo().SetVisible(!!properties[INITIALLY_VISIBLE]); this._imageOffsetX = properties[IMAGE_OFFSET_X]; this._imageOffsetY = properties[IMAGE_OFFSET_Y]; this._imageScaleX = properties[IMAGE_SCALE_X];
-						this._imageScaleY = properties[IMAGE_SCALE_Y]; this._imageAngle = C3.toRadians(properties[IMAGE_ANGLE]); this._enableTileRandomization = !!properties[ENABLE_TILE_RANDOMIZATION]; this._tileXRandom = properties[TILE_XRANDOM]; this._tileYRandom = properties[TILE_YRANDOM]; this._tileAngleRandom = properties[TILE_ANGLERANDOM]; this._tileBlendMarginX = properties[TILE_BLENDMARGINX]; this._tileBlendMarginY = properties[TILE_BLENDMARGINY]
-					}
+				super(inst); this._imageOffsetX = 0; this._imageOffsetY = 0; this._imageScaleX = 1; this._imageScaleY = 1; this._imageAngle = 0; this._enableTileRandomization = false; this._tileXRandom = 0; this._tileYRandom = 0; this._tileAngleRandom = 0; this._tileBlendMarginX = 0; this._tileBlendMarginY = 0; this._ownImageInfo = null; if (properties) {
+					this.GetWorldInfo().SetVisible(!!properties[INITIALLY_VISIBLE]); this._imageOffsetX = properties[IMAGE_OFFSET_X]; this._imageOffsetY = properties[IMAGE_OFFSET_Y]; this._imageScaleX = properties[IMAGE_SCALE_X];
+					this._imageScaleY = properties[IMAGE_SCALE_Y]; this._imageAngle = C3.toRadians(properties[IMAGE_ANGLE]); this._enableTileRandomization = !!properties[ENABLE_TILE_RANDOMIZATION]; this._tileXRandom = properties[TILE_XRANDOM]; this._tileYRandom = properties[TILE_YRANDOM]; this._tileAngleRandom = properties[TILE_ANGLERANDOM]; this._tileBlendMarginX = properties[TILE_BLENDMARGINX]; this._tileBlendMarginY = properties[TILE_BLENDMARGINY]
+				}
 			} Release() { this._ReleaseOwnImage(); super.Release() } _ReleaseOwnImage() {
 				if (this._ownImageInfo) {
 					this._ownImageInfo.Release();
@@ -8982,7 +8982,7 @@ void main(void) {
 			this._startX = x; this._startY = y; this._x = x; this._y = y; this._lastX = x; this._lastY = y
 		} Update(nowTime, x, y, width, height, pressure) { this._lastTime = this._time; this._time = nowTime; this._lastX = this._x; this._lastY = this._y; this._x = x; this._y = y; this._width = width; this._height = height; this._pressure = pressure; if (!this._isTooFarForHold && C3.distanceTo(this._startX, this._startY, this._x, this._y) >= GESTURE_HOLD_THRESHOLD) this._isTooFarForHold = true } GetId() { return this._pointerId } GetStartIndex() { return this._startIndex } GetTime() { return this._time } _SetLastTime(t) {
 			this._lastTime =
-			t
+				t
 		} GetX() { return this._x } GetY() { return this._y } GetSpeed() { const dist = C3.distanceTo(this._x, this._y, this._lastX, this._lastY); const dt = (this._time - this._lastTime) / 1E3; if (dt > 0) return dist / dt; else return 0 } GetAngle() { return C3.angleTo(this._lastX, this._lastY, this._x, this._y) } GetWidth() { return this._width } GetHeight() { return this._height } GetPressure() { return this._pressure } ShouldTriggerHold(nowTime) {
 			if (this._hasTriggeredHold) return false; if (nowTime - this._startTime >= GESTURE_HOLD_TIMEOUT && !this._isTooFarForHold &&
 				C3.distanceTo(this._startX, this._startY, this._x, this._y) < GESTURE_HOLD_THRESHOLD) { this._hasTriggeredHold = true; return true } return false
@@ -9069,8 +9069,8 @@ void main(void) {
 			} Draw(renderer) {
 				const wi = this.GetWorldInfo(); this._UpdateTextSize(); const texture = this._rendererText.GetTexture(); if (!texture) return; const layer = wi.GetLayer(); if (wi.GetAngle() === 0 && layer.GetAngle() === 0 && wi.GetTotalZElevation() ===
 					0 && !wi.HasMesh() && layer.RendersIn2DMode()) {
-						const quad = wi.GetBoundingQuad(); const [dl, dt] = layer.LayerToDrawSurface(quad.getTlx(), quad.getTly()); const [dr, db] = layer.LayerToDrawSurface(quad.getBrx(), quad.getBry()); const offX = dl - Math.round(dl); const offY = dt - Math.round(dt); tempRect.set(dl, dt, dr, db); tempRect.offset(-offX, -offY); tempQuad.setFromRect(tempRect); const [rtWidth, rtHeight] = renderer.GetRenderTargetSize(renderer.GetRenderTarget()); this._runtime.GetCanvasManager().SetDeviceTransform(renderer, rtWidth,
-							rtHeight); renderer.SetTexture(texture); renderer.Quad3(tempQuad, this._rendererText.GetTexRect()); layer._SetTransform(renderer)
+					const quad = wi.GetBoundingQuad(); const [dl, dt] = layer.LayerToDrawSurface(quad.getTlx(), quad.getTly()); const [dr, db] = layer.LayerToDrawSurface(quad.getBrx(), quad.getBry()); const offX = dl - Math.round(dl); const offY = dt - Math.round(dt); tempRect.set(dl, dt, dr, db); tempRect.offset(-offX, -offY); tempQuad.setFromRect(tempRect); const [rtWidth, rtHeight] = renderer.GetRenderTargetSize(renderer.GetRenderTarget()); this._runtime.GetCanvasManager().SetDeviceTransform(renderer, rtWidth,
+						rtHeight); renderer.SetTexture(texture); renderer.Quad3(tempQuad, this._rendererText.GetTexRect()); layer._SetTransform(renderer)
 				} else { renderer.SetTexture(texture); if (wi.HasMesh()) this._DrawMesh(wi, renderer); else this._DrawStandard(wi, renderer) }
 			} _DrawStandard(wi, renderer) { let quad = wi.GetBoundingQuad(); if (this._runtime.IsPixelRoundingEnabled()) quad = this._PixelRoundQuad(quad); renderer.Quad3(quad, this._rendererText.GetTexRect()) } _DrawMesh(wi, renderer) {
 				const transformedMesh = wi.GetTransformedMesh(); if (wi.IsMeshChanged()) {
@@ -9107,7 +9107,7 @@ void main(void) {
 				this._StartTicking()
 			} _CancelTypewriter() { this._typewriterStartTime = -1; this._typewriterEndTime = -1; this._typewriterLength = 0; this._rendererText.SetDrawMaxCharacterCount(-1); this._StopTicking() } _FinishTypewriter() { if (this._typewriterEndTime === -1) return; this._CancelTypewriter(); this.Trigger(C3.Plugins.Text.Cnds.OnTypewriterTextFinished); this._runtime.UpdateRender() } _SetFontFace(face) { if (this._faceName === face) return; this._faceName = face; this._rendererText.SetFontName(face); this._runtime.UpdateRender() } _GetFontFace() { return this._faceName } _SetBold(b) {
 				b =
-				!!b; if (this._isBold === b) return; this._isBold = b; this._rendererText.SetBold(b); this._runtime.UpdateRender()
+					!!b; if (this._isBold === b) return; this._isBold = b; this._rendererText.SetBold(b); this._runtime.UpdateRender()
 			} _IsBold() { return this._isBold } _SetItalic(i) { i = !!i; if (this._isItalic === i) return; this._isItalic = i; this._rendererText.SetItalic(i); this._runtime.UpdateRender() } _IsItalic() { return this._isItalic } _SetFontSize(size) { if (this._ptSize === size) return; this._ptSize = size; this._runtime.UpdateRender() } _GetFontSize() { return this._ptSize } _SetFontColor(color) {
 				if (this._color.equalsIgnoringAlpha(color)) return; this._color.copyRgb(color);
 				this._rendererText.SetColor(this._color); this._runtime.UpdateRender()
@@ -9214,7 +9214,7 @@ void main(void) {
 				const runtime = this._runtime; const eventSheetManager =
 					runtime.GetEventSheetManager(); const currentEvent = runtime.GetCurrentEvent(); const solModifiers = currentEvent.GetSolModifiers(); const eventStack = runtime.GetEventStack(); const oldFrame = eventStack.GetCurrentStackFrame(); const newFrame = eventStack.Push(currentEvent); const forDepth = ++this._forDepth; const forX = this._forX; const forY = this._forY; const forZ = this._forZ; const cx = this._cx; const cy = this._cy; const cz = this._cz; if (forDepth === this._forX.length) { forX.push(0); forY.push(0); forZ.push(0) } else {
 						forX[forDepth] =
-						0; forY[forDepth] = 0; forZ[forDepth] = 0
+							0; forY[forDepth] = 0; forZ[forDepth] = 0
 					} runtime.SetDebuggingEnabled(false); if (dims === 0) for (let x = 0; x < cx; ++x)for (let y = 0; y < cy; ++y)for (let z = 0; z < cz; ++z) { forX[forDepth] = x; forY[forDepth] = y; forZ[forDepth] = z; DoForEachTrigger(eventSheetManager, currentEvent, solModifiers, oldFrame, newFrame) } else if (dims === 1) for (let x = 0; x < cx; ++x)for (let y = 0; y < cy; ++y) { forX[forDepth] = x; forY[forDepth] = y; DoForEachTrigger(eventSheetManager, currentEvent, solModifiers, oldFrame, newFrame) } else for (let x = 0; x < cx; ++x) {
 						forX[forDepth] = x; DoForEachTrigger(eventSheetManager,
 							currentEvent, solModifiers, oldFrame, newFrame)
@@ -9414,7 +9414,7 @@ void main(void) {
 				} finally { if (state) state["placeholder"] = this._runtime.GetTickCountNoSave() }
 			}, async PlayAtObjectByName(folder, filename,
 				looping, vol, objectClass, innerAngle, outerAngle, outerGain, tagStr) {
-					if (this._isSilent) return; if (this._isSilent) return; if (!objectClass) return; const inst = objectClass.GetFirstPicked(); if (!inst || !inst.GetWorldInfo()) return; const wi = inst.GetWorldInfo(); const layerAngle = wi.GetLayer().GetAngle(); const [x, y] = this.rotatePtAround(wi.GetX(), wi.GetY(), -layerAngle, this._listenerPos[0], this._listenerPos[1]); const isMusic = folder === 1; const info = this._runtime.GetAssetManager().GetProjectAudioFileUrl(filename) || this._remoteUrls.get(filename.toLowerCase());
+				if (this._isSilent) return; if (this._isSilent) return; if (!objectClass) return; const inst = objectClass.GetFirstPicked(); if (!inst || !inst.GetWorldInfo()) return; const wi = inst.GetWorldInfo(); const layerAngle = wi.GetLayer().GetAngle(); const [x, y] = this.rotatePtAround(wi.GetX(), wi.GetY(), -layerAngle, this._listenerPos[0], this._listenerPos[1]); const isMusic = folder === 1; const info = this._runtime.GetAssetManager().GetProjectAudioFileUrl(filename) || this._remoteUrls.get(filename.toLowerCase());
 				if (!info) return; const nextPlayTime = this._nextPlayTime; this._nextPlayTime = 0; const state = this._MaybeMarkAsPlaying(filename, tagStr, isMusic, looping !== 0, this.DbToLinear(vol)); try {
 					await this.PostToDOMAsync("play", {
 						"originalUrl": filename, "url": info.url, "type": info.type, "isMusic": isMusic, "tags": this._SplitTags(tagStr), "isLooping": looping !== 0, "vol": this.DbToLinear(vol), "pos": 0, "off": nextPlayTime, "trueClock": !!self["C3_GetAudioContextCurrentTime"], "panning": {
@@ -9492,7 +9492,7 @@ void main(void) {
 		const C3 = self.C3; const C3X = self.C3X; const IBehaviorInstance = self.IBehaviorInstance; C3.Behaviors.Flash.Instance = class FlashInstance extends C3.SDKBehaviorInstanceBase {
 			constructor(behInst, properties) { super(behInst); this._onTime = 0; this._offTime = 0; this._stage = 0; this._stageTimeLeft = 0; this._timeLeft = 0; this._StartTicking() } Release() { super.Release() } _Flash(on, off, dur) { this._onTime = on; this._offTime = off; this._stage = 1; this._stageTimeLeft = off; this._timeLeft = dur; this._inst.GetWorldInfo().SetVisible(false); this._runtime.UpdateRender() } _StopFlashing() {
 				this._timeLeft =
-				0; this._inst.GetWorldInfo().SetVisible(true); this._runtime.UpdateRender()
+					0; this._inst.GetWorldInfo().SetVisible(true); this._runtime.UpdateRender()
 			} _IsFlashing() { return this._timeLeft > 0 } SaveToJson() { return { "on": this._onTime, "off": this._offTime, "s": this._stage, "stl": this._stageTimeLeft, "tl": this._timeLeft } } LoadFromJson(o) { this._onTime = o["on"]; this._offTime = o["off"]; this._stage = o["s"]; this._stageTimeLeft = o["stl"]; this._timeLeft = o["tl"] === null ? Infinity : o["tl"] } Tick() {
 				if (this._timeLeft <= 0) return; const dt = this._runtime.GetDt(this._inst); this._timeLeft -= dt; if (this._timeLeft <=
 					0) { this._timeLeft = 0; this._inst.GetWorldInfo().SetVisible(true); this._runtime.UpdateRender(); this.DispatchScriptEvent("flashend"); return this.DebugTrigger(C3.Behaviors.Flash.Cnds.OnFlashEnded) } this._stageTimeLeft -= dt; if (this._stageTimeLeft <= 0) { if (this._stage === 0) { this._inst.GetWorldInfo().SetVisible(false); this._stage = 1; this._stageTimeLeft += this._offTime } else { this._inst.GetWorldInfo().SetVisible(true); this._stage = 0; this._stageTimeLeft += this._onTime } this._runtime.UpdateRender() }
@@ -9633,17 +9633,17 @@ void main(void) {
 				this._AddTween(tween, args.property); return tween
 			} _MaybeRemoveFromActiveTweenMap(tween) { const id = tween.GetId(); if (this._activeTweens.has(id)) { const tweenArray = this._activeTweens.get(id); if (tweenArray) { const index = tweenArray.indexOf(tween); if (index !== -1) tweenArray.splice(index, 1) } } } ReleaseTween(tween, complete = false) { this._MaybeRemoveFromActiveTweenMap(tween); if (tween.IsReleased()) return; if (this._IsInWaitingList(tween)) return; tween.Stop(complete); this._AddToWaitingList(tween) } ReleaseTweens(indexProperty,
 				complete = false) {
-					if (C3.IsFiniteNumber(indexProperty)) { const stringProperty = NAMESPACE.Maps.GetPropertyFromIndex(indexProperty); if (!this._activeTweens.has(stringProperty)) return; const tweenArray = this._activeTweens.get(stringProperty); const finishingTween = this.GetFinishingTween(); for (const tween of tweenArray) { if (tween === finishingTween) continue; if (tween.IsReleased()) continue; if (this._IsInWaitingList(tween)) continue; tween.Stop(complete); tween.Release() } C3.clearArray(tweenArray) } else {
-						const finishingTween =
-							this.GetFinishingTween(); for (const tween of this.AllTweens()) { if (tween === finishingTween) continue; if (tween.IsReleased()) continue; if (this._IsInWaitingList(tween)) continue; tween.Stop(complete); tween.Release() } for (const property of this._activeTweens.keys()) { C3.clearArray(this._activeTweens.get(property)); this._activeTweens.delete(property) } this._activeTweens.clear()
-					}
+				if (C3.IsFiniteNumber(indexProperty)) { const stringProperty = NAMESPACE.Maps.GetPropertyFromIndex(indexProperty); if (!this._activeTweens.has(stringProperty)) return; const tweenArray = this._activeTweens.get(stringProperty); const finishingTween = this.GetFinishingTween(); for (const tween of tweenArray) { if (tween === finishingTween) continue; if (tween.IsReleased()) continue; if (this._IsInWaitingList(tween)) continue; tween.Stop(complete); tween.Release() } C3.clearArray(tweenArray) } else {
+					const finishingTween =
+						this.GetFinishingTween(); for (const tween of this.AllTweens()) { if (tween === finishingTween) continue; if (tween.IsReleased()) continue; if (this._IsInWaitingList(tween)) continue; tween.Stop(complete); tween.Release() } for (const property of this._activeTweens.keys()) { C3.clearArray(this._activeTweens.get(property)); this._activeTweens.delete(property) } this._activeTweens.clear()
+				}
 			} ReleaseAndCompleteTween(tween) { this.ReleaseTween(tween, true) } ReleaseAndCompleteTweens() { this.ReleaseTweens(NaN, true) } GetPropertyValueByIndex(index) { switch (index) { case ENABLED: return this._enabled } } SetPropertyValueByIndex(index,
 				value) { switch (index) { case ENABLED: this._enabled = !!value; break } } _GetBehaviorType(tween) { const instance = tween.GetInstance(); const behaviorInstances = instance.GetBehaviorInstances(); for (const behaviorInstance of behaviorInstances) { const behaviorType = behaviorInstance.GetBehaviorType(); if (behaviorType.GetInstanceSdkCtor() === this.constructor) return behaviorType } } Trigger(method, runtime, inst, behaviorType) { if (this._runtime) return super.Trigger(method); else return runtime.Trigger(method, inst, behaviorType) } _FinishTriggers(tween) {
 					this._finishingTween =
-					tween; NAMESPACE.Cnds.SetFinishingTween(tween); let instance; let runtime; if (!this.GetRuntime()) { instance = tween.GetInstance(); if (!instance) return; if (instance && instance.IsDestroyed()) return; runtime = instance.GetRuntime(); const behaviorType = this._GetBehaviorType(tween); this.Trigger(NAMESPACE.Cnds.OnTweensFinished, runtime, instance, behaviorType); this.Trigger(NAMESPACE.Cnds.OnAnyTweensFinished, runtime, instance, behaviorType); tween.Stop() } else {
-						instance = this._inst; runtime = this._runtime; this.Trigger(NAMESPACE.Cnds.OnTweensFinished);
-						this.Trigger(NAMESPACE.Cnds.OnAnyTweensFinished); this.ReleaseTween(tween)
-					} this._finishingTween = null; NAMESPACE.Cnds.SetFinishingTween(null); if (tween.GetDestroyInstanceOnComplete()) runtime.DestroyInstance(instance)
+						tween; NAMESPACE.Cnds.SetFinishingTween(tween); let instance; let runtime; if (!this.GetRuntime()) { instance = tween.GetInstance(); if (!instance) return; if (instance && instance.IsDestroyed()) return; runtime = instance.GetRuntime(); const behaviorType = this._GetBehaviorType(tween); this.Trigger(NAMESPACE.Cnds.OnTweensFinished, runtime, instance, behaviorType); this.Trigger(NAMESPACE.Cnds.OnAnyTweensFinished, runtime, instance, behaviorType); tween.Stop() } else {
+							instance = this._inst; runtime = this._runtime; this.Trigger(NAMESPACE.Cnds.OnTweensFinished);
+							this.Trigger(NAMESPACE.Cnds.OnAnyTweensFinished); this.ReleaseTween(tween)
+						} this._finishingTween = null; NAMESPACE.Cnds.SetFinishingTween(null); if (tween.GetDestroyInstanceOnComplete()) runtime.DestroyInstance(instance)
 				} _AddTween(tween, indexProperty) { const stringProperty = NAMESPACE.Maps.GetPropertyFromIndex(indexProperty); if (!this._activeTweens.has(stringProperty)) this._activeTweens.set(stringProperty, []); const tweenArray = this._activeTweens.get(stringProperty); tweenArray.push(tween) } _AddToWaitingList(tween) {
 					const id =
 						tween.GetId(); if (!this._waitingForReleaseTweens.has(id)) this._waitingForReleaseTweens.set(id, []); this._waitingForReleaseTweens.get(id).push(tween)
@@ -10060,7 +10060,7 @@ void main(void) {
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => and("Blance: ", v0.GetValue());
+			return () => and("◎ ", v0.GetValue());
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
