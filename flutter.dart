@@ -7,12 +7,23 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // نقطة تشغيل التطبيق.
-void main() {
+Future<void> main() async {
   // تأكد أن Flutter engine جهز كل الـ bindings قبل أي عمل async.
   WidgetsFlutterBinding.ensureInitialized();
+
+  // قفل التطبيق على الوضع العرضي فقط (Landscape).
+  // لو حابب تسمح بالاتجاهين العرضيين اترك السطرين كما هما.
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+
+  // جعل التطبيق Fullscreen علشان اللعبة تاخد أكبر مساحة ممكنة.
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   // تشغيل التطبيق الرئيسي.
   runApp(const FishermanApp());
@@ -42,6 +53,10 @@ class FishermanWebViewScreen extends StatefulWidget {
 }
 
 class _FishermanWebViewScreenState extends State<FishermanWebViewScreen> {
+  // لو false: نخفي شريط الحالة وأزرار الاختبار وتظهر اللعبة Fullscreen.
+  // لو true: نظهر أدوات المتابعة والاختبار كما هي.
+  static const bool showDebugPanel = false;
+
   // كنترولر WebView: عن طريقه نفتح الرابط وننفذ JavaScript.
   late final WebViewController _controller;
 
@@ -215,55 +230,59 @@ class _FishermanWebViewScreenState extends State<FishermanWebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Fisherman + Flutter Wallet')),
+      appBar: showDebugPanel
+          ? AppBar(title: const Text('Fisherman + Flutter Wallet'))
+          : null,
       body: Column(
         children: [
           // شريط حالة بسيط يعرض حالة الجسر والرصيد وآخر event.
-          Container(
-            width: double.infinity,
-            color: Colors.blueGrey.shade50,
-            padding: const EdgeInsets.all(12),
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 8,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Text('Bridge: ${_bridgeReady ? "READY" : "NOT READY"}'),
-                Text('Balance: $_balance'),
-                Text('Last event: $_lastEvent'),
-              ],
+          if (showDebugPanel)
+            Container(
+              width: double.infinity,
+              color: Colors.blueGrey.shade50,
+              padding: const EdgeInsets.all(12),
+              child: Wrap(
+                spacing: 16,
+                runSpacing: 8,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text('Bridge: ${_bridgeReady ? "READY" : "NOT READY"}'),
+                  Text('Balance: $_balance'),
+                  Text('Last event: $_lastEvent'),
+                ],
+              ),
             ),
-          ),
 
           // مساحة اللعبة نفسها داخل WebView.
           Expanded(child: WebViewWidget(controller: _controller)),
 
           // أزرار اختبار يدوية للتأكد أن الربط شغال.
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-            child: Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _setBalance(5000),
-                  child: const Text('Set 5000'),
-                ),
-                ElevatedButton(
-                  onPressed: () => _adjustBalance(100),
-                  child: const Text('+100'),
-                ),
-                ElevatedButton(
-                  onPressed: () => _adjustBalance(-50),
-                  child: const Text('-50'),
-                ),
-                OutlinedButton(
-                  onPressed: _requestGameToPushState,
-                  child: const Text('Sync From Game'),
-                ),
-              ],
+          if (showDebugPanel)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _setBalance(5000),
+                    child: const Text('Set 5000'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _adjustBalance(100),
+                    child: const Text('+100'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _adjustBalance(-50),
+                    child: const Text('-50'),
+                  ),
+                  OutlinedButton(
+                    onPressed: _requestGameToPushState,
+                    child: const Text('Sync From Game'),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
