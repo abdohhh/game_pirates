@@ -14,18 +14,9 @@ body {
 }
 
 canvas {
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 100vw !important;
-	height: 56.25vw !important;
-	max-width: 177.7778vh !important;
-	max-height: 100vh !important;
 	display: block;
 	background: transparent;
 	background-color: transparent !important;
-	object-fit: contain;
 }
 
 html, body, canvas {

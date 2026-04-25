@@ -30,6 +30,7 @@ class GameWebView extends StatefulWidget {
 class _GameWebViewState extends State<GameWebView>
     with SingleTickerProviderStateMixin {
   late final WebViewController _controller;
+  late final Widget _webView;
   late final AnimationController _bgController; // متحكم حركة السماء
   Timer? _bootstrapSyncTimer;
   bool _bridgeReady = false;
@@ -74,6 +75,12 @@ class _GameWebViewState extends State<GameWebView>
         ),
       )
       ..loadRequest(Uri.parse(gameUrl));
+
+    // ثبّت عنصر الـ WebView مرة واحدة لتجنب إعادة إنشاء PlatformView بنفس id.
+    _webView = WebViewWidget(
+      key: const ValueKey('fisherman-webview'),
+      controller: _controller,
+    );
 
     Future.microtask(() async {
       await _forceTransparentWebPage();
@@ -161,16 +168,7 @@ class _GameWebViewState extends State<GameWebView>
       overflow: hidden !important;
     }
     canvas {
-      position: fixed !important;
-      left: 50% !important;
-      top: 50% !important;
-      transform: translate(-50%, -50%) !important;
-      width: 100vw !important;
-      height: 56.25vw !important;
-      max-width: 177.7778vh !important;
-      max-height: 100vh !important;
       display: block !important;
-      object-fit: contain !important;
     }
   `;
   document.head.appendChild(style);
@@ -246,7 +244,7 @@ class _GameWebViewState extends State<GameWebView>
               ),
             ),
           ),
-          Positioned.fill(child: WebViewWidget(controller: _controller)),
+          Positioned.fill(child: _webView),
         ],
       ),
     );
