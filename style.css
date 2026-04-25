@@ -18,6 +18,16 @@ body {
 	animation: gifBgPan 24s linear infinite;
 }
 
+canvas {
+	position: fixed;
+	inset: 0;
+	width: 100vw !important;
+	height: 100vh !important;
+	display: block;
+	background: transparent;
+	object-fit: fill;
+}
+
 @keyframes gifBgPan {
 	from {
 		background-position: 0 0;

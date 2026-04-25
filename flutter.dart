@@ -1,288 +1,116 @@
-// ملف Flutter جاهز للربط مع لعبة الويب عبر WebView.
-// الفكرة الأساسية:
-// 1) نفتح اللعبة داخل WebView.
-// 2) نستقبل رسائل من الجسر JavaScript.
-// 3) نبعث أوامر للجسر لتعديل العملة (الرصيد).
-
 import 'dart:convert';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-// نقطة تشغيل التطبيق.
-Future<void> main() async {
-  // تأكد أن Flutter engine جهز كل الـ bindings قبل أي عمل async.
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // قفل التطبيق على الوضع العرضي فقط (Landscape).
-  // لو حابب تسمح بالاتجاهين العرضيين اترك السطرين كما هما.
+  // ضبط التطبيق على الوضع العرضي وإخفاء شريط النظام
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-
-  // جعل التطبيق Fullscreen علشان اللعبة تاخد أكبر مساحة ممكنة.
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  // تشغيل التطبيق الرئيسي.
-  runApp(const FishermanApp());
+  runApp(
+    const MaterialApp(debugShowCheckedModeBanner: false, home: GameWebView()),
+  );
 }
 
-// الـ App root: هنا إعداد الثيم والشاشة الرئيسية.
-class FishermanApp extends StatelessWidget {
-  const FishermanApp({super.key});
+class GameWebView extends StatefulWidget {
+  const GameWebView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Fisherman Wallet Bridge',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
-      home: const FishermanWebViewScreen(),
-    );
-  }
+  // أضفنا SingleTickerProviderStateMixin لدعم الـ Animation
+  State<GameWebView> createState() => _GameWebViewState();
 }
 
-// شاشة الربط: فيها WebView + حالة الرصيد + أزرار اختبار.
-class FishermanWebViewScreen extends StatefulWidget {
-  const FishermanWebViewScreen({super.key});
-
-  @override
-  State<FishermanWebViewScreen> createState() => _FishermanWebViewScreenState();
-}
-
-class _FishermanWebViewScreenState extends State<FishermanWebViewScreen> {
-  // لو false: نخفي شريط الحالة وأزرار الاختبار وتظهر اللعبة Fullscreen.
-  // لو true: نظهر أدوات المتابعة والاختبار كما هي.
-  static const bool showDebugPanel = false;
-
-  // كنترولر WebView: عن طريقه نفتح الرابط وننفذ JavaScript.
+class _GameWebViewState extends State<GameWebView>
+    with SingleTickerProviderStateMixin {
   late final WebViewController _controller;
+  late final AnimationController _bgController; // متحكم حركة السماء
 
-  // حالة محلية في Flutter لعرض معلومات الجسر والرصيد.
-  int _balance = 0;
-  bool _bridgeReady = false;
-  String _lastEvent = 'idle';
-  Timer? _bootstrapSyncTimer;
-
-  // مهم جدا: عدّل الرابط ده إلى رابط لعبتك الحقيقي.
-  static const String gameUrl = 'https://your-domain.com/';
+  final String gameUrl = 'https://rococo-torrone-48b523.netlify.app/';
 
   @override
   void initState() {
     super.initState();
 
-    // إعداد الـ WebView بالكامل عند فتح الشاشة.
+    // إعداد حركة الخلفية
+    // يمكنك تعديل الثواني (20) للتحكم في سرعة حركة السحاب
+    _bgController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 20),
+    )..repeat(); // repeat تجعل الحركة تستمر للأبد (Infinite Loop)
+
     _controller = WebViewController()
-      // نسمح بتشغيل JavaScript لأن الجسر معتمد عليه.
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      // قناة الرسائل الأساسية المتوقعة من bridge في اللعبة.
+      // الأهم: جعل الويب فيو "شفاف" لتظهر صورتنا من تحته
+      ..setBackgroundColor(Colors.transparent)
       ..addJavaScriptChannel(
         'FishermanBridge',
-        onMessageReceived: (msg) => _onBridgeMessage(msg.message),
+        onMessageReceived: (msg) {
+          try {
+            final data = jsonDecode(msg.message);
+            print('Current Balance from Game: ${data['balance']}');
+          } catch (e) {
+            debugPrint('Error: $e');
+          }
+        },
       )
-      // قناة بديلة (احتياط) لأن bridge عندك بيدور على أكثر من اسم.
-      ..addJavaScriptChannel(
-        'FlutterBridge',
-        onMessageReceived: (msg) => _onBridgeMessage(msg.message),
-      )
-      // قناة بديلة ثالثة (احتياط إضافي).
-      ..addJavaScriptChannel(
-        'fishermanBridge',
-        onMessageReceived: (msg) => _onBridgeMessage(msg.message),
-      )
-      // متابعة أحداث الملاحة.
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          // لما الصفحة تخلص تحميل: نسحب الحالة الحالية من JavaScript.
-          onPageFinished: (_) async {
-            await _syncInitialStateFromJs();
-            _startBootstrapSyncLoop();
-          },
-        ),
-      )
-      // فتح اللعبة داخل WebView.
       ..loadRequest(Uri.parse(gameUrl));
-  }
-
-  // Retry loop بسيط في البداية لو الجسر اتأخر في التجهيز.
-  void _startBootstrapSyncLoop() {
-    _bootstrapSyncTimer?.cancel();
-
-    var attempts = 0;
-    const maxAttempts = 20;
-
-    _bootstrapSyncTimer = Timer.periodic(const Duration(milliseconds: 700), (
-      timer,
-    ) async {
-      if (_bridgeReady || attempts >= maxAttempts) {
-        timer.cancel();
-        return;
-      }
-
-      attempts++;
-      await _syncInitialStateFromJs();
-    });
-  }
-
-  // استقبال الرسالة القادمة من JavaScript channel.
-  void _onBridgeMessage(String rawMessage) {
-    try {
-      // الرسالة جاية JSON string، نحولها إلى Map.
-      final decoded = jsonDecode(rawMessage);
-      if (decoded is! Map<String, dynamic>) return;
-
-      // استخراج أهم حقول البروتوكول.
-      final type = decoded['type']?.toString() ?? '';
-      final balanceValue = _toInt(decoded['balance']);
-      final readyValue = decoded['ready'] == true;
-
-      // تحديث الواجهة المحلية.
-      setState(() {
-        _balance = balanceValue;
-        _bridgeReady = readyValue;
-        _lastEvent = type.isEmpty ? 'unknown' : type;
-      });
-    } catch (_) {
-      // لو الرسالة malformed ما نكسرش التطبيق.
-    }
-  }
-
-  // نسحب الحالة المبدئية من الجسر JavaScript بعد تحميل الصفحة.
-  Future<void> _syncInitialStateFromJs() async {
-    // بننادي window.FishermanFlutterBridge.getState() ونرجع JSON string.
-    final raw = await _controller.runJavaScriptReturningResult('''
-(() => {
-	const bridge = window.FishermanFlutterBridge;
-	if (!bridge || !bridge.getState) return "null";
-	return JSON.stringify(bridge.getState());
-})();
-''');
-
-    // بعض المنصات ترجع النص محاط باقتباس إضافي، فننظفه.
-    final normalized = _normalizeJsResult(raw);
-    if (normalized == 'null') return;
-
-    // تحويل النص إلى JSON واستخراج القيم.
-    final decoded = jsonDecode(normalized);
-    if (decoded is! Map<String, dynamic>) return;
-
-    setState(() {
-      _bridgeReady = decoded['ready'] == true;
-      _balance = _toInt(decoded['balance']);
-      _lastEvent = 'initial-sync';
-    });
-  }
-
-  // إرسال أمر مباشر لضبط الرصيد من Flutter إلى اللعبة.
-  Future<void> _setBalance(int value) async {
-    await _controller.runJavaScript(
-      'window.FishermanFlutterBridge?.setBalance($value, "flutter-set");',
-    );
-  }
-
-  // إرسال أمر زيادة/نقصان الرصيد.
-  Future<void> _adjustBalance(int delta) async {
-    await _controller.runJavaScript(
-      'window.FishermanFlutterBridge?.adjustBalance($delta, "flutter-adjust");',
-    );
-  }
-
-  // طلب مزامنة من جهة اللعبة (لو اللعبة عدلت الرصيد داخليًا).
-  Future<void> _requestGameToPushState() async {
-    await _controller.runJavaScript(
-      'window.FishermanFlutterBridge?.syncFromGame("flutter-sync-request");',
-    );
-  }
-
-  // تحويل آمن لأي قيمة رقمية جاية من JSON إلى int.
-  int _toInt(Object? v) {
-    if (v is int) return v;
-    if (v is double) return v.round();
-    return int.tryParse(v?.toString() ?? '') ?? 0;
-  }
-
-  // تنظيف ناتج JavaScript Returning Result بين Android/iOS.
-  String _normalizeJsResult(Object raw) {
-    final text = raw.toString().trim();
-
-    // لو النتيجة String مغلف داخل String JSON، نفك التغليف.
-    if ((text.startsWith('"') && text.endsWith('"')) ||
-        (text.startsWith("'") && text.endsWith("'"))) {
-      try {
-        final unwrapped = jsonDecode(text);
-        if (unwrapped is String) return unwrapped;
-      } catch (_) {
-        // لو فشل الفك نرجع النص الأصلي.
-      }
-    }
-
-    return text;
   }
 
   @override
   void dispose() {
-    _bootstrapSyncTimer?.cancel();
+    // مهم جداً: إغلاق المتحكم عند الخروج من الشاشة لمنع تسريب الذاكرة (Memory Leak)
+    _bgController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showDebugPanel
-          ? AppBar(title: const Text('Fisherman + Flutter Wallet'))
-          : null,
-      body: Column(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        // استخدمنا Stack لوضع الويب فيو فوق الخلفية
         children: [
-          // شريط حالة بسيط يعرض حالة الجسر والرصيد وآخر event.
-          if (showDebugPanel)
-            Container(
-              width: double.infinity,
-              color: Colors.blueGrey.shade50,
-              padding: const EdgeInsets.all(12),
-              child: Wrap(
-                spacing: 16,
-                runSpacing: 8,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text('Bridge: ${_bridgeReady ? "READY" : "NOT READY"}'),
-                  Text('Balance: $_balance'),
-                  Text('Last event: $_lastEvent'),
-                ],
+          // 1. طبقة الخلفية المتحركة (السماء)
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _bgController,
+              builder: (context, child) {
+                return Stack(
+                  children: [
+                    // الصورة الأولى تتحرك لليسار
+                    FractionalTranslation(
+                      translation: Offset(-_bgController.value, 0),
+                      child: child,
+                    ),
+                    // الصورة الثانية تكمل الفراغ فوراً لتبدو متصلة
+                    FractionalTranslation(
+                      translation: Offset(1 - _bgController.value, 0),
+                      child: child,
+                    ),
+                  ],
+                );
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      'https://images.unsplash.com/photo-1570483358100-6d222cdea6ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreXxlbnwwfHwwfHx8MA%3D%3D',
+                    ),
+                    fit: BoxFit.cover, // لتغطية الشاشة بالكامل
+                  ),
+                ),
               ),
             ),
+          ),
 
-          // مساحة اللعبة نفسها داخل WebView.
-          Expanded(child: WebViewWidget(controller: _controller)),
-
-          // أزرار اختبار يدوية للتأكد أن الربط شغال.
-          if (showDebugPanel)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => _setBalance(5000),
-                    child: const Text('Set 5000'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _adjustBalance(100),
-                    child: const Text('+100'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _adjustBalance(-50),
-                    child: const Text('-50'),
-                  ),
-                  OutlinedButton(
-                    onPressed: _requestGameToPushState,
-                    child: const Text('Sync From Game'),
-                  ),
-                ],
-              ),
-            ),
+          // 2. طبقة اللعبة (WebView)
+          Positioned.fill(child: WebViewWidget(controller: _controller)),
         ],
       ),
     );
