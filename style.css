@@ -5,17 +5,12 @@ html, body {
 	height: 100%;
 	overflow: hidden;
 	
-	background: #0b3a66;
+	background: transparent;
 	color: white;
 }
 
 body {
-	background-color: #0b3a66;
-	background-image: url("images/tiledbackground2-sheet0.png");
-	background-repeat: repeat;
-	background-position: center center;
-	background-size: 256px 256px;
-	animation: gifBgPan 24s linear infinite;
+	background: transparent;
 }
 
 canvas {
@@ -25,16 +20,8 @@ canvas {
 	height: 100vh !important;
 	display: block;
 	background: transparent;
+	background-color: transparent !important;
 	object-fit: fill;
-}
-
-@keyframes gifBgPan {
-	from {
-		background-position: 0 0;
-	}
-	to {
-		background-position: 1024px 0;
-	}
 }
 
 html, body, canvas {

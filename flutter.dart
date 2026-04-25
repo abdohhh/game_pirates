@@ -59,13 +59,123 @@ class _GameWebViewState extends State<GameWebView>
           }
         },
       )
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (_) async {
+            await _forceTransparentWebPage();
+            await _syncInitialStateFromJs();
+            _startBootstrapSyncLoop();
+          },
+        ),
+      )
       ..loadRequest(Uri.parse(gameUrl));
+
+    Future.microtask(() async {
+      await _forceTransparentWebPage();
+      await _syncInitialStateFromJs();
+      _startBootstrapSyncLoop();
+    });
+  }
+
+  void _startBootstrapSyncLoop() {
+    // نحاول عدة مرات في البداية لأن Construct قد يتأخر لحظة في تجهيز الجسر.
+    _bootstrapSyncTimer?.cancel();
+
+    var attempts = 0;
+    const maxAttempts = 20;
+
+    _bootstrapSyncTimer = Timer.periodic(const Duration(milliseconds: 700), (
+      timer,
+    ) async {
+      if (_bridgeReady || attempts >= maxAttempts) {
+        timer.cancel();
+        return;
+      }
+
+      attempts++;
+      await _syncInitialStateFromJs();
+    });
+  }
+
+  Future<void> _syncInitialStateFromJs() async {
+    try {
+      final raw = await _controller.runJavaScriptReturningResult('''
+(() => {
+  const bridge = window.FishermanFlutterBridge;
+  if (!bridge || !bridge.getState) return "null";
+  return JSON.stringify(bridge.getState());
+})();
+''');
+
+      final normalized = _normalizeJsResult(raw);
+      if (normalized == 'null') return;
+
+      final decoded = jsonDecode(normalized);
+      if (decoded is! Map<String, dynamic>) return;
+
+      setState(() {
+        _bridgeReady = decoded['ready'] == true;
+        _balance = _toInt(decoded['balance']);
+        _lastEvent = 'initial-sync';
+      });
+    } catch (_) {
+      // لو الجسر مش جاهز بعد، نسيب retry loop يكمل.
+    }
+  }
+
+  Future<void> _forceTransparentWebPage() async {
+    try {
+      await _controller.runJavaScript('''
+(function () {
+  const apply = (el) => {
+    if (!el) return;
+    el.style.background = 'transparent';
+    el.style.backgroundColor = 'transparent';
+    el.style.backgroundImage = 'none';
+  };
+
+  apply(document.documentElement);
+  apply(document.body);
+
+  const canvases = document.querySelectorAll('canvas');
+  canvases.forEach((canvas) => {
+    canvas.style.background = 'transparent';
+    canvas.style.backgroundColor = 'transparent';
+    canvas.style.display = 'block';
+  });
+
+  const style = document.createElement('style');
+  style.textContent = `
+    html, body, canvas {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+    }
+    body {
+      margin: 0 !important;
+      overflow: hidden !important;
+    }
+    canvas {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      display: block !important;
+    }
+  `;
+  document.head.appendChild(style);
+})();
+''');
+    } catch (_) {
+      // لو الحقن فشل نحافظ على تشغيل اللعبة عادي.
+    }
   }
 
   @override
   void dispose() {
     // مهم جداً: إغلاق المتحكم عند الخروج من الشاشة لمنع تسريب الذاكرة (Memory Leak)
     _bgController.dispose();
+    _bootstrapSyncTimer?.cancel();
     super.dispose();
   }
 
@@ -74,21 +184,17 @@ class _GameWebViewState extends State<GameWebView>
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
-        // استخدمنا Stack لوضع الويب فيو فوق الخلفية
         children: [
-          // 1. طبقة الخلفية المتحركة (السماء)
           Positioned.fill(
             child: AnimatedBuilder(
               animation: _bgController,
               builder: (context, child) {
                 return Stack(
                   children: [
-                    // الصورة الأولى تتحرك لليسار
                     FractionalTranslation(
                       translation: Offset(-_bgController.value, 0),
                       child: child,
                     ),
-                    // الصورة الثانية تكمل الفراغ فوراً لتبدو متصلة
                     FractionalTranslation(
                       translation: Offset(1 - _bgController.value, 0),
                       child: child,
@@ -102,14 +208,12 @@ class _GameWebViewState extends State<GameWebView>
                     image: NetworkImage(
                       'https://images.unsplash.com/photo-1570483358100-6d222cdea6ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreXxlbnwwfHwwfHx8MA%3D%3D',
                     ),
-                    fit: BoxFit.cover, // لتغطية الشاشة بالكامل
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
           ),
-
-          // 2. طبقة اللعبة (WebView)
           Positioned.fill(child: WebViewWidget(controller: _controller)),
         ],
       ),
