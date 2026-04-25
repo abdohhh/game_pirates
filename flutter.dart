@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,10 @@ class _GameWebViewState extends State<GameWebView>
     with SingleTickerProviderStateMixin {
   late final WebViewController _controller;
   late final AnimationController _bgController; // متحكم حركة السماء
+  Timer? _bootstrapSyncTimer;
+  bool _bridgeReady = false;
+  int _balance = 0;
+  String _lastEvent = 'idle';
 
   final String gameUrl = 'https://rococo-torrone-48b523.netlify.app/';
 
@@ -157,10 +162,15 @@ class _GameWebViewState extends State<GameWebView>
     }
     canvas {
       position: fixed !important;
-      inset: 0 !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
       width: 100vw !important;
-      height: 100vh !important;
+      height: 56.25vw !important;
+      max-width: 177.7778vh !important;
+      max-height: 100vh !important;
       display: block !important;
+      object-fit: contain !important;
     }
   `;
   document.head.appendChild(style);
@@ -169,6 +179,28 @@ class _GameWebViewState extends State<GameWebView>
     } catch (_) {
       // لو الحقن فشل نحافظ على تشغيل اللعبة عادي.
     }
+  }
+
+  int _toInt(Object? value) {
+    if (value is int) return value;
+    if (value is double) return value.round();
+    return int.tryParse(value?.toString() ?? '') ?? 0;
+  }
+
+  String _normalizeJsResult(Object raw) {
+    final text = raw.toString().trim();
+
+    if ((text.startsWith('"') && text.endsWith('"')) ||
+        (text.startsWith("'") && text.endsWith("'"))) {
+      try {
+        final decoded = jsonDecode(text);
+        if (decoded is String) return decoded;
+      } catch (_) {
+        // لو الفك فشل نرجع النص الأصلي.
+      }
+    }
+
+    return text;
   }
 
   @override
